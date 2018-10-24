@@ -7,4 +7,9 @@ describe Order, type: :model do
     it {should belong_to(:user)}
     #alias column customer_id and merchant_id
   end
+
+  describe 'Validations' do
+    it {should validate_presence_of(:status)}
+    it {should validate_presence_of(:user_id)}
+  end
 end

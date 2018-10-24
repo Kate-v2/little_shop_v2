@@ -4,6 +4,12 @@
       "/Users/meghanstang/turing/2module/projects/little_shop_v2/app/models/item.rb": [
         1,
         1,
+        null,
+        null,
+        null,
+        null,
+        null,
+        1,
         1,
         1,
         null
@@ -16,6 +22,10 @@
       "/Users/meghanstang/turing/2module/projects/little_shop_v2/app/models/order_item.rb": [
         1,
         1,
+        null,
+        null,
+        null,
+        1,
         1,
         null,
         null,
@@ -24,6 +34,8 @@
       "/Users/meghanstang/turing/2module/projects/little_shop_v2/app/models/order.rb": [
         1,
         1,
+        null,
+        1,
         1,
         null,
         1,
@@ -31,6 +43,15 @@
       ],
       "/Users/meghanstang/turing/2module/projects/little_shop_v2/app/models/user.rb": [
         1,
+        1,
+        1,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
         1,
         1,
         null,
@@ -69,6 +90,6 @@
         0
       ]
     },
-    "timestamp": 1540418119
+    "timestamp": 1540419537
   }
 }
