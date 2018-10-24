@@ -13,6 +13,14 @@
         1,
         null
       ],
+      "/Users/meghanstang/turing/2module/projects/little_shop_v2/app/models/order_item.rb": [
+        1,
+        1,
+        1,
+        null,
+        null,
+        null
+      ],
       "/Users/meghanstang/turing/2module/projects/little_shop_v2/app/models/order.rb": [
         1,
         1,
@@ -26,12 +34,6 @@
         1,
         1,
         null,
-        1,
-        null
-      ],
-      "/Users/meghanstang/turing/2module/projects/little_shop_v2/app/models/order_item.rb": [
-        1,
-        1,
         1,
         null
       ],
@@ -67,6 +69,6 @@
         0
       ]
     },
-    "timestamp": 1540416371
+    "timestamp": 1540418119
   }
 }
