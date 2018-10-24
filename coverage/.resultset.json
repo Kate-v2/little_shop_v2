@@ -1,11 +1,10 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/meghanstang/turing/2module/projects/little_shop_v2/app/models/user.rb": [
+      "/Users/meghanstang/turing/2module/projects/little_shop_v2/app/models/item.rb": [
         1,
         1,
         1,
-        null,
         1,
         null
       ],
@@ -14,10 +13,11 @@
         1,
         null
       ],
-      "/Users/meghanstang/turing/2module/projects/little_shop_v2/app/models/item.rb": [
+      "/Users/meghanstang/turing/2module/projects/little_shop_v2/app/models/user.rb": [
         1,
         1,
         1,
+        null,
         1,
         null
       ],
@@ -67,6 +67,6 @@
         0
       ]
     },
-    "timestamp": 1540416081
+    "timestamp": 1540416261
   }
 }
