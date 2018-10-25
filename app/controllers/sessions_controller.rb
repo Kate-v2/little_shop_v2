@@ -3,7 +3,8 @@ class SessionsController <ApplicationController
   def new
     if session[:user_id]
       flash[:login] = "You are already logged in."
-      redirect_to user_path(User.find(session[:user_id]))
+      # redirect_to profile_path(User.find(session[:user_id]))
+      redirect_to profile_path
     end
   end
 
@@ -12,7 +13,8 @@ class SessionsController <ApplicationController
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       flash[:login] = "Welcome, #{user.name}!"
-      redirect_to user_path(user)
+      # redirect_to profile_path(user)
+      redirect_to profile_path
     else
       flash[:login] = "Incorrect email/password combination."
       render :new

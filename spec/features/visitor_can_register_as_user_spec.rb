@@ -21,19 +21,18 @@ describe 'user registration' do
     click_on "Register"
 
     expect(current_path).to eq(new_user_path)
+    fill_in "Name", with: @name
+    fill_in "Address", with: @address
+    fill_in "City", with: @city
+    fill_in "State", with: @state
+    fill_in "Email", with: @email
+    fill_in "Password", with: @password
+    fill_in "Confirm password", with: @password
 
-    # fill_in :name, with: @name
-    # fill_in :address, with: @address
-    # fill_in :city, with: @city
-    # fill_in :city, with: @state
-    # fill_in :email, with: @email
-    # fill_in :password, with: @password
-    # fill_in :password_confirmation, with: @password
-    #
-    # click_on "Register As New User"
-    #
-    # expect(page).to have_content("Welcome, #{@username}, you are now registered and logged in.")
-    # expect(current_path).to eq(user_profile_path(user))
+    click_on "Register As New User"
+
+    expect(page).to have_content("Welcome, #{@name}, you are now registered and logged in.")
+    expect(current_path).to eq(user_path(@user))
   end
   #
   # it 'already has the user email' do
