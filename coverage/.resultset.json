@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/meghanstang/turing/2module/projects/little_shop_v2/app/models/item.rb": [
+      "/Users/quinnkrug/turing/2module/little_shop_v2/app/models/item.rb": [
         1,
         1,
         null,
@@ -14,12 +14,12 @@
         1,
         null
       ],
-      "/Users/meghanstang/turing/2module/projects/little_shop_v2/app/models/application_record.rb": [
+      "/Users/quinnkrug/turing/2module/little_shop_v2/app/models/application_record.rb": [
         1,
         1,
         null
       ],
-      "/Users/meghanstang/turing/2module/projects/little_shop_v2/app/models/order_item.rb": [
+      "/Users/quinnkrug/turing/2module/little_shop_v2/app/models/order_item.rb": [
         1,
         1,
         null,
@@ -31,26 +31,9 @@
         null,
         null
       ],
-      "/Users/meghanstang/turing/2module/projects/little_shop_v2/app/models/order.rb": [
+      "/Users/quinnkrug/turing/2module/little_shop_v2/app/models/order.rb": [
         1,
         1,
-        null,
-        1,
-        1,
-        null,
-        1,
-        null
-      ],
-      "/Users/meghanstang/turing/2module/projects/little_shop_v2/app/models/user.rb": [
-        1,
-        1,
-        1,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
         null,
         1,
         1,
@@ -58,38 +41,80 @@
         1,
         null
       ],
-      "/Users/meghanstang/turing/2module/projects/little_shop_v2/app/mailers/application_mailer.rb": [
+      "/Users/quinnkrug/turing/2module/little_shop_v2/app/models/user.rb": [
+        1,
+        1,
+        1,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        1,
+        1,
+        null,
+        1,
+        null
+      ],
+      "/Users/quinnkrug/turing/2module/little_shop_v2/app/controllers/items_controller.rb": [
+        1,
+        null,
+        1,
+        null,
+        1,
+        null,
+        null,
+        1,
+        1,
+        null,
+        null,
+        1,
+        1,
+        1,
+        null,
+        null,
+        1,
+        null,
+        1,
+        1,
+        null,
+        null,
+        null
+      ],
+      "/Users/quinnkrug/turing/2module/little_shop_v2/app/controllers/application_controller.rb": [
+        1,
+        1,
+        null
+      ],
+      "/Users/quinnkrug/turing/2module/little_shop_v2/app/mailers/application_mailer.rb": [
         0,
         0,
         0,
         0
       ],
-      "/Users/meghanstang/turing/2module/projects/little_shop_v2/app/jobs/application_job.rb": [
+      "/Users/quinnkrug/turing/2module/little_shop_v2/app/jobs/application_job.rb": [
         0,
         0
       ],
-      "/Users/meghanstang/turing/2module/projects/little_shop_v2/app/controllers/application_controller.rb": [
-        0,
-        0,
-        0
-      ],
-      "/Users/meghanstang/turing/2module/projects/little_shop_v2/app/helpers/application_helper.rb": [
+      "/Users/quinnkrug/turing/2module/little_shop_v2/app/helpers/application_helper.rb": [
         0,
         0
       ],
-      "/Users/meghanstang/turing/2module/projects/little_shop_v2/app/channels/application_cable/connection.rb": [
+      "/Users/quinnkrug/turing/2module/little_shop_v2/app/channels/application_cable/connection.rb": [
         0,
         0,
         0,
         0
       ],
-      "/Users/meghanstang/turing/2module/projects/little_shop_v2/app/channels/application_cable/channel.rb": [
+      "/Users/quinnkrug/turing/2module/little_shop_v2/app/channels/application_cable/channel.rb": [
         0,
         0,
         0,
         0
       ]
     },
-    "timestamp": 1540419537
+    "timestamp": 1540487549
   }
 }
