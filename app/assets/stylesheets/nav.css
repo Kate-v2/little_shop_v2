@@ -9,12 +9,28 @@
   text-decoration: none;
 }
 
-.nav-button img {
-  /* max-width: 30%; */
-  height: 100%;
-  width: auto;
+#shopping-search-bar {
+  width: 30%;
 }
 
+#welcome-user {
+  color: #9bbcf2;
+}
+
+#cart-button {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+#cart-button img {
+  /* max-width: 30%; */
+  text-align: center;
+  margin: 5%;
+  height: 90%;
+  width: auto;
+}
 
 .container {
   display: flex;

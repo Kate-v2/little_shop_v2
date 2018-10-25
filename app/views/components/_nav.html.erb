@@ -1,4 +1,4 @@
-<% content_for :head do %>
+2<% content_for :head do %>
      <!-- <link rel="stylesheet" href="/assets/nav.css">  -->
      <% link_to rel: 'stylesheet', src: "/assets/nav.css" %>
 <% end %>
@@ -17,6 +17,14 @@
     </span>
   </span>
 
+  <span id='shopping-search-bar'>
+    <!-- if we had a search bar, this is where it'd go -->
+  </span>
+
+<span id='welcome-user'>
+  <h2>Welcome, @current_user!</h2>
+</span>
+
   <span class='card nav-button dropdown' id='profile'>
     <h2>Profile</h2>
     <span class='dropdown-list' id='profile-list'>
@@ -28,6 +36,7 @@
 
 
   <span class='card nav-button' id='cart-button'>
+    <h4>CART: COUNT</h4>
     <%= image_tag 'cart-icon.png' %>
     <!-- < %= link_to image_tag('cart-icon.png'), cart_path % > -->
   </span>
