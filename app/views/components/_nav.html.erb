@@ -1,0 +1,45 @@
+2<% content_for :head do %>
+     <!-- <link rel="stylesheet" href="/assets/nav.css">  -->
+     <% link_to rel: 'stylesheet', src: "/assets/nav.css" %>
+<% end %>
+
+<div class='container' id='nav-bar'>
+
+  <span class='card nav-button' id='home-button'>
+    <h2><%= link_to 'Home', root_path %></h2>
+  </span>
+
+  <span class='card nav-button dropdown' id='browse'>
+    <h2>Shop by</h2>
+    <span class='dropdown-list' id='browse-list'>
+      <p>< %= link_to 'Items', items_path % ></p>
+      <p>< %= link_to 'Merchants', merchants_path % ></p>
+    </span>
+  </span>
+
+  <span id='shopping-search-bar'>
+    <!-- if we had a search bar, this is where it'd go -->
+  </span>
+
+<span id='welcome-user'>
+  <h2>Welcome, @current_user!</h2>
+</span>
+
+  <span class='card nav-button dropdown' id='profile'>
+    <h2>Profile</h2>
+    <span class='dropdown-list' id='profile-list'>
+      <p>links</p>
+      <p>like</p>
+      <p>Dashboard</p>
+    </span>
+  </span>
+
+
+  <span class='card nav-button' id='cart-button'>
+    <h4>CART: COUNT</h4>
+    <%= image_tag 'cart-icon.png' %>
+    <!-- < %= link_to image_tag('cart-icon.png'), cart_path % > -->
+  </span>
+
+
+</div>
