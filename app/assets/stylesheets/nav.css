@@ -1,0 +1,41 @@
+
+#nav-bar {
+  background-color: #282f3a;
+  color: lightgrey;
+}
+
+.nav-button a {
+  color: lightgrey;
+  text-decoration: none;
+}
+
+.nav-button img {
+  /* max-width: 30%; */
+  height: 100%;
+  width: auto;
+}
+
+
+.container {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; /* vertical alignment */ */
+}
+
+.dropdown {
+  /* hover & dropdown guts */
+}
+
+
+.nav-button {
+  /* max-width: 10%; */
+  max-height: 80px;
+  overflow: hidden;
+}
