@@ -56,6 +56,51 @@
         1,
         null,
         1,
+        null,
+        null,
+        1,
+        null
+      ],
+      "/Users/meghanstang/turing/2module/projects/little_shop_v2/app/controllers/welcome_controller.rb": [
+        1,
+        null,
+        1,
+        null,
+        null,
+        null
+      ],
+      "/Users/meghanstang/turing/2module/projects/little_shop_v2/app/controllers/application_controller.rb": [
+        1,
+        1,
+        null
+      ],
+      "/Users/meghanstang/turing/2module/projects/little_shop_v2/app/controllers/users_controller.rb": [
+        1,
+        null,
+        1,
+        null,
+        null,
+        1,
+        1,
+        null,
+        null,
+        1,
+        0,
+        0,
+        0,
+        0,
+        null,
+        0,
+        null,
+        null,
+        null,
+        null,
+        1,
+        null,
+        1,
+        0,
+        null,
+        null,
         null
       ],
       "/Users/meghanstang/turing/2module/projects/little_shop_v2/app/mailers/application_mailer.rb": [
@@ -65,11 +110,6 @@
         0
       ],
       "/Users/meghanstang/turing/2module/projects/little_shop_v2/app/jobs/application_job.rb": [
-        0,
-        0
-      ],
-      "/Users/meghanstang/turing/2module/projects/little_shop_v2/app/controllers/application_controller.rb": [
-        0,
         0,
         0
       ],
@@ -90,6 +130,6 @@
         0
       ]
     },
-    "timestamp": 1540419537
+    "timestamp": 1540494969
   }
 }
