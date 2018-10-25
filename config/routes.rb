@@ -3,12 +3,10 @@ Rails.application.routes.draw do
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
-  get '/profile', to: 'profile/users#index'
+  get '/profile', to: 'users#show'
 
 
   resources :users, only: [:new, :create]
 
-  namespace :profile do
-    resources :profile, only: [:index]
-  end
+
 end
