@@ -22,7 +22,12 @@
 
   <span id='welcome-user'>
     <% if !current_user %>
-      <h2>Welcome!<br>Please <%= link_to "Register", register_path %> or <%= link_to "Login", login_path %> to get started!</h2>
+      <h2>
+        Welcome!<br>Please <%= link_to "Register", register_path %>
+         or
+         <%= link_to "Login", login_path %>
+          to get started!
+       </h2>
     <% else %>
       <h2>Welcome <%= current_user.name %>!</h2>
     <% end %>
@@ -35,13 +40,15 @@
 
       <span class='dropdown-list' id='profile-list'>
 
-        <% if current_user && current_user.role != 0 %>
+        <% if current_user.role != 0 %>
           <h3><%= link_to('Dashboard', dashboard_path) %></h3>
         <% end %>
 
-        <% if current_user %>
-          <h3><%= link_to("Log Out", logout_path)%></h3>
+        <% if current_user.role == 2 %>
+          <h3><%= link_to('Users', users_path) %></h3>
         <% end %>
+
+        <h3><%= link_to("Log Out", logout_path)%></h3>
       </span>
 
     </span>
