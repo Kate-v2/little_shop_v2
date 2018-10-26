@@ -9,7 +9,9 @@
 def quick_user( role = 0)
   types = { 0 => "user", 1 => 'merch', 2 => 'admin' }
   type  = types[role]
-  id    = (User.last.id + 1).to_s
+  last  = User.last
+  last ? last = last.id : last = 0
+  id    = (last + 1).to_s
   hash = Hash.new
   hash[:email]    = type + id
   hash[:password] = type + id
@@ -23,6 +25,24 @@ def quick_user( role = 0)
   return hash
 end
 
+def main_user_set
+  main_user = quick_user(0)
+  main_user[:email]    = 'user'
+  main_user[:password] = 'user'
+  User.create(main_user)
+
+  main_merch = quick_user(1)
+  main_merch[:email]    = 'merch'
+  main_merch[:password] = 'merch'
+  User.create(main_merch)
+
+  main_admin = quick_user(2)
+  main_admin[:email]    = 'admin'
+  main_admin[:password] = 'admin'
+  User.create(main_admin)
+end
+
+main_user_set
 user  = User.create(quick_user(0))
 merch = User.create(quick_user(1))
 admin = User.create(quick_user(2))
