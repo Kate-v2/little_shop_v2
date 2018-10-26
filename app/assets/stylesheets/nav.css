@@ -2,9 +2,11 @@
 #nav-bar {
   background-color: #282f3a;
   color: lightgrey;
+  max-height: 100px;
+  /* overflow: hidden; */
 }
 
-a {
+#nav-bar a {
   color: lightgrey;
   text-decoration: none;
 }
@@ -15,43 +17,54 @@ a {
 
 #welcome-user {
   color: #9bbcf2;
+  text-align: center;
 }
 
 #cart-button {
   display: flex;
   flex-wrap: nowrap;
   flex-direction: row;
+  vertical-align: middle;
   justify-content: space-around;
 }
 
 #cart-button img {
-  /* max-width: 30%; */
-  text-align: center;
-  margin: 5%;
-  height: 90%;
-  width: auto;
+  display: flex;
+  justify-content: space-around;
+  max-width: 30%;
+  height: auto;
 }
 
 .container {
   display: flex;
   flex-wrap: nowrap;
   flex-direction: row;
-  justify-content: space-around;
+  vertical-align: middle;
+  justify-content: space-between;
 }
 
 .card {
   display: flex;
   flex-direction: column;
-  /* justify-content: center; /* vertical alignment */
 }
 
 .dropdown {
   /* hover & dropdown guts */
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  vertical-align: middle;
+  justify-content: space-around;
+}
+
+.dropdown-list {
+  display: flex;
+  flex-direction: column;
 }
 
 
 .nav-button {
-  /* max-width: 10%; */
-  max-height: 80px;
-  overflow: hidden;
+  max-width: 10%;
+  max-height: 8%;
+  /* overflow: hidden; */
 }
