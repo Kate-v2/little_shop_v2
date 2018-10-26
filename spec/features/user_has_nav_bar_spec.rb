@@ -154,14 +154,23 @@ describe 'Navigation Bar:' do
       end
 
       it 'user does have a dashboard' do
+        expect(page).to have_content('Dashboard')
         skip('Dashboard Controller needs methods')
         click_on 'Dashboard'
         expect(page).to have_current_path(dashboard_path)
       end
 
       it 'user does have a users view' do
-        skip('User Controller needs methods')
+        expect(page).to have_content('Users')
+        skip('Users Controller needs methods')
         click_on 'Users'
+        expect(page).to have_current_path(users_path)
+      end
+
+      it 'user does have a users view' do
+        expect(page).to have_content('Orders')
+        skip('needs Orders Controller')
+        click_on 'Orders'
         expect(page).to have_current_path(users_path)
       end
     end

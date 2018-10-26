@@ -10,8 +10,12 @@ Rails.application.routes.draw do
 
   get '/cart', to: 'cart#index'
 
-  get '/profile',   to: 'users#show'
   get '/dashboard', to: 'dashboard#index'
+  get '/profile',   to: 'users#show'
+  get '/profile/orders', to:'orders#index'
+  # namespace :profile do
+  #   resources :orders, only:[:index]
+  # end
 
   # something not quite right with this path
   get '/merchants', to: 'users#index'
