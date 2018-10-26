@@ -20,7 +20,7 @@ describe 'user registration' do
 
     click_on "Register"
 
-    expect(current_path).to eq(new_user_path)
+    expect(current_path).to eq(register_path)
     fill_in "Name", with: @name
     fill_in "Address", with: @address
     fill_in "City", with: @city
