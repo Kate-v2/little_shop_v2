@@ -1,5 +1,4 @@
-2<% content_for :head do %>
-     <!-- <link rel="stylesheet" href="/assets/nav.css">  -->
+<% content_for :head do %>
      <% link_to rel: 'stylesheet', src: "/assets/nav.css" %>
 <% end %>
 
@@ -12,8 +11,8 @@
   <span class='card nav-button dropdown' id='browse'>
     <h2>Shop by</h2>
     <span class='dropdown-list' id='browse-list'>
-      <p>< %= link_to 'Items', items_path % ></p>
-      <p>< %= link_to 'Merchants', merchants_path % ></p>
+      <%= link_to 'Items', items_path %>
+      <%= link_to 'Merchants', merchants_path %>
     </span>
   </span>
 
