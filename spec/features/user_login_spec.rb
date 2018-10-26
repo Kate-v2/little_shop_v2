@@ -49,6 +49,15 @@ require 'rails_helper'
      click_on 'Log In'
      expect(current_path).to eq(login_path)
      expect(page).to have_content("Incorrect email/password combination.")
+
+     fill_in :email, with: ''
+     fill_in :password, with: @user_1.password
+     click_on 'Log In'
+     expect(page).to have_content("Incorrect email/password combination.")
+   end
+
+   it 'should keep field content if form fails' do
+     skip('HOW DO WE DO THIS -- COOKIE ?')
    end
 
   end
