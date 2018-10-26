@@ -11,8 +11,8 @@
   <span class='card nav-button dropdown' id='browse'>
     <h2>Shop by</h2>
     <span class='dropdown-list' id='browse-list'>
-      <%= link_to 'Items', items_path %>
-      <%= link_to 'Merchants', merchants_path %>
+      <h3><%= link_to 'Items', items_path %></h3>
+      <h3><%= link_to 'Merchants', merchants_path %></h3>
     </span>
   </span>
 
@@ -49,11 +49,12 @@
   <% end %>
 
 
+  <%= link_to cart_path do %>
   <span class='card nav-button' id='cart-button'>
-    <h4>CART: COUNT</h4>
-    <!-- < %= image_tag 'cart-icon.png' % > -->
-    <%= link_to image_tag('cart-icon.png'), cart_path %>
+    <%= image_tag('cart-icon.png') %>
+    <h3>CART: COUNT</h3>
   </span>
+  <% end %>
 
 
 </div>
