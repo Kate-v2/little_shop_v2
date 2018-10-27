@@ -13,7 +13,6 @@ class SessionsController <ApplicationController
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       flash[:login] = "Welcome, #{user.name}!"
-
       redirect_to profile_path
     else
       flash[:login] = "Incorrect email/password combination."

@@ -8,8 +8,8 @@
       </div>
     <%end%>
       <h4>Seller: <%=item.user.name%></h4>
-      <h4>$<%=item.price.round(2)%></h4>
-      <h4><%= link_to "Add Item", add_item_path(item_id: item.id)%></h4>
+      <h4><%=number_to_currency(item.price)%></h4>
+      <h4><%=render partial: 'components/add_item', :locals => {item: item}%></h4>
     </span>
   <%end%>
 </div>
