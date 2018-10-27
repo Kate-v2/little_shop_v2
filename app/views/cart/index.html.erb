@@ -1,2 +1,3 @@
 <h1>Your Cart</h1>
 <%= render partial: 'components/items' %>
+<%=link_to "Empty Cart", delete_cart_path(delete_cart: 0)%>

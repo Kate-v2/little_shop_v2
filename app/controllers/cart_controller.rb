@@ -6,7 +6,11 @@ class CartController < ApplicationController
 
   def destroy
     # binding.pry
-    session[:cart].delete(params[:item_id].to_s)
+    if params[:delete_item]
+      session[:cart].delete(params[:item_id].to_s)
+    elsif params[:delete_cart]
+      session[:cart] = nil
+    end
     redirect_back(fallback_location: root_path)
   end
 
