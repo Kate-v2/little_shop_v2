@@ -6,12 +6,12 @@ class Cart
     @contents = contents
   end
 
-  def cart_count
+  def cart_count 
     @contents.values.sum
   end
 
   def cart_items
-    item_ids = @contents.keys#.map {|id| id.to_i}
+    item_ids = @contents.keys
     items = Item.where(id: item_ids)
   end
 

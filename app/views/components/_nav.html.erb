@@ -61,7 +61,7 @@
   <%= link_to cart_path do %>
   <span class='card nav-button' id='cart-button'>
     <%= image_tag('cart-icon.png') %>
-    <h3>CART: COUNT</h3>
+    <h3>CART: <%=@cart.cart_count %></h3>
   </span>
   <% end %>
 

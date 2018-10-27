@@ -5,11 +5,14 @@ class CartController < ApplicationController
   end
 
   def destroy
-
+    # binding.pry
+    session[:cart].delete(params[:item_id].to_s)
+    redirect_back(fallback_location: root_path)
   end
 
   def update
-
+    session[:cart][params[:item_id]] = params[:number].to_i
+    redirect_back(fallback_location: root_path)
   end
 
   def create

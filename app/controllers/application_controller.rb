@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
   before_action :set_cart
 
   def set_cart
+    session[:cart] ||= Hash.new(0)
     @cart ||= Cart.new(session[:cart])
   end
 

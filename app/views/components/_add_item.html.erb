@@ -1,1 +1,34 @@
-<%= link_to "Add Item", add_item_path(item_id: item.id)%>
+<div>
+  <!-- < % binding.pry %> -->
+  <% if @cart.contents.keys.include?(item.id.to_s) %>
+    <% quantity = @cart.contents[item.id.to_s] %>
+
+    <% if quantity == 1 %>
+      <%= link_to delete_item_path(item_id: item.id) do %>
+        <span>
+          <p>-</p>
+        </span>
+      <%end%>
+    <%else%>
+
+      <%= link_to update_item_path(number: (@cart.contents[item.id.to_s]-1), item_id: item.id) do %>
+        <span>
+          <p>-</p>
+        </span>
+      <%end%>
+    <%end%>
+
+    <span>
+      <%= quantity %>
+    </span>
+
+    <%= link_to update_item_path(number: (@cart.contents[item.id.to_s]+1), item_id: item.id) do %>
+      <span>
+        <p>+</p>
+      </span>
+    <%end%>
+
+  <% else %>
+    <%= link_to "Add Item", add_item_path(item_id: item.id)%>
+  <%end%>
+</div>

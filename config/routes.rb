@@ -8,6 +8,9 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
   get '/add_item', to: 'cart#create'
+  get '/update_item', to: 'cart#update'
+  #add destroy_item path to remove from database
+  get '/delete_item', to: 'cart#destroy'
 
   get '/cart', to: 'cart#index'
 
