@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get '/login',  to: 'sessions#new'
   post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
+  get '/add_item', to: 'cart#create'
 
   get '/cart', to: 'cart#index'
 
@@ -21,7 +22,7 @@ Rails.application.routes.draw do
   get '/merchants', to: 'users#index'
 
   # get '/dashboard', to: 'users#index'
-  resources :items, only: [:index]
+  resources :items, only: [:index, :new, :show]
 
   resources :users, only: [:new, :create] do
     resources :items, only: [:new, :create]
