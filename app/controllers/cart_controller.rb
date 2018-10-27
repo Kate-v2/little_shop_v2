@@ -1,7 +1,7 @@
 class CartController < ApplicationController
 
   def index
-
+    @items = @cart.cart_items
   end
 
   def destroy
