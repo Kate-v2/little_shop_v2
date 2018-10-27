@@ -10,6 +10,7 @@
       <h4>Seller: <%=item.user.name%></h4>
       <h4><%=number_to_currency(item.price)%></h4>
       <h4><%=render partial: 'components/add_item', :locals => {item: item}%></h4>
+      <h4>Item total: <%= number_to_currency(@item_sum[item.id.to_s]) %></h4>
     </span>
   <%end%>
 </div>

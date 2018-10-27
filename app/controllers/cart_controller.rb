@@ -2,10 +2,11 @@ class CartController < ApplicationController
 
   def index
     @items = @cart.cart_items
+    @item_sum = @cart.cart_item_total
+    @cart_sum = @item_sum.values.sum
   end
 
   def destroy
-    # binding.pry
     if params[:delete_item]
       session[:cart].delete(params[:item_id].to_s)
     elsif params[:delete_cart]
