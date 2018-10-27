@@ -5,8 +5,10 @@ class ItemsController < ApplicationController
   def new
     #This is a dummy merchant. The code below will need to be replaced
     #if you do not have a user in your DB this will break
-    @merchant = User.first
+
+    @merchant = User.find(session[:user_id])
     @item = Item.new
+    binding.pry
   end
 
   def create
