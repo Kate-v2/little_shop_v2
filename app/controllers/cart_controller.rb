@@ -9,6 +9,8 @@ class CartController < ApplicationController
   def destroy
     if params[:delete_item]
       session[:cart].delete(params[:item_id].to_s)
+    # elsif params[:destroy_item]
+    #   session[:cart][params[:item_id]] = nil
     elsif params[:delete_cart]
       session[:cart] = nil
     end
