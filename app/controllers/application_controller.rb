@@ -7,4 +7,11 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
 
+  before_action :set_cart
+
+  def set_cart
+    session[:cart] ||= Hash.new(0)
+    @cart ||= Cart.new(session[:cart])
+  end
+
 end
