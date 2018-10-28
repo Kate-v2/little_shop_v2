@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
   get '/cart', to: 'cart#index'
 
-  get '/dashboard', to: 'dashboard#index'
+  get '/dashboard', to: 'dashboards#index'
   get '/profile',   to: 'users#show'
   get '/profile/orders', to:'orders#index'
   # namespace :profile do
@@ -27,13 +27,9 @@ Rails.application.routes.draw do
   # get '/dashboard', to: 'users#index'
   resources :items, only: [:index, :new, :show]
 
-  resources :users, only: [:new, :create] do
+  resources :users, only: [:new, :create, :edit, :update] do
     resources :items, only: [:new, :create]
   end
-
-
-
-
 
 
 end
