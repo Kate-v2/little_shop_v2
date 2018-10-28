@@ -1,12 +1,13 @@
 <div class='container' id='items-collection'>
-  <% @items.each do |item| %>
-    <span class='card item'>
-    <%= link_to item_path(item) do %>
-      <div class='container item-link'>
-        <h3><%=item.name%></h3>
-        <%= image_tag('cart-icon.png')%>
-      </div>
-    <%end%>
+  <% if @items %>
+    <% @items.each do |item| %>
+      <span class='card item'>
+      <%= link_to item_path(item) do %>
+        <div class='container item-link'>
+          <h3><%=item.name%></h3>
+          <%= image_tag('cart-icon.png')%>
+        </div>
+        <%end%>
       <h4>Seller: <%=item.user.name%></h4>
       <h4><%=number_to_currency(item.price)%></h4>
       <h4><%=render partial: 'components/add_item', :locals => {item: item}%></h4>
@@ -15,5 +16,17 @@
         <h4>Item total: <%= number_to_currency(@item_sum[item.id.to_s]) %></h4>
       <%end%>
     </span>
+    <%end%>
+
+    <%elsif @item %>
+      <h3><%= @item.name %></h3>
+      <h4><%= @item.description %></h4>
+      <%= image_tag('cart-icon.png')%>
+      <h4>Seller: <%=@item.user.name%></h4>
+      <h4><%=@item.inventory%> in stock</h4>
+      <h4>Current price:<%=number_to_currency(@item.price)%></h4>
+      <h4><%=render partial: 'components/add_item', :locals => {item: @item}%></h4>
+
   <%end%>
+
 </div>
