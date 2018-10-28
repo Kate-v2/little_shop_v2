@@ -4,18 +4,23 @@ Rails.application.routes.draw do
 
   get '/register',  to: 'users#new'
   post '/register', to: 'users#create'
+
   get '/login',  to: 'sessions#new'
   post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
-  get '/add_item', to: 'cart#create'
-  get '/update_item', to: 'cart#update'
-  #add destroy_item path to remove from database
-  get '/delete_item', to: 'cart#destroy'
 
-  get '/cart', to: 'cart#index'
+  get '/add_item',    to: 'cart#create'
+  get '/update_item', to: 'cart#update'
+  get '/delete_item', to: 'cart#destroy'
+  #add destroy_item path to remove from database
+
+
+  get '/cart',     to: 'cart#index'
+  get '/checkout', to: 'orders#create'
 
   get '/dashboard', to: 'dashboard#index'
-  get '/profile',   to: 'users#show'
+
+  get '/profile',        to: 'users#show'
   get '/profile/orders', to:'orders#index'
   # namespace :profile do
   #   resources :orders, only:[:index]

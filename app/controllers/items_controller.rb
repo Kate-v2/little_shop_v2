@@ -1,5 +1,3 @@
-require 'pry'
-
 class ItemsController < ApplicationController
 
   def new
@@ -18,7 +16,7 @@ class ItemsController < ApplicationController
 
   def show
 
-  end 
+  end
 
   private
 
