@@ -18,6 +18,21 @@ class UsersController <ApplicationController
     end
   end
 
+  def edit
+   @user = User.find(current_user.id)
+  end
+
+  def update
+    @user = User.find(current_user.id)
+    if @user.update(user_params)
+      flash[:success] = "You have successfully updated your info"
+      redirect_to profile_path
+    else
+      flash[:notice] = "Please double check your info and try again"
+      redirect_back(fallback_location: root_path)
+    end
+  end
+
 
   private
 
