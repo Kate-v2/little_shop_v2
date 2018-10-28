@@ -9,8 +9,6 @@ class CartController < ApplicationController
   def destroy
     if params[:delete_item]
       session[:cart].delete(params[:item_id].to_s)
-    # elsif params[:destroy_item]
-    #   session[:cart][params[:item_id]] = nil
     elsif params[:delete_cart]
       session[:cart] = nil
     end
@@ -21,10 +19,12 @@ class CartController < ApplicationController
     item = Item.find(params[:item_id])
     new_qty = params[:number].to_i
     original_qty = session[:cart][params[:item_id]].to_i
-    session[:cart][params[:item_id]] = params[:number].to_i
+    session[:cart][params[:item_id]] = params[:number].to_i unless new_qty > item.inventory
     if original_qty - new_qty == 1
       flash[:success] = "#{item.name.capitalize} removed from cart"
-    else
+    elsif original_qty == item.inventory
+      flash[:success] = "Only #{item.inventory} in stock"
+    elsif original_qty - new_qty == -1
       flash[:success] = "#{item.name.capitalize} added to cart"
     end
     redirect_back(fallback_location: root_path)
