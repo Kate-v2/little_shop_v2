@@ -16,16 +16,11 @@ class Cart
   end
 
   def cart_item_total
-    contents = @contents.dup
     hash = {}
-    item_ids = contents.keys
-    item_ids.each do |id|
+    @contents.keys.each do |id|
       hash[id] = (contents[id] * Item.find(id).price)
     end
     return hash
-  end
-
-  def cart_total
   end
 
 end
