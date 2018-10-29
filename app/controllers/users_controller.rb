@@ -23,14 +23,22 @@ class UsersController <ApplicationController
       @user = User.find(params[:id])
     else
       @user = User.find(current_user.id)
-    end 
+    end
   end
 
   def update
-    @user = User.find(current_user.id)
+    if current_admin?
+      @user = User.find(params[:id])
+    else
+      @user = User.find(current_user.id)
+    end
     if @user.update(user_params)
       flash[:success] = "You have successfully updated your info"
-      redirect_to profile_path
+      if current_admin?
+        redirect_to user_path(@user)
+      else
+        redirect_to profile_path
+      end 
     else
       flash[:notice] = "Please double check your info and try again"
       redirect_back(fallback_location: root_path)
