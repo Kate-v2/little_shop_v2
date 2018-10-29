@@ -116,7 +116,7 @@ describe 'Navigation Bar:' do
     end
 
     context 'User' do
-      xit 'user does not have a dashboard' do
+      it 'user does not have a dashboard' do
         expect(page).to_not have_content("Dashboard")
       end
 

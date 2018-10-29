@@ -8,4 +8,7 @@
   <li>Zip Code: <%= @user.zip %></li>
   <li>Email:    <%= @user.email %></li>
 </ul>
+<%= link_to edit_user_path(@user.id) do %>
+Update Info
+<% end %>
 </section>
