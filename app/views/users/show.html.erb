@@ -1,1 +1,11 @@
-<h1>Profile Content HERE</h1>
+<section>
+<h2>Welcome <%= @user.name %>!</h2>
+<h3>Account Info</h3>
+<ul>
+  <li>Address:  <%= @user.address %></li>
+  <li>City:     <%= @user.city %></li>
+  <li>State:    <%= @user.state %></li>
+  <li>Zip Code: <%= @user.zip %></li>
+  <li>Email:    <%= @user.email %></li>
+</ul>
+</section>
