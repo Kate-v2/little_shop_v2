@@ -31,6 +31,9 @@ class UsersController <ApplicationController
       flash[:notice] = "Please double check your info and try again"
       redirect_back(fallback_location: root_path)
     end
+
+  def show
+    @user = User.find(session[:user_id])
   end
 
 
