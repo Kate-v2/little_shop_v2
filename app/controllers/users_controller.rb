@@ -19,7 +19,11 @@ class UsersController <ApplicationController
   end
 
   def edit
-   @user = User.find(current_user.id)
+    if current_admin?
+      @user = User.find(params[:id])
+    else
+      @user = User.find(current_user.id)
+    end 
   end
 
   def update
@@ -34,7 +38,13 @@ class UsersController <ApplicationController
   end
 
   def show
-    @user = User.find(session[:user_id])
+    if request.path == profile_path
+      @user = User.find(session[:user_id])
+    elsif current_admin?
+      @user = User.find(params[:id])
+    else
+      render file: "public/404"
+    end
   end
 
 
