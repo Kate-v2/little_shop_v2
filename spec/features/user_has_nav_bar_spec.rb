@@ -181,5 +181,4 @@ end
 
 def page_pry
   save_and_open_page
-  # binding.pry
 end

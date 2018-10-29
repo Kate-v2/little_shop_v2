@@ -9,7 +9,8 @@ Rails.application.routes.draw do
   get '/logout', to: 'sessions#destroy'
   get '/add_item', to: 'cart#create'
   get '/update_item', to: 'cart#update'
-  #add destroy_item path to remove from database
+  get '/delete_cart', to: 'cart#destroy'
+  # get '/destroy_item', to: 'cart#destroy'
   get '/delete_item', to: 'cart#destroy'
 
   get '/cart', to: 'cart#index'
