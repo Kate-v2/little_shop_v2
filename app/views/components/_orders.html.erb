@@ -6,8 +6,14 @@
 
       <h3><%= link_to "#{order.id}", profile_order_path(order) %>
       </h3>
-      <h4>Status: <%= order.status %>
+      <h4>Status: <%= order.status.capitalize %>
       </h4>
+
+      <% if order.status == 'pending' %>
+        <%= link_to "Cancel Order", cancel_order_path(order) %>
+      <% end %>
+
+
       <h5 class='item-date'>Ordered: <%= order.created_at %>
       </h5>
       <h5 class='item-date'>Updated: <%= order.updated_at %>
