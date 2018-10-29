@@ -15,18 +15,23 @@ class OrdersController < ApplicationController
 
   def index
     @user = User.find(session[:user_id].to_i)
-    user_experience  = request.path == profile_orders_path   && @user.role == 'default'
-    merch_experience = request.path == dashboard_orders_path && @user.role == 'merchant'
-    admin_experience = request.path == orders_path           && @user.role == 'admin'
+    path = request.path
+    user_experience  = path == profile_orders_path   && current_user
+    merch_experience = path == dashboard_orders_path && current_merchant?
+    admin_experience = path == orders_path           && current_admin?
+
+    # if none of the experiences, show 404 page
+
     @orders = Order.where(user_id: @user.id) if user_experience
     @orders = Order.all                      if admin_experience
 
     if merch_experience
-      items       = Item.where(user_id: @user.id).pluck(:id)
-      order_items = OrderItem.where(item: items)
-      order_ids   = order_items.pluck(:order_id)
-      @orders = Order.where(id: order_ids)
+      items        = Item.where(user_id: @user.id).pluck(:id)
+      @order_items = OrderItem.where(item: items)
+      order_ids    = order_items.pluck(:order_id)
+      @orders      = Order.where(id: order_ids)
     end
+
   end
 
   def show

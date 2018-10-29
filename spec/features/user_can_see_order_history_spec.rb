@@ -55,7 +55,6 @@ describe 'Order History' do
   end
 
   it 'can cancel pending orders' do
-
     last  = Order.last
     order = page.find("#order-#{last.id}")
     order.click_on("Cancel Order")
