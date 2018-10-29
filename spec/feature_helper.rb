@@ -7,6 +7,7 @@ module FeatureHelper
   end
 
   def login(user)
+    binding.pry
     visit logout_path
     visit login_path
     fill_in 'Email'   , with: user.email

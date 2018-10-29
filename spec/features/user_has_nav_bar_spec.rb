@@ -137,6 +137,8 @@ describe 'Navigation Bar:' do
       end
 
       it 'does have a users view' do
+        # save_and_open_page
+        # binding.pry
         expect(page).to have_content('Users')
         skip('Users Controller needs methods')
         click_on 'Users'
@@ -154,4 +156,3 @@ describe 'Navigation Bar:' do
   end
 
 end
-

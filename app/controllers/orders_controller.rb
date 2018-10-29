@@ -21,7 +21,7 @@ class OrdersController < ApplicationController
       items       = Item.where(user_id: @user.id).pluck(:id)
       order_items = OrderItem.where(item: items)
       order_ids   = order_items.pluck(:order_id)
-
+      binding.pry
       @orders = Order.where(id: order_ids)
       binding.pry
     end
