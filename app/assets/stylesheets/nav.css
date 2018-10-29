@@ -56,6 +56,10 @@
   justify-content: space-between;
 }
 
+#items-collection {
+  flex-wrap: wrap;
+}
+
 .card {
   display: flex;
   flex-direction: column;
