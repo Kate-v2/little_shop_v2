@@ -23,7 +23,7 @@ class CartController < ApplicationController
     if original_qty - new_qty == 1
       flash[:success] = "#{item.name.capitalize} removed from cart"
     elsif original_qty == item.inventory
-      flash[:success] = "Only #{item.inventory} in stock"
+      flash[:error] = "Only #{item.inventory} in stock"
     elsif original_qty - new_qty == -1
       flash[:success] = "#{item.name.capitalize} added to cart"
     end
