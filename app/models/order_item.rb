@@ -13,12 +13,4 @@ class OrderItem < ApplicationRecord
     select('order_items.*, (quantity * purchase_price) AS subtotal')
   end
 
-  def self.with_totals
-    # with_subtotals.select('order, SUM(subtotal) AS total')
-    # .group()
-
-  end
-
-
-
 end
