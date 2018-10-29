@@ -18,12 +18,15 @@ Rails.application.routes.draw do
   get '/cart',     to: 'cart#index'
   get '/checkout', to: 'orders#create'
 
-  get '/dashboard', to: 'dashboard#index'
+  get '/dashboard',        to: 'dashboard#index'
+  get '/dashboard/orders', to: 'orders#index',    as: 'dashboard_orders'
+
+  resources :orders, only: [:index, :show]
 
   get '/profile',                   to: 'users#show'
   get '/profile/orders',            to: 'orders#index'
   get '/profile/orders/:id',        to: 'orders#show',    as: 'profile_order'
-  get '/profile/orders/:id/cancel',     to: 'orders#destroy', as: 'cancel_order'
+  get '/profile/orders/:id/cancel', to: 'orders#destroy', as: 'cancel_order'
   # namespace :profile do
   #   resources :orders, only:[:index, :show]
   # end

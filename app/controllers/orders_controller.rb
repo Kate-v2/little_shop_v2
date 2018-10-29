@@ -14,7 +14,17 @@ class OrdersController < ApplicationController
 
 
   def index
-    @orders = Order.where(user_id: session[:user_id])
+    @user = User.find(session[:user_id].to_i)
+    @orders = Order.where(user_id: @user.id) if request.path == profile_orders_path && @user.role == 0
+    @orders = Order.all if request.path == orders_path && @user.role == 2
+    if request.path == dashboard_orders_path  && @user.role == 1
+      items       = Item.where(user_id: @user.id).pluck(:id)
+      order_items = OrderItem.where(item: items)
+      order_ids   = order_items.pluck(:order_id)
+
+      @orders = Order.where(id: order_ids)
+      binding.pry
+    end
   end
 
   def show

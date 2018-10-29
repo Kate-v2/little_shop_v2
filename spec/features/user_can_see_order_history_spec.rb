@@ -3,6 +3,8 @@ require 'feature_helper'
 
 describe 'Order History' do
   include FeatureHelper
+  include ActionView::Helpers::NumberHelper
+
 
   before(:each) do
     # -- shop --
@@ -24,7 +26,10 @@ describe 'Order History' do
     updated = purchase.updated_at
     status  = purchase.status
     count   = purchase.item_count
-    total   = purchase.total_cost
+    # total   = purchase.total_cost
+
+    # total = number_with_delimiter(purchase.total_cost,delimiter: ",")
+    total = number_to_currency(purchase.total_cost)
 
     order = page.find("#order-#{purchase.id}")
     expect(order).to have_content(id)
@@ -32,7 +37,7 @@ describe 'Order History' do
     expect(order).to have_content("Ordered: #{created}")
     expect(order).to have_content("Updated: #{updated}")
     expect(order).to have_content("#{count} items")
-    expect(order).to have_content("Total: $#{total}")
+    expect(order).to have_content("Total: #{total}")
     expect(order).to have_content("Cancel Order")
   end
 
