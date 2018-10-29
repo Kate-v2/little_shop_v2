@@ -19,6 +19,15 @@ Rails.application.routes.draw do
   #add destroy_item path to remove from database
 
 
+
+  get '/dashboard', to: 'dashboards#index'
+  get '/profile',   to: 'users#show'
+  get '/profile/orders', to:'orders#index'
+  get '/profile/edit', to: 'users#edit'
+  get '/users', to: 'admin/users#index'
+  get '/users', to: 'admin/users#edit'
+
+
   get '/cart',     to: 'cart#index'
   get '/checkout', to: 'orders#create'
 
@@ -33,6 +42,7 @@ Rails.application.routes.draw do
   get '/profile/orders/:id',        to: 'orders#show',    as: 'profile_order'
   get '/profile/orders/:id/cancel', to: 'orders#destroy', as: 'cancel_order'
   
+
   # namespace :profile do
   #   resources :orders, only:[:index, :show]
   # end
@@ -43,8 +53,19 @@ Rails.application.routes.draw do
   # get '/dashboard', to: 'users#index'
   resources :items, only: [:index, :new, :show]
 
-  resources :users, only: [:new, :create, :edit, :update] do
+  resources :users, only: [:new, :create, :edit, :update, :show] do
     resources :items, only: [:new, :create]
+  end
+
+
+  namespace :admin do
+    resources :items
+    resources :orders
+  end
+
+  namespace :merchant do
+    resources :items
+    resources :orders
   end
 
 end
