@@ -13,6 +13,7 @@ class User < ApplicationRecord
   #below is for merchants only
   has_many :items
 
+  enum role: %w(default merchant admin)
 
   has_secure_password
 end
