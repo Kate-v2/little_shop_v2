@@ -1,6 +1,11 @@
 
 module FeatureHelper
 
+  def page_pry
+    save_and_open_page
+    binding.pry
+  end
+
   def login(user)
     visit logout_path
     visit login_path
