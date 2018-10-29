@@ -42,7 +42,23 @@ describe 'Order History' do
     expect(orders).to eq(db_orders)
   end
 
+  it "links to each order's show page" do
+    last = Order.last
+    order = page.find("#order-#{last.id}")
+    order.click_on("Order: #{last.id}")
+    expect(page).to have_current_path(profile_order_path(last))
+  end
 
+  it 'can cancel pending orders' do
+    last  = Order.last
+    order = page.find("#order-#{last.id}")
+    order.click_on("Cancel Order")
 
+    expect(page).to have_current_path(profile_orders_path)
+    expect(page).to have_content("Order ##{last.id} has been canceled")
+
+    order = page.find("#order-#{last.id}")
+    expect(order).to have_content("Canceled")
+  end
 
 end

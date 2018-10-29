@@ -2,12 +2,11 @@ class OrdersController < ApplicationController
 
   def create
     @items = @cart.cart_items
-    user  = User.find(session[:user_id])
+    user   = User.find(session[:user_id])
     @order = Order.create(status: 0, user_id: user.id)
     order_all_items
     # @count = @cart.cart_count
     session.delete(:cart)
-    # binding.pry
     # unsure if this is what I want to do and/or @cart = nil
     flash[:order] = "Thank you for your purchase! Order Number: #{@order.id}"
     redirect_to profile_orders_path #(count: @count)
@@ -16,9 +15,18 @@ class OrdersController < ApplicationController
 
   def index
     @orders = Order.where(user_id: session[:user_id])
-    # binding.pry
   end
 
+  def show
+    @orders = [ Order.find(params[:id].to_i) ]
+  end
+
+  def destroy
+    order = Order.find(params[:id].to_i)
+    order.status = 2; order.save
+    flash[:canceled] = "Order ##{order.id} has been canceled."
+    redirect_to params[:previous]
+  end
 
 
   private
