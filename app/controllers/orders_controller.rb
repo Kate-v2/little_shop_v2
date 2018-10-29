@@ -15,15 +15,17 @@ class OrdersController < ApplicationController
 
   def index
     @user = User.find(session[:user_id].to_i)
-    @orders = Order.where(user_id: @user.id) if request.path == profile_orders_path && @user.role == 0
-    @orders = Order.all if request.path == orders_path && @user.role == 2
-    if request.path == dashboard_orders_path  && @user.role == 1
+    user_experience  = request.path == profile_orders_path   && @user.role == 'default'
+    merch_experience = request.path == dashboard_orders_path && @user.role == 'merchant'
+    admin_experience = request.path == orders_path           && @user.role == 'admin'
+    @orders = Order.where(user_id: @user.id) if user_experience
+    @orders = Order.all                      if admin_experience
+
+    if merch_experience
       items       = Item.where(user_id: @user.id).pluck(:id)
       order_items = OrderItem.where(item: items)
       order_ids   = order_items.pluck(:order_id)
-      binding.pry
       @orders = Order.where(id: order_ids)
-      binding.pry
     end
   end
 

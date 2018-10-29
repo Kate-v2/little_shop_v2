@@ -15,7 +15,6 @@ describe 'Navigation Bar:' do
     describe 'Shop By' do
       it 'ITEMS link' do
         visit login_path
-        skip('Items INDEX not created yet')
         click_on 'Items'
         expect(page).to have_current_path(items_path)
       end
@@ -41,7 +40,6 @@ describe 'Navigation Bar:' do
 
     it 'CART link' do
       visit root_path
-      skip('CART stuff does not exist yet')
       click_on 'Cart'
       expect(page).to have_current_path(cart_path)
     end
@@ -63,16 +61,10 @@ describe 'Navigation Bar:' do
     context 'Any Registered User' do
 
       describe 'retains visitor shopping interactions' do
-        it 'HOME' do click_on("Home") end
-        it 'ITEMS' do
-          skip('items stuff does not exist yet')
-          click_on("Items")
-        end
+        it 'HOME'      do click_on("Home")      end
+        it 'ITEMS'     do click_on("Items")     end
         it 'MERCHANTS' do click_on("Merchants") end
-        it 'Cart' do
-          skip('need to click on cart div, also cart stuff does not yet exist')
-          click_on("Cart")
-        end
+        it 'Cart'      do click_on("Cart")      end
       end
 
       it 'User has profile' do
@@ -137,8 +129,6 @@ describe 'Navigation Bar:' do
       end
 
       it 'does have a users view' do
-        # save_and_open_page
-        # binding.pry
         expect(page).to have_content('Users')
         skip('Users Controller needs methods')
         click_on 'Users'
