@@ -1,0 +1,22 @@
+.add_sub_item span {
+  padding: 9px 0;
+  border: 1px solid #eee;
+  border-right-width: 0;
+  border-left-width: 0;
+}
+
+.add_sub_item a {
+  background-color: #282f3a;
+  padding: 10px;
+  border-radius: 5px 0 0 5px;
+  color: white;
+  text-decoration: none;
+}
+
+.add_sub_item a:last-child {
+  border-radius: 0 5px 5px 0;
+}
+
+.add_sub_item a:only-child {
+  border-radius: 5px;
+}
