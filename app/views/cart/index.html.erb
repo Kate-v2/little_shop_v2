@@ -1,8 +1,9 @@
 
+
 <section>
   <h1>Your Cart</h1>
+  <%= link_to 'Check Out', checkout_path %>
   <%= render partial: 'components/items' %>
   <%=link_to "Empty Cart", delete_cart_path(delete_cart: 0)%>
   <h4>Cart Total: <%= number_to_currency(@cart_sum) %></h4>
 </section>
-
