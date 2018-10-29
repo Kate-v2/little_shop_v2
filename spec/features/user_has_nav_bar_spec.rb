@@ -1,7 +1,8 @@
 require "rails_helper"
-
+require "feature_helper"
 
 describe 'Navigation Bar:' do
+  include FeatureHelper
 
   context 'Visitor' do
 
@@ -14,7 +15,6 @@ describe 'Navigation Bar:' do
     describe 'Shop By' do
       it 'ITEMS link' do
         visit login_path
-        skip('Items INDEX not created yet')
         click_on 'Items'
         expect(page).to have_current_path(items_path)
       end
@@ -40,7 +40,6 @@ describe 'Navigation Bar:' do
 
     it 'CART link' do
       visit root_path
-      skip('CART stuff does not exist yet')
       click_on 'Cart'
       expect(page).to have_current_path(cart_path)
     end
@@ -54,46 +53,18 @@ describe 'Navigation Bar:' do
 
   describe 'Registered Users' do
 
-    def quick_user( id = User.last.id + 1 )
-      {
-        name:    "name #{id}"    ,
-        address: "address #{id}" ,
-        city:     "city #{id}"   ,
-        state:    "state #{id}"  ,
-        zip:      id,
-        email:    "email #{id}"  ,
-        password: "password#{id}",
-        role:     0,
-        active:   1
-      }
-    end
-
-    def log_in(user)
-      visit logout_path
-      visit login_path
-      fill_in 'Email'   , with: user.email
-      fill_in 'Password', with: user.password
-      click_on 'Log In'
-    end
-
     before(:each) do
       @user = create(:user)
-      log_in(@user)
+      login(@user)
     end
 
     context 'Any Registered User' do
 
-      describe 'has retains visitor shopping interactions' do
-        it 'HOME' do click_on("Home") end
-        it 'ITEMS' do
-          skip('items stuff does not exist yet')
-          click_on("Items")
-        end
+      describe 'retains visitor shopping interactions' do
+        it 'HOME'      do click_on("Home")      end
+        it 'ITEMS'     do click_on("Items")     end
         it 'MERCHANTS' do click_on("Merchants") end
-        it 'Cart' do
-          skip('need to click on cart div, also cart stuff does not yet exist')
-          click_on("Cart")
-        end
+        it 'Cart'      do click_on("Cart")      end
       end
 
       it 'User has profile' do
@@ -101,7 +72,7 @@ describe 'Navigation Bar:' do
       end
 
       it 'Welcomes user' do
-        expect(page).to have_content("Welcome #{@user.name}")
+        expect(page).to     have_content("Welcome #{@user.name}")
         expect(page).to_not have_content("Welcome! Please")
         expect(page).to_not have_content("Login")
         expect(page).to_not have_content("Register")
@@ -116,11 +87,11 @@ describe 'Navigation Bar:' do
     end
 
     context 'User' do
-      it 'user does not have a dashboard' do
+      it 'does not have a dashboard' do
         expect(page).to_not have_content("Dashboard")
       end
 
-      it 'user does not have a users view' do
+      it 'does not have a users view' do
         expect(page).to_not have_content("Users")
       end
     end
@@ -128,18 +99,17 @@ describe 'Navigation Bar:' do
     context 'Merchant' do
 
       before(:each) do
-        quick = quick_user; quick[:role] = 1
-        @merch = User.create(quick)
-        log_in(@merch)
+        @merch = create(:user, role: 1)
+        login(@merch)
       end
 
-      it 'user does have a dashboard' do
+      it 'does have a dashboard' do
         skip('Dashboard Controller needs methods')
         click_on 'Dashboard'
         expect(page).to have_current_path(dashboard_path)
       end
 
-      it 'user does not have a users view' do
+      it 'does not have a users view' do
         expect(page).to_not have_content("Users")
       end
     end
@@ -148,26 +118,24 @@ describe 'Navigation Bar:' do
     context 'Admin' do
 
       before(:each) do
-        quick = quick_user; quick[:role] = 2
-        @admin = User.create(quick)
-        log_in(@admin)
+        @admin = create(:user, role: 2)
+        login(@admin)
       end
 
-      it 'user does have a dashboard' do
-        expect(page).to have_content('Dashboard')
+      it 'does have a dashboard' do
         skip('Dashboard Controller needs methods')
         click_on 'Dashboard'
         expect(page).to have_current_path(dashboard_path)
       end
 
-      it 'user does have a users view' do
+      it 'does have a users view' do
         expect(page).to have_content('Users')
         skip('Users Controller needs methods')
         click_on 'Users'
         expect(page).to have_current_path(users_path)
       end
 
-      it 'user does have a users view' do
+      it 'does have a users view' do
         expect(page).to have_content('Orders')
         skip('needs Orders Controller')
         click_on 'Orders'
@@ -177,9 +145,4 @@ describe 'Navigation Bar:' do
 
   end
 
-end
-
-def page_pry
-  save_and_open_page
-  # binding.pry
 end

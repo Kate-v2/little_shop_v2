@@ -1,5 +1,3 @@
-require 'pry'
-
 class ItemsController < ApplicationController
 
   def new
@@ -17,8 +15,8 @@ class ItemsController < ApplicationController
   end
 
   def show
-
-  end 
+    @items = [Item.find(params[:id])]
+  end
 
   private
 
