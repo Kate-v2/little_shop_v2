@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   get '/profile',   to: 'users#show'
   get '/profile/orders', to:'orders#index'
   get '/profile/edit', to: 'users#edit'
+  get '/users', to: 'admin/users#index'
   # namespace :profile do
   #   resources :orders, only:[:index]
   # end
@@ -36,6 +37,7 @@ Rails.application.routes.draw do
     resources :items
     resources :users
     resources :orders
+
   end
 
   namespace :merchant do
