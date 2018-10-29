@@ -2,7 +2,7 @@
      <% link_to rel: 'stylesheet', src: "/assets/nav.css" %>
 <% end %>
 
-<div class='container' id='nav-bar'>
+<nav class='container' id='nav-bar'>
 
   <span class='card nav-button' id='home-button'>
     <h2><%= link_to 'Home', root_path %></h2>
@@ -57,13 +57,12 @@
 
   <% end %>
 
-
-  <%= link_to cart_path do %>
-  <span class='card nav-button' id='cart-button'>
+  <span class='card nav-button cart' id='cart-button'>
+    <%= link_to cart_path do %>
     <%= image_tag('cart-icon.png') %>
     <h3>CART: <%=@cart.cart_count %></h3>
+    <% end %>
   </span>
-  <% end %>
 
 
-</div>
+</nav>
