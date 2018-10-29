@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   # get '/dashboard', to: 'users#index'
   resources :items, only: [:index, :new, :show]
 
-  resources :users, only: [:new, :create, :edit, :update, :show] do
+  resources :users, only: [:new, :create, :edit, :update] do
     resources :items, only: [:new, :create]
   end
 
