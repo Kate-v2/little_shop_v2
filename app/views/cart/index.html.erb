@@ -1,8 +1,12 @@
 
 <section>
   <h1>Your Cart</h1>
+  <% if current_user %>
+    <%= link_to 'Check Out', checkout_path %>
+  <% else %>
+    <h4>In order to Check Out, please <%= link_to "Register", register_path %> as a new user or <%= link_to "Log In", login_path %></h4>
+  <% end %>
   <%= render partial: 'components/items' %>
   <%=link_to "Empty Cart", delete_cart_path(delete_cart: 0)%>
   <h4>Cart Total: <%= number_to_currency(@cart_sum) %></h4>
 </section>
-
