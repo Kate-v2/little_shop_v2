@@ -26,13 +26,13 @@ describe 'Order History' do
     count   = purchase.item_count
     total   = purchase.total_cost
 
-    order = page.find("order-#{Order.first.id}")
+    order = page.find("#order-#{purchase.id}")
     expect(order).to have_content(id)
-    expect(order).to have_content(created_at)
-    expect(order).to have_content(updated_at)
-    expect(order).to have_content(status)
-    expect(order).to have_content(count)
-    expect(order).to have_content(total)
+    expect(order).to have_content("Status: #{status}")
+    expect(order).to have_content("Ordered: #{created}")
+    expect(order).to have_content("Updated: #{updated}")
+    expect(order).to have_content("#{count} items")
+    expect(order).to have_content("Total: $#{total}")
   end
 
   it 'displays all orders' do
