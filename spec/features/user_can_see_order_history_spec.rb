@@ -37,7 +37,9 @@ describe 'Order History' do
   end
 
   it 'displays all orders' do
-
+    orders = page.all('.order').count
+    db_orders = Order.count
+    expect(orders).to eq(db_orders)
   end
 
 
