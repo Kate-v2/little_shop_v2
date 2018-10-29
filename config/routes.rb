@@ -20,10 +20,11 @@ Rails.application.routes.draw do
 
   get '/dashboard', to: 'dashboard#index'
 
-  get '/profile',        to: 'users#show'
-  get '/profile/orders', to:'orders#index'
+  get '/profile',            to: 'users#show'
+  get '/profile/orders',     to: 'orders#index'
+  get '/profile/orders/:id', to: 'orders#show', as: 'profile_order'
   # namespace :profile do
-  #   resources :orders, only:[:index]
+  #   resources :orders, only:[:index, :show]
   # end
 
   # something not quite right with this path

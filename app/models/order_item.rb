@@ -7,4 +7,18 @@ class OrderItem < ApplicationRecord
   belongs_to :order
   #merchant purchaser issue
   # belongs_to :user, through: :item
+
+
+  def self.with_subtotals
+    select('order_items.*, (quantity * purchase_price) AS subtotal')
+  end
+
+  def self.with_totals
+    # with_subtotals.select('order, SUM(subtotal) AS total')
+    # .group()
+
+  end
+
+
+
 end

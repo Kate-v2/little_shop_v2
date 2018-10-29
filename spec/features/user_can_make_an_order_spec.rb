@@ -1,27 +1,33 @@
 require "rails_helper"
 
 
-describe 'User can click checkout button to purchase cart' do
+describe 'User can make purchases' do
 
   before(:each) do
     @merch = create(:user, role: 1)
     create_list(:item, 3, user_id: @merch.id)
-
     @user = create(:user, role: 0)
     log_in(@user)
-
-
-
   end
 
-  it 'test' do
-    shop
-    checkout
+  it 'User can click Check Out' do
+    shop; checkout
     expect(page).to have_current_path(profile_orders_path)
   end
 
+  it 'User sees a notification that the order has been made' do
+    shop; checkout
+    order = Order.last
+    expect(page).to have_content("Thank you for your purchase! Order Number: #{order.id}")
+  end
 
-
+  it 'User can see new order in their list of orders' do
+    shop; checkout
+    order = Order.last
+    skip('build view')
+    recent = page.find("#order-##{order.id}")
+    expect(recent).to have_content(order.id)
+  end
 
 
 end
@@ -50,8 +56,6 @@ def shop
   second.click_on('Add Item')
   second = page.all('.item')[1]
   second.click_on('+')
-  # first.find('Add Item').click
-  # first.find('+').click
 end
 
 def checkout
