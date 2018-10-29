@@ -4,11 +4,22 @@
   color: lightgrey;
   max-height: 100px;
   overflow: hidden;
+  padding: 0 5%;
 }
 
 #nav-bar a {
   color: lightgrey;
   text-decoration: none;
+}
+
+#nav-bar .cart a {
+  position: relative;
+  padding: 0 10px;
+}
+
+#nav-bar h2, #nav-bar h3 {
+  line-height:28px;
+  margin:20px 0;
 }
 
 #shopping-search-bar {
@@ -30,9 +41,11 @@
 }
 
 #cart-button img {
-  /* display: flex; */
-  width: 30%;
-  max-height: auto;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  right: 100%;
 }
 
 .container {
@@ -50,6 +63,7 @@
 
 .nav-button {
   max-width: 20%;
+  padding:0 15px;
   text-align: center;
   vertical-align: middle;
 }
@@ -71,10 +85,15 @@
   position: absolute;
   background-color: #9bbcf2;
   width: 20%;
+  top:68px;
   z-index: 1;
 
   /* display: flex; */
   /* flex-direction: column; */
+}
+
+#nav-bar .dropdown-list h3 {
+  margin:0;
 }
 
 .dropdown-list a {
@@ -82,6 +101,7 @@
   text-decoration: none;
   display: block;
   text-align: center;
+  padding:10px 0;
 }
 
 dropdown-list a:hover {
