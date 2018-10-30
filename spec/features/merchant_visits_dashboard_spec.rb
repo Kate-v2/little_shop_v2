@@ -49,7 +49,7 @@ describe 'merchant visits dashboard' do
     click_on("All My Items")
     click_on("Add New Item")
 
-    expect(current_path).to eq("/items/new")
+    expect(current_path).to eq("/dashboard/items/new")
   end
 
   it 'and can click link to edit item' do

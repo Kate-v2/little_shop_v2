@@ -22,6 +22,7 @@ Rails.application.routes.draw do
 
   get '/dashboard', to: 'dashboards#index'
   get '/dashboard/items', to: 'dashboards#show', as: 'dashboard_items'
+  get 'dashboard/items/new', to: 'dashboards#new', as: 'dashboard/items/new'
   get '/profile',   to: 'users#show'
   get '/profile/orders', to:'orders#index'
   get '/profile/edit', to: 'users#edit'

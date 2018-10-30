@@ -1,5 +1,5 @@
-<h1> Dashboard </h1>
-<%=link_to "Add New Item", new_item_path%>
+<h1><%=@user.name%>'s' Items </h1>
+<h2><%=link_to "Add New Item",  dashboard_items_new_path%></h2>
 <ul>
 <div class='container' id='items-collection'>
   <% @items.each do |item| %>
