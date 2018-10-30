@@ -91,6 +91,15 @@ describe 'Any User can CANCEL a relevant order' do
 
   end
 
+  describe 'Logistics' do
+
+    it 'Inventory is returned to all Merchant(s)' do
+      skip
+    end
+
+
+  end
+
 
 
 end
