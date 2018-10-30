@@ -17,14 +17,4 @@ class Order < ApplicationRecord
   end
 
 
-  def ship_to_user
-    self.user.name
-    binding.pry
-  end
-
-  def ship_to_location
-
-  end
-
-
 end
