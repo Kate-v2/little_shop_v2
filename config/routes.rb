@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   get '/add_item',    to: 'cart#create'
   get '/update_item', to: 'cart#update'
-  
+
   get '/delete_cart', to: 'cart#destroy'
   # get '/destroy_item', to: 'cart#destroy'
 
@@ -22,8 +22,9 @@ Rails.application.routes.draw do
   get '/cart',     to: 'cart#index'
   get '/checkout', to: 'orders#create'
 
-  get '/dashboard',        to: 'dashboard#index'
-  get '/dashboard/orders', to: 'orders#index',    as: 'dashboard_orders'
+  get '/dashboard',         to: 'dashboard#index'
+  get '/dashboard/orders',  to: 'orders#index',   as: 'dashboard_orders'
+  get 'dashboard/fulfill',  to: 'orders#update',  as: 'fulfillment'
 
   resources :orders, only: [:index, :show]
 
@@ -32,7 +33,7 @@ Rails.application.routes.draw do
   get '/profile/orders',            to: 'orders#index'
   get '/profile/orders/:id',        to: 'orders#show',    as: 'profile_order'
   get '/profile/orders/:id/cancel', to: 'orders#destroy', as: 'cancel_order'
-  
+
   # namespace :profile do
   #   resources :orders, only:[:index, :show]
   # end

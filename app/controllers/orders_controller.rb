@@ -56,6 +56,10 @@ class OrdersController < ApplicationController
     redirect_to params[:previous]
   end
 
+  def update
+    binding.pry
+  end
+
 
   private
 

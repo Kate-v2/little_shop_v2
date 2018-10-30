@@ -1,35 +1,44 @@
 
 <div class='container order-items'>
-  <!-- Display the order items if -->
+
+  <% @total = 0 %>
+  <% @count = 0 %>
+
   <% if @merch_experience %>
-    <% order.order_items.with_subtotals.each do |oitem| %>
+    <% order_items = order.order_items.with_subtotals %>
+    <% order_items.each do |oitem| %>
 
       <% if oitem.item.user_id == current_user.id %>
 
-        < %= link_to item_path(oitem.item do)%>
+        <% @count += 1 %>
+        <% @total += oitem.subtotal %>
+
+        <%= link_to item_path(oitem.item) do%>
           <span>
             <h3><%= oitem.item.name %></h3>
             <% oitem.item.image ? img = oitem.item.image : img = "https://smhttp-ssl-50970.nexcesscdn.net/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/placeholder/default/no_image_available_3.jpg" %>
             <%= image_tag img %>
           </span>
-        < % end %>
+        <% end %>
+
+        <h5>Current: <%= number_to_currency(oitem.item.price) %></h4>
+        <h4>Purchased: <%= number_to_currency(oitem.purchase_price) %></h4>
+        <h4>Qty: <%= oitem.quantity %></h4>
+        <h5>Sum: <%= number_to_currency(oitem.subtotal) %>
+
+        <% if oitem.quantity <= oitem.item.inventory %>
+          <%= link_to 'Fulfill', fulfillment_path(oitem) %>
+          <!-- ??? Is a merchant able to cancel - it would affect the order  -->
+          <!-- < %= link_to 'Cancel', cancel_order_path %> -->
+        <% else %>
+          <h3 id='cannot-fulfill'>Sorry, you don't have enough inventory to fulfill this order"</h3>
+        <% end %>
+
       <% end %>
-
-      <h4>Current: <%= oitem.item.price %></h4>
-      <h4>Purchased: <%= oitem.purchase_price %></h4>
-      <h4>Qty: <%= oitem.quantity %></h4>
-      <h5>Sum: <%= oitem.subtotal %>
-
-      <% if oitem.quantity <= oitem.item.inventory %>
-        < %= link_to 'Fulfill', fulfill_order_path %>
-        <!-- ??? Is a merchant able to cancel - it would affect the order  -->
-        <!-- < %= link_to 'Cancel', cancel_order_path %> -->
-      <% else %>
-        <h3 id='cannot-fulfill'>Sorry, you don't have enough inventory to fulfill this order"</h3>
-      <% end %>
-
-
     <% end %>
+
+    <h3>Checkout Cost: <%= number_to_currency(@total) %></h3>
+    <h3>Item Count: <%= @count %></h3>
   <% end %>
 
 

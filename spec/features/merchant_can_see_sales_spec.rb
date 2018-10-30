@@ -3,6 +3,7 @@ require 'feature_helper'
 
 describe 'Merchant Sold Orders' do
   include FeatureHelper
+  include ActionView::Helpers::NumberHelper
 
   before(:each) do
     # -- shops --
@@ -66,7 +67,6 @@ describe 'Merchant Sold Orders' do
       expect(other_merch_item.user_id).to eq(@merch2.id)
 
       order1 = page.find("#order-#{order.id}")
-      skip('NEED TO BUILD summary into view')
       expect(order1).to     have_content(this_merch_item.name)
       expect(order1).to     have_content(this_merch_item.name)
       expect(order1).to_not have_content(other_merch_item.name)
@@ -75,11 +75,16 @@ describe 'Merchant Sold Orders' do
     describe 'order details are specific to the merchant and not the whole order' do
 
       it 'item count is only of merchant items' do
-        skip
+        order = Order.first
+        order1 = page.find("#order-#{order.id}")
+        expect(order1).to have_content("Item Count: 1")
       end
 
       it 'total cost is only of merchant items' do
-        skip
+        order = Order.first
+        item  = order.order_items.with_subtotals[0]
+        order1 = page.find("#order-#{order.id}")
+        expect(order1).to have_content("Checkout Cost: #{number_to_currency(item.subtotal)}")
       end
     end
 
