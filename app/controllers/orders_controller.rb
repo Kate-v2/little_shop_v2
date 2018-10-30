@@ -17,8 +17,8 @@ class OrdersController < ApplicationController
     session[:user_id] || not_found
     user = User.find(session[:user_id].to_i)
     path  = request.path
-    @user_experience  = path == profile_orders_path   && current_user
-    @merch_experience = (path == dashboard_orders_path && current_merchant?) || (path == dashboard_orders_path && current_admin?)
+    @user_experience  = path == profile_orders_path && current_user
+    @merch_experience = path == dashboard_orders_path && (current_merchant? || current_admin?)
     @admin_experience = path == orders_path           && current_admin?
 
     # if none of the experiences, show 404 page
@@ -38,9 +38,9 @@ class OrdersController < ApplicationController
 
   def show
     path = request.path
-    experience1 = path == order_path && current_merchant?
-    experience2 = path == order_path && current_admin?
-    @merch_order_experience = experience1 || experience2
+    @user_order_experience  = path == profile_order_path && current_user
+    @merch_order_experience = path == order_path && (current_merchant? || current_admin?)
+    @user_order_experience || @merch_order_experience || not_found
     @orders = [ Order.find(params[:id].to_i) ]
   end
 

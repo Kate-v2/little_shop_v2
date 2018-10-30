@@ -26,9 +26,6 @@ describe 'Order History' do
     updated = purchase.updated_at
     status  = purchase.status
     count   = purchase.item_count
-    # total   = purchase.total_cost
-
-    # total = number_with_delimiter(purchase.total_cost,delimiter: ",")
     total = number_to_currency(purchase.total_cost)
 
     order = page.find("#order-#{purchase.id}")

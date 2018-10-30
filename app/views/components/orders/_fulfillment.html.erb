@@ -1,0 +1,8 @@
+
+<% if oitem.quantity <= item.inventory %>
+  <%= link_to 'Fulfill', fulfillment_path(oitem) %>
+  <!-- ??? Is a merchant able to cancel - it would affect the order  -->
+  <!-- < %= link_to 'Cancel', cancel_order_path %> -->
+<% else %>
+  <h3 id='cannot-fulfill'>Sorry, you don't have enough inventory to fulfill this order"</h3>
+<% end %>
