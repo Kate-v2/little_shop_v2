@@ -35,29 +35,50 @@ class OrdersController < ApplicationController
   end
 
   def destroy
-    order = Order.find(params[:id].to_i)
-    order.status = 2; order.save
-    flash[:canceled] = "Order ##{order.id} has been canceled."
+    # order = Order.find(params[:id].to_i)
+    # order.status = 2; order.save
+    cancel_order
+    flash[:canceled] = "Order ##{params[:id]} has been canceled."
     redirect_to params[:previous]
   end
 
   def update
-    binding.pry
-    cancel_order  if request.path == cancel_order_path && current_user
-    fulfill_order if request.path == fulfillment_path  && current_merchant?
+    # binding.pry
+    # if request.path == cancel_order_path && current_user
+    #   cancel_order
+    #   redirect_to params[:previous]
+    # end
+
+    if request.path == fulfillment_path  && current_merchant?  # current_user.id == item.user_id ??
+      fulfill_order
+      redirect_to params[:previous]
+    end
   end
 
 
   private
 
   def fulfill_order
-    order_item = OrderItem.find(params[:id].to_i)
-    item       = order.item
+    order_item = OrderItem.find(params[:order_item].to_i)
+    item = order_item.item
+    qty  = order_item.quantity
     if qty <= item.inventory
-      item.inventory   -= quantity;  item.save
-      order_item.status = 1;         order_item.save
+      item.inventory -= qty; item.save
+      order_item.status = 1; order_item.save
+      influence_order_status(order_item.order)
+      flash[:fulfill] = "You have fulfilled item: #{item.name} of order: #{order_item.order_id}"
     else
-      flash[:error] = "Order quantity exceeds inventory"
+      flash[:error] = "Order quantity exceeds inventory."
+    end
+  end
+
+  def influence_order_status(order_id)
+    order = Order.find(order_id.id)
+    items = OrderItem.where(order: order )
+    stats = items.map { |item| item.status }
+    finalize = stats.all? { |status| status == 'complete' }
+    if finalize
+      order.status = 1; order.save
     end
   end
 

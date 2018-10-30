@@ -36,7 +36,7 @@ Rails.application.routes.draw do
 
   # get '/profile/orders/:id/cancel', to: 'orders#destroy', as: 'cancel_order'
   get '/orders/:id/cancel',  to: 'orders#destroy', as: 'cancel_order'
-  get '/orders/:id/fulfill', to: 'orders#update',  as: 'fulfillment'
+  get '/orders/fulfill', to: 'orders#update',  as: 'fulfillment'
 
   post '/activate', to: 'users#toggle'
 
