@@ -15,7 +15,7 @@
         <% @count += 1 %>
         <% @total += oitem.subtotal %>
 
-        <%= render partial: 'components/items/item_title',          locals: {oitem: oitem, item: item }%>
+        <%= render partial: 'components/items/item_title',           locals: {oitem: oitem, item: item } %>
         <%= render partial: 'components/orders/merchant_order_item', locals: {oitem: oitem, item: item, order: order } %>
         <%= render partial: 'components/orders/fulfillment',         locals: {oitem: oitem, item: item } %>
 
@@ -24,8 +24,13 @@
 
     <h3>Checkout Cost: <%= number_to_currency(@total) %></h3>
     <h3>Item Count: <%= @count %></h3>
+  <% end %>
 
-  <% else %>
+
+  <% if @user_order_experience %>
+
+    <h3>Checkout Cost: <%= number_to_currency(order.total_cost) %></h3>
+    <h3>Item Count: <%=    order.item_count                     %></h3>
 
     <% order_items = order.order_items.with_subtotals %>
     <% order_items.each do |oitem| %>
@@ -34,10 +39,10 @@
       <% @count += oitem.quantity %>
       <% @total += oitem.subtotal %>
 
-      <%= render partial: 'components/items/item_title',          locals: {oitem: oitem, item: item }%>
-      <%= render partial: 'components/orders/merchant_order_item', locals: {oitem: oitem, item: item, order: order } %>
-    <% end %>
+      <%= render partial: 'components/items/item_title',       locals: {oitem: oitem, item: item } %>
+      <%= render partial: 'components/orders/user_order_item', locals: {item: item, oitem: oitem, order: order } %>
 
+    <% end %>
   <% end %>
 
 

@@ -1,6 +1,4 @@
-<% if @merch_order_experience %>
-  <h5>Current: <%=   number_to_currency(item.price)           %></h4>
-  <h4>Purchased: <%= number_to_currency(oitem.purchase_price) %></h4>
-  <h4>Qty: <%=       oitem.quantity                           %></h4>
-  <h5>Sum: <%=       number_to_currency(oitem.subtotal)       %></h5>
-<% end %>
+<!-- < % if @merch_order_experience %> -->
+  <h5>Current: <%= number_to_currency(item.price) %></h4>
+  <%= render partial: 'components/orders/user_order_item', locals: {item: item, oitem: oitem} %>
+<!-- < % end %> -->
