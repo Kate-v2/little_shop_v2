@@ -16,27 +16,6 @@ describe 'As an admin' do
       create_list(:item, 3, user_id: @merch_1.id)
       create_list(:item, 4, user_id: @merch_2.id)
       create_list(:item, 5, user_id: @merch_3.id)
-      # -- purchaser --
-      @user_1 = create(:user, role: 0)
-      @user_2 = create(:user, role: 0)
-      @user_3 = create(:user, role: 0)
-      @user_4 = create(:user, role: 0)
-      login(@user_1)
-      shop; checkout
-      shop; checkout
-      shop; checkout
-      login(@user_2)
-      shop; checkout
-      shop; checkout
-      shop; checkout
-      login(@user_3)
-      shop; checkout
-      shop; checkout
-      shop; checkout
-      login(@user_4)
-      shop; checkout
-      shop; checkout
-      shop; checkout
       login(@admin)
     end
 
@@ -83,8 +62,6 @@ describe 'As an admin' do
         click_on('Disable')
       end
 
-      binding.pry
-
       visit merchants_path
 
       within("#merchant-#{@merch_1.id}") do
@@ -99,12 +76,29 @@ describe 'As an admin' do
         click_button('Disable')
       end
 
+      login(@merch_1)
+
+      expect(current_path).to_not eq(profile_path)
+      expect(page).to_not have_content(@merch_1.name)
+    end
+
+    it 'when I click on enable, merchant can login' do
       visit merchants_path
+
+      within("#merchant-#{@merch_1.id}") do
+        click_button('Disable')
+      end
+
+      visit merchants_path
+
+      within("#merchant-#{@merch_1.id}") do
+        click_button('Enable')
+      end
 
       login(@merch_1)
 
-      expect(current_path).to_not eq(profile_path(@merch_1))
-      expect(page).to_not have_content(@merch_1.name)
+      expect(current_path).to eq(profile_path)
+      expect(page).to have_content(@merch_1.name)
     end
 
   end
