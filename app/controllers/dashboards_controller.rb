@@ -18,8 +18,12 @@ class DashboardsController < ApplicationController
 
   def create
     user = User.find(params[:user_id])
-    item = user.items.create(item_params)
-    redirect_to
+    item = user.items.new(item_params)
+    if item.save
+      redirect_to "/dashboard/items"
+    else
+      redirect_back(fallback_location: root_path)
+    end
   end
 
   private
