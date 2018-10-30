@@ -34,4 +34,14 @@ module FeatureHelper
     click_on 'Check Out'
   end
 
+  def mock_order(items, qty, user)
+    # binding.pry
+    order = Order.create!(status: 0, user: user)
+    items.each { |item|
+      OrderItem.create!(item: item, order: order, quantity: qty, purchase_price: (qty * 100))
+    }
+    # binding.pry
+    return Order.last
+  end
+
 end

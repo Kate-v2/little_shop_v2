@@ -16,4 +16,15 @@ class Order < ApplicationRecord
     count = order_items.sum(:quantity)
   end
 
+
+  def ship_to_user
+    self.user.name
+    binding.pry
+  end
+
+  def ship_to_location
+
+  end
+
+
 end
