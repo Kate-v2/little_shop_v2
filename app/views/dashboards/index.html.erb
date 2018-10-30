@@ -8,5 +8,5 @@
   <% else %>
     <p>Sorry <%= @user.name %>, no one has ordered any of your items.</p>
   <% end %>
+  <%= link_to "Downgrade Account", upgrade_downgrade_path(id: @user.id, upgrade_downgrade: "default") %>
 </div>
-

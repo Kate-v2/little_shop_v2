@@ -55,7 +55,11 @@ class UsersController <ApplicationController
     if request.path == profile_path
       @user = User.find(session[:user_id])
     elsif current_admin?
-      @user = User.find(params[:id])
+      if User.find(params[:id]).role == "merchant"
+        redirect_to merchant_show_path
+      else
+        @user = User.find(params[:id])
+      end
     else
       render file: "public/404"
     end
@@ -84,7 +88,7 @@ class UsersController <ApplicationController
       @user.role = "merchant"
       @user.save!
       flash[:success]="#{@user.name.capitalize} has been upgraded to a merchant"
-      redirect_to merchant_show_path(@user)
+      redirect_to merchant_show_path(id: @user.id)
     elsif params[:upgrade_downgrade] == "default"
       @user.role = "default"
       @user.save!

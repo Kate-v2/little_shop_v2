@@ -4,11 +4,18 @@ class DashboardsController < ApplicationController
 
   def index
     if current_admin?
-    end
-    @user = User.find(session[:user_id])
-    @merchant_orders = @user.find_merchant_order_ids
+      if User.find(params[:id]).role == "default"
+        redirect_to user_path
+      else
+        @user = User.find(params[:id])
+        @merchant_orders = @user.find_merchant_order_ids
+      end
+    else
+      @user = User.find(session[:user_id])
+      @merchant_orders = @user.find_merchant_order_ids
 
-    @user = current_user
+      @user = current_user
+    end
   end
 
   def show
