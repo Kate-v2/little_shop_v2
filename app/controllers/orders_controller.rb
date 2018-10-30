@@ -14,32 +14,23 @@ class OrdersController < ApplicationController
 
 
   def index
-    @user = User.find(session[:user_id].to_i)
-    @path  = request.path
-    @user_experience  = @path == profile_orders_path   && current_user
-    @merch_experience = @path == dashboard_orders_path && current_merchant? # || current_admin
-    @admin_experience = @path == orders_path           && current_admin?
+    session[:user_id] || not_found
+    user = User.find(session[:user_id].to_i)
+    path  = request.path
+    @user_experience  = path == profile_orders_path   && current_user
+    @merch_experience = (path == dashboard_orders_path && current_merchant?) || (path == dashboard_orders_path && current_admin?)
+    @admin_experience = path == orders_path           && current_admin?
 
     # if none of the experiences, show 404 page
+    not_found if (@user_experience || @merch_experience || @admin_experience) == false
 
-    # @orders = Order.where(user_id: @user.id) if user_experience
-    # @orders = Order.all                      if admin_experience
-
-    if @user_experience
-      @orders = Order.where(user_id: @user.id)
-      # order_items?
-    end
-
-    if @admin_experience
-      @orders = Order.all
-
-    end
-
+    @orders = Order.where(user_id: user.id) if @user_experience
+    @orders = Order.all                     if @admin_experience
 
     if @merch_experience
-      items        = Item.where(user_id: @user.id).pluck(:id)
-      @order_items = OrderItem.where(item: items)
-      order_ids    = @order_items.pluck(:order_id)
+      items        = Item.where(user_id: user.id).pluck(:id)
+      order_items  = OrderItem.where(item: items)
+      order_ids    = order_items.pluck(:order_id)
       @orders      = Order.where(id: order_ids)
     end
 
@@ -50,7 +41,6 @@ class OrdersController < ApplicationController
     experience1 = path == order_path && current_merchant?
     experience2 = path == order_path && current_admin?
     @merch_order_experience = experience1 || experience2
-    # binding.pry
     @orders = [ Order.find(params[:id].to_i) ]
   end
 
