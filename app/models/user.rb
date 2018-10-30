@@ -16,4 +16,5 @@ class User < ApplicationRecord
   enum role: %w(default merchant admin)
 
   has_secure_password
+
 end
