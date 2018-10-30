@@ -31,8 +31,9 @@ Rails.application.routes.draw do
   get '/cart',     to: 'cart#index'
   get '/checkout', to: 'orders#create'
 
-  get '/dashboard',        to: 'dashboard#index'
-  get '/dashboard/orders', to: 'orders#index',    as: 'dashboard_orders'
+  get '/dashboard',         to: 'dashboard#index'
+  get '/dashboard/orders',  to: 'orders#index',   as: 'dashboard_orders'
+  get '/dashboard/fulfill',  to: 'orders#update',  as: 'fulfillment'
 
   post '/activate', to: 'users#toggle'
 
@@ -44,7 +45,6 @@ Rails.application.routes.draw do
   get '/profile/orders',            to: 'orders#index'
   get '/profile/orders/:id',        to: 'orders#show',    as: 'profile_order'
   get '/profile/orders/:id/cancel', to: 'orders#destroy', as: 'cancel_order'
-
 
   # namespace :profile do
   #   resources :orders, only:[:index, :show]
