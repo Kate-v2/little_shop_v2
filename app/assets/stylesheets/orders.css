@@ -1,0 +1,25 @@
+
+#orders-collection {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  vertical-align: middle;
+  justify-content: space-between;
+}
+
+#orders-collection .card {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+
+  margin: 2%;
+  background-color: lightgrey;
+  padding: 2%;
+}
+
+.order-items {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 30%;
+}
