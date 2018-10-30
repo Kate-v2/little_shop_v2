@@ -43,6 +43,8 @@ class OrdersController < ApplicationController
 
   def update
     binding.pry
+    cancel_order  if request.path == cancel_order_path && current_user
+    fulfill_order if request.path == fulfillment_path  && current_merchant?
   end
 
 
