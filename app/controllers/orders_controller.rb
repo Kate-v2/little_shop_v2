@@ -48,15 +48,39 @@ class OrdersController < ApplicationController
 
   private
 
+  def fulfill_order
+    order_item = OrderItem.find(params[:id].to_i)
+    item       = order.item
+    if qty <= item.inventory
+      item.inventory   -= quantity;  item.save
+      order_item.status = 1;         order_item.save
+    else
+      flash[:error] = "Order quantity exceeds inventory"
+    end
+  end
+
+  def cancel_order
+    order       = Order.find(params[:id].to_i)
+    order_items = order.order_items
+
+    if order.status == 'pending'
+      order.status = 2; order.save
+      order_items.each { |oitem|
+        item = oitem.item
+        item.inventory += oitem.quantity; item.save
+        oitem.status = 2; oitem.save
+      }
+    else
+      flash[:error] = "Sorry, this order can no longer be canceled."
+    end
+  end
+
   def order_all_items
     @items.each { |item|
       qty = @cart.contents[item.id.to_s]
-      OrderItem.create( item: item, order: @order, quantity: qty,
-                        purchase_price: item.price
-                      )
-     }
+      OrderItem.create( item: item, order: @order, quantity: qty, purchase_price: item.price )
+    }
   end
-
 
   def show_experiences
     path = request.path

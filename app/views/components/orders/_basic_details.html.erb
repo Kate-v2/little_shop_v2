@@ -1,11 +1,7 @@
 <h4>Status: <%= order.status.capitalize %>
 </h4>
 
-<% if order.status == 'pending' %>
-  <%= link_to "Cancel Order",
-      cancel_order_path( id: order.id, previous: request.path )
-  %>
-<% end %>
+<%= render partial: 'components/orders/cancel_order', locals: {order: order} %>
 
 <h5 class='item-date'>Ordered: <%= order.created_at.to_date %>
 </h5>
