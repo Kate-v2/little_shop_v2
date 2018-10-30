@@ -18,6 +18,22 @@ describe 'merchant vists their items page' do
     expect(current_path).to eq("/dashboard/items/new")
   end
 
+  it 'can create a new item' do
+    login(@merch)
+    visit dashboard_path
+    click_on("All My Items")
+    click_on("Add New Item")
+
+    page.fill_in 'Item Name', with: 'Burrito'
+    page.fill_in 'Price', with: 8
+    page.fill_in 'Description', with: 'Has green chile'
+    page.fill_in 'Inventory', with: 20
+    click_button("Create Item")
+
+    expect(current_path).to eq("/dashboard/items")
+  end
+
+
 
 
 end

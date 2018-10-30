@@ -20,11 +20,14 @@ class DashboardsController < ApplicationController
     user = User.find(params[:user_id])
     item = user.items.new(item_params)
     if item.save
+      flash[:success] = "#{item.name.capitalize} added to store"
       redirect_to "/dashboard/items"
     else
+      flash[:error] = "#{item.name.capitalize}'s' information was invalid"
       redirect_back(fallback_location: root_path)
     end
   end
+
 
   private
 
