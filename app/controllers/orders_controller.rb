@@ -8,7 +8,7 @@ class OrdersController < ApplicationController
     # @count = @cart.cart_count
     session.delete(:cart)
     # unsure if this is what I want to do and/or @cart = nil
-    flash[:order] = "Thank you for your purchase! Order Number: #{@order.id}"
+    flash[:order] = flash_messages[:successful_order]
     redirect_to profile_orders_path #(count: @count)
   end
 
@@ -35,20 +35,12 @@ class OrdersController < ApplicationController
   end
 
   def destroy
-    # order = Order.find(params[:id].to_i)
-    # order.status = 2; order.save
     cancel_order
     flash[:canceled] = "Order ##{params[:id]} has been canceled."
     redirect_to params[:previous]
   end
 
   def update
-    # binding.pry
-    # if request.path == cancel_order_path && current_user
-    #   cancel_order
-    #   redirect_to params[:previous]
-    # end
-
     if request.path == fulfillment_path  && current_merchant?  # current_user.id == item.user_id ??
       fulfill_order
       redirect_to params[:previous]
@@ -57,6 +49,9 @@ class OrdersController < ApplicationController
 
 
   private
+
+  def fulfilled() 1 end
+  def canceled()  2 end
 
   def fulfill_order
     order_item = OrderItem.find(params[:order_item].to_i)
@@ -68,18 +63,18 @@ class OrdersController < ApplicationController
       influence_order_status(order_item.order)
       flash[:fulfill] = "You have fulfilled item: #{item.name} of order: #{order_item.order_id}"
     else
-      flash[:error] = "Order quantity exceeds inventory."
+      flash[:error] = flash_messages[:invalid_qty]
     end
   end
 
   def influence_order_status(order_id)
     order = Order.find(order_id.id)
     items = OrderItem.where(order: order )
-    stats = items.map { |item| item.status }
-    finalize = stats.all? { |status| status == 'complete' }
-    if finalize
-      order.status = 1; order.save
-    end
+    finalize = items.all? { |item| item.status == 'complete' }
+    (order.status = fulfilled; order.save) if finalize
+    # if finalize
+    #   (order.status = fulfilled; order.save)
+    # end
   end
 
   def cancel_order
@@ -87,14 +82,14 @@ class OrdersController < ApplicationController
     order_items = order.order_items
 
     if order.status == 'pending'
-      order.status = 2; order.save
+      order.status = canceled; order.save
       order_items.each { |oitem|
         item = oitem.item
         item.inventory += oitem.quantity; item.save
-        oitem.status = 2; oitem.save
+        oitem.status = canceled; oitem.save
       }
     else
-      flash[:error] = "Sorry, this order can no longer be canceled."
+      flash[:error] = flash_messages[:cannot_cancel]
     end
   end
 
@@ -118,6 +113,14 @@ class OrdersController < ApplicationController
     @merch_experience = path == dashboard_orders_path && (current_merchant? || current_admin?)
     @admin_experience = path == orders_path           && current_admin?
     not_found if (@user_experience || @merch_experience || @admin_experience) == false
+  end
+
+  def flash_messages
+    {
+      cannot_cancel:    "Sorry, this order can no longer be canceled.",
+      invalid_qty:      "Order quantity exceeds inventory.",
+      successful_order: "Thank you for your purchase! Order Number: #{@order.id}"
+    }
   end
 
 
