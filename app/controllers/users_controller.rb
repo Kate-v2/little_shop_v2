@@ -45,6 +45,7 @@ class UsersController <ApplicationController
       flash[:notice] = "Please double check your info and try again"
       redirect_back(fallback_location: root_path)
     end
+
   end
 
   def show

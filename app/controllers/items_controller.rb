@@ -7,7 +7,14 @@ class ItemsController < ApplicationController
 
   def create
     user = User.find(params[:user_id])
-    item = user.items.create(item_params)
+    item = user.items.new(item_params)
+    if item.save
+      flash[:success] = "#{item.name.capitalize} added to store"
+      redirect_to "/dashboard/items"
+    else
+      flash[:error] = "#{item.name.capitalize}'s' information was invalid"
+      redirect_back(fallback_location: root_path)
+    end
   end
 
   def index
@@ -16,6 +23,22 @@ class ItemsController < ApplicationController
 
   def show
     @items = [Item.find(params[:id])]
+  end
+
+  def edit
+   @item = Item.find(params[:id])
+   @merchant = current_user
+  end
+
+  def update
+    @item = Item.find(params[:id])
+    if @item.update(item_params)
+      flash[:success] = "You have successfully updated your info"
+      redirect_to item_path(item)
+    else
+      flash[:notice] = "Please double check your info and try again"
+      redirect_back(fallback_location: root_path)
+    end
   end
 
   private

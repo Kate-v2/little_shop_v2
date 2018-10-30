@@ -1,5 +1,6 @@
 <h1> All users </h1>
 <% @users.each do |user| %>
+
 <session>
   <%=link_to user.name, user_path(user)%>
   <% if user.active %>
@@ -10,4 +11,5 @@
     <%= button_to "Enable", activate_path(user: user)%>
   <%end%>
 </session>
+
 <%end%>
