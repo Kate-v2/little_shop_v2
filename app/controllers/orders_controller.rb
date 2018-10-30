@@ -46,6 +46,11 @@ class OrdersController < ApplicationController
   end
 
   def show
+    path = request.path
+    experience1 = path == order_path && current_merchant?
+    experience2 = path == order_path && current_admin?
+    @merch_order_experience = experience1 || experience2
+    # binding.pry
     @orders = [ Order.find(params[:id].to_i) ]
   end
 

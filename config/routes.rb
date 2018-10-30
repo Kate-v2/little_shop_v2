@@ -24,7 +24,7 @@ Rails.application.routes.draw do
 
   get '/dashboard',         to: 'dashboard#index'
   get '/dashboard/orders',  to: 'orders#index',   as: 'dashboard_orders'
-  get 'dashboard/fulfill',  to: 'orders#update',  as: 'fulfillment'
+  get '/dashboard/fulfill',  to: 'orders#update',  as: 'fulfillment'
 
   resources :orders, only: [:index, :show]
 

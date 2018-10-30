@@ -4,29 +4,42 @@
   <% @total = 0 %>
   <% @count = 0 %>
 
-  <% if @merch_experience %>
+  <% if @merch_experience || @merch_order_experience %>
+
     <% order_items = order.order_items.with_subtotals %>
     <% order_items.each do |oitem| %>
+      <% item = oitem.item %>
 
-      <% if oitem.item.user_id == current_user.id %>
+      <% if item.user_id == current_user.id %>
 
+        <!-- Only Need this on show ? -->
         <% @count += 1 %>
         <% @total += oitem.subtotal %>
 
-        <%= link_to item_path(oitem.item) do%>
+        <% if @merch_experience %>
+          <%= link_to item_path(item) do%>
+            <span>
+              <h3><%= item.name %></h3>
+              <% item.image ? img = item.image : img = "https://smhttp-ssl-50970.nexcesscdn.net/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/placeholder/default/no_image_available_3.jpg" %>
+              <%= image_tag img %>
+            </span>
+          <% end %>
+        <%else %>
           <span>
-            <h3><%= oitem.item.name %></h3>
-            <% oitem.item.image ? img = oitem.item.image : img = "https://smhttp-ssl-50970.nexcesscdn.net/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/placeholder/default/no_image_available_3.jpg" %>
+            <h3><%= item.name %></h3>
+            <% item.image ? img = item.image : img = "https://smhttp-ssl-50970.nexcesscdn.net/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/placeholder/default/no_image_available_3.jpg" %>
             <%= image_tag img %>
           </span>
         <% end %>
 
-        <h5>Current: <%= number_to_currency(oitem.item.price) %></h4>
-        <h4>Purchased: <%= number_to_currency(oitem.purchase_price) %></h4>
-        <h4>Qty: <%= oitem.quantity %></h4>
-        <h5>Sum: <%= number_to_currency(oitem.subtotal) %>
+        <% if @merch_order_experience %>
+          <h5>Current: <%= number_to_currency(item.price) %></h4>
+          <h4>Purchased: <%= number_to_currency(oitem.purchase_price) %></h4>
+          <h4>Qty: <%= oitem.quantity %></h4>
+          <h5>Sum: <%= number_to_currency(oitem.subtotal) %>
+        <% end %>
 
-        <% if oitem.quantity <= oitem.item.inventory %>
+        <% if oitem.quantity <= item.inventory %>
           <%= link_to 'Fulfill', fulfillment_path(oitem) %>
           <!-- ??? Is a merchant able to cancel - it would affect the order  -->
           <!-- < %= link_to 'Cancel', cancel_order_path %> -->
