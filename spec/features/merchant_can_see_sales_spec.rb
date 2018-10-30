@@ -47,6 +47,13 @@ describe 'Merchant Sold Orders' do
     expect(orders).to eq(2)
   end
 
+  it 'Can click title to view order show page' do
+    order = Order.first
+    id    = order.id
+    click_on "Order: #{id}"
+    expect(page).to have_current_path(order_path(order))
+  end
+
   describe 'Displayed Orders are specific to Merchant' do
 
     it 'does not display orders irrelevant to current merchant' do
@@ -95,13 +102,42 @@ describe 'Merchant Sold Orders' do
         it 'Current Price' do
           order = Order.first
           id    = order.id
-          click_on "Order: #{id}"
-          expect(page).to have_current_path(order_path(order))
+          card  = page.find("#order-#{id}")
+          item  = order.items.first
+          expect(card).to have_content(item.price)
         end
 
+        it 'Purchase Price' do
+          order = Order.first
+          id    = order.id
+          card  = page.find("#order-#{id}")
+          item  = order.order_items.first
+          expect(card).to have_content(item.purchase_price)
+        end
 
+        it 'Item Quantity' do
+          order = Order.first
+          id    = order.id
+          card  = page.find("#order-#{id}")
+          item  = order.order_items.first
+          expect(card).to have_content(item.quantity)
+        end
 
+        it 'Subtotal' do
+          order = Order.first
+          id    = order.id
+          card  = page.find("#order-#{id}")
+          item  = order.order_items.first
+          expect(card).to have_content(item.quantity * item.purchase_price)
+        end
 
+        it 'Shipping Info' do
+          order = Order.first
+          id    = order.id
+          card  = page.find("#order-#{id}")
+          item  = order.order_items.first
+          expect(card).to have_content(item.quantity * item.purchase_price)
+        end
       end
 
 

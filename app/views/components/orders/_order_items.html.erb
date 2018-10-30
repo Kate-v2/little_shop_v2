@@ -15,14 +15,15 @@
         <% @count += 1 %>
         <% @total += oitem.subtotal %>
 
-        <%= render partial: 'components/orders/order_title',    locals: {oitem: oitem, item: item }%>
-        <%= render partial: 'components/orders/merchant_order', locals: {oitem: oitem, item: item, order: order } %>
-        <%= render partial: 'components/orders/fulfillment',    locals: {oitem: oitem, item: item } %>
+        <%= render partial: 'components/orders/item_title',          locals: {oitem: oitem, item: item }%>
+        <%= render partial: 'components/orders/merchant_order_item', locals: {oitem: oitem, item: item, order: order } %>
+        <%= render partial: 'components/orders/fulfillment',         locals: {oitem: oitem, item: item } %>
 
       <% end %>
     <% end %>
 
     <h3>Checkout Cost: <%= number_to_currency(@total) %></h3>
     <h3>Item Count: <%= @count %></h3>
+
   <% end %>
 </div>

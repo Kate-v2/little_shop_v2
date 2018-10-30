@@ -22,8 +22,8 @@ describe 'Order History' do
   it 'displays an order' do
     purchase = Order.first
     id      = purchase.id
-    created = purchase.created_at
-    updated = purchase.updated_at
+    created = purchase.created_at.to_date
+    updated = purchase.updated_at.to_date
     status  = purchase.status
     count   = purchase.item_count
     total = number_to_currency(purchase.total_cost)
