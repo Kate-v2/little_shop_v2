@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20181024203313) do
     t.string "image"
     t.integer "price"
     t.string "description"
-    t.boolean "active"
+    t.boolean "active", default: true
     t.integer "inventory"
     t.integer "user_id"
     t.datetime "created_at", null: false
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20181024203313) do
   create_table "order_items", force: :cascade do |t|
     t.bigint "order_id"
     t.bigint "item_id"
+    t.integer "status", default: 0
     t.integer "quantity"
     t.integer "purchase_price"
     t.datetime "created_at", null: false
@@ -39,7 +40,7 @@ ActiveRecord::Schema.define(version: 20181024203313) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.integer "status"
+    t.integer "status", default: 0
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -53,8 +54,8 @@ ActiveRecord::Schema.define(version: 20181024203313) do
     t.integer "zip"
     t.string "email"
     t.string "password_digest"
-    t.integer "role"
-    t.boolean "active"
+    t.integer "role", default: 0
+    t.boolean "active", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
