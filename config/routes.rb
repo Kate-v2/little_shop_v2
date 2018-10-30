@@ -21,9 +21,13 @@ Rails.application.routes.draw do
 
 
   get '/dashboard', to: 'dashboards#index'
-  # get '/profile',   to: 'users#show'
-  # get '/profile/orders', to:'orders#index'
+
+  get '/dashboard/items', to: 'dashboards#show', as: 'dashboard_items'
+  get 'dashboard/items/new', to: 'dashboards#new', as: 'dashboard/items/new'
+  get '/profile',   to: 'users#show'
+  get '/profile/orders', to:'orders#index'
   get '/profile/edit', to: 'users#edit', as: 'profile_edit'
+
   get '/users', to: 'admin/users#index'
   get '/users', to: 'admin/users#edit'
 
@@ -31,11 +35,13 @@ Rails.application.routes.draw do
   get '/cart',     to: 'cart#index'
   get '/checkout', to: 'orders#create'
 
+
   get '/dashboard',         to: 'dashboard#index'
   get '/dashboard/orders',  to: 'orders#index',   as: 'dashboard_orders'
   get '/dashboard/fulfill',  to: 'orders#update',  as: 'fulfillment'
 
   post '/activate', to: 'users#toggle'
+
 
 
   resources :orders, only: [:index, :show]
@@ -46,6 +52,7 @@ Rails.application.routes.draw do
   get '/profile/orders/:id',        to: 'orders#show',    as: 'profile_order'
   get '/profile/orders/:id/cancel', to: 'orders#destroy', as: 'cancel_order'
 
+
   # namespace :profile do
   #   resources :orders, only:[:index, :show]
   # end
@@ -54,7 +61,7 @@ Rails.application.routes.draw do
   get '/merchants', to: 'users#index'
 
   # get '/dashboard', to: 'users#index'
-  resources :items, only: [:index, :new, :show]
+  resources :items, only: [:index, :new, :show, :edit, :update]
 
   resources :users, only: [:new, :create, :edit, :update, :show] do
     resources :items, only: [:new, :create]
