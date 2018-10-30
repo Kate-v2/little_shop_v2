@@ -38,7 +38,7 @@ class UsersController <ApplicationController
         redirect_to user_path(@user)
       else
         redirect_to profile_path
-      end 
+      end
     else
       flash[:notice] = "Please double check your info and try again"
       redirect_back(fallback_location: root_path)
@@ -53,6 +53,13 @@ class UsersController <ApplicationController
     else
       render file: "public/404"
     end
+
+  end
+
+  def toggle
+    user = User.find(params[:user].to_i)
+    user.toggle(:active).save
+    redirect_back(fallback_location: root_path)
   end
 
 
