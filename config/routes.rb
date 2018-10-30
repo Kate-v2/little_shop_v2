@@ -21,9 +21,9 @@ Rails.application.routes.draw do
 
 
   get '/dashboard', to: 'dashboards#index'
-  get '/profile',   to: 'users#show'
-  get '/profile/orders', to:'orders#index'
-  get '/profile/edit', to: 'users#edit'
+  # get '/profile',   to: 'users#show'
+  # get '/profile/orders', to:'orders#index'
+  get '/profile/edit', to: 'users#edit', as: 'profile_edit'
   get '/users', to: 'admin/users#index'
   get '/users', to: 'admin/users#edit'
 
