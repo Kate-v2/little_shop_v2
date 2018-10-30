@@ -6,6 +6,7 @@ describe 'merchant visits dashboard' do
   before(:each) do
 
     @merch = create(:user, role: 1)
+    @user = create(:user, role: 0)
     create_list(:item, 3, user_id: @merch.id)
   end
 
@@ -51,13 +52,20 @@ describe 'merchant visits dashboard' do
     expect(current_path).to eq("/items/new")
   end
 
-  xit 'and can click link to edit item' do
+  it 'and can click link to edit item' do
     login(@merch)
     visit dashboard_path
     click_on("All My Items")
-    click_on("Edit Item")
+    click_on("Edit #{@merch.items.first.name}")
 
-    expect(current_path).to eq("/items/")
+    expect(current_path).to eq("/items/#{@merch.items.first.id}/edit")
+  end
+
+  it 'normal user is denied access' do
+    login(@user)
+    visit dashboard_path
+
+    expect(page).to have_content("The page you were looking for doesn't exist.")
   end
 
 end
