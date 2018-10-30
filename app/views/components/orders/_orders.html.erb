@@ -37,8 +37,8 @@
         </h4>
       <% end %>
 
-      <%= render partial: 'components/orders/order_items', locals: { order: order } %>
       <%= render partial: 'components/orders/ship_to',     locals: { order: order } %>
+      <%= render partial: 'components/orders/order_items', locals: { order: order } %>
 
 
 
