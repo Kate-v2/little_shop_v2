@@ -24,7 +24,11 @@
       <h4>Total: <%= number_to_currency(order.total_cost) %>
       </h4>
 
-    </span>
 
+      <%= render partial: 'components/order_items', locals: { order: order } %>
+
+
+
+    </span>
   <%end%>
 </div>
