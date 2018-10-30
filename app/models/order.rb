@@ -6,7 +6,7 @@ class Order < ApplicationRecord
   #just for the customer
   belongs_to :user
 
-  enum status: [:pending, :complete, :canceled]
+  enum status: %w(pending complete canceled)
 
   def total_cost
     cost = order_items.sum("quantity * purchase_price")
