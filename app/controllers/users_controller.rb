@@ -59,6 +59,11 @@ class UsersController <ApplicationController
   def toggle
     user = User.find(params[:user].to_i)
     user.toggle(:active).save
+    if user.active
+      flash[:success]= "#{user.name.capitalize}'s account has been activated"
+    else
+      flash[:success]= "#{user.name.capitalize}'s account has been disabled"
+    end
     redirect_back(fallback_location: root_path)
   end
 
