@@ -36,5 +36,13 @@ describe 'Merchant can fulfill order' do
 
   end
 
+  describe 'Admin' do
+
+    it 'Admin cannot fulfill orders' do
+      skip
+    end
+
+  end
+
 
 end
