@@ -18,6 +18,22 @@ class ItemsController < ApplicationController
     @items = [Item.find(params[:id])]
   end
 
+  def edit
+   @item = Item.find(params[:id])
+   @merchant = current_user
+  end
+
+  def update
+    @item = Item.find(params[:id])
+    if @item.update(item_params)
+      flash[:success] = "You have successfully updated your info"
+      redirect_to item_path(item)
+    else
+      flash[:notice] = "Please double check your info and try again"
+      redirect_back(fallback_location: root_path)
+    end
+  end
+
   private
 
   def item_params

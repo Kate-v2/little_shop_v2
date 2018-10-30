@@ -1,0 +1,12 @@
+<h1> Dashboard </h1>
+<%=link_to "Add New Item", new_item_path%>
+<ul>
+  <% @items.each do |item| %>
+    <li><%=link_to item.name, item_path(item)%> </li>
+    <li>Item ID: <%=item.id%> </li>
+    <li><%=item.image%> </li>
+    <li>Price : <%=item.price%> </li>
+    <li>Inventory Count: <%=item.inventory%></li>
+    <li><%=link_to "Edit Item", edit_item_path(item)%> </li>
+  <%end%>
+</ul>
