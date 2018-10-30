@@ -3,9 +3,11 @@
 <session>
   <%=link_to user.name, user_path(user)%>
   <% if user.active %>
-    <%=button_to "Disable", activate_path(user: user) %>
+    <%= "Active" %>
+    <%= button_to "Disable", activate_path(user: user) %>
   <%else%>
-    <%=button_to "Enable", activate_path(user: user)%>
+    <%= "Disabled" %>
+    <%= button_to "Enable", activate_path(user: user)%>
   <%end%>
 </session>
 <%end%>
