@@ -88,6 +88,27 @@ describe 'Merchant Sold Orders' do
       end
     end
 
+    describe 'Order Show Page' do
+
+      describe 'order shows expected data' do
+
+        it 'Current Price' do
+          order = Order.first
+          id    = order.id
+          click_on "Order: #{id}"
+          expect(page).to have_current_path(order_path(order))
+        end
+
+
+
+
+      end
+
+
+    end
+
+
+
 
   end
 
