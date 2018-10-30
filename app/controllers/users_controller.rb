@@ -1,6 +1,8 @@
 class UsersController <ApplicationController
 
   def index
+    @merchants = User.where(role: 'merchant')
+    @user = User.find(session[:user_id]) if session[:user_id]
   end
 
   def new

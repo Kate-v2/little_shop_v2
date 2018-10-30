@@ -3,6 +3,10 @@ class DashboardsController < ApplicationController
   before_action :require_role
 
   def index
+
+    @user = User.find(session[:user_id])
+    @merchant_orders = @user.find_merchant_order_ids
+
     @user = current_user
   end
 
