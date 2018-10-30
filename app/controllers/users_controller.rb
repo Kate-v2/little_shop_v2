@@ -53,7 +53,6 @@ class UsersController <ApplicationController
     else
       render file: "public/404"
     end
-
   end
 
   def toggle
