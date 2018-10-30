@@ -17,7 +17,7 @@ class OrdersController < ApplicationController
     session[:user_id] || not_found
     user = User.find(session[:user_id].to_i)
     path  = request.path
-    @user_experience  = path == profile_orders_path && current_user
+    @user_experience  = path == profile_orders_path   && current_user
     @merch_experience = path == dashboard_orders_path && (current_merchant? || current_admin?)
     @admin_experience = path == orders_path           && current_admin?
 
