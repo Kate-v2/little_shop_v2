@@ -21,11 +21,13 @@ Rails.application.routes.draw do
 
 
   get '/dashboard', to: 'dashboards#index'
+
   get '/dashboard/items', to: 'dashboards#show', as: 'dashboard_items'
   get 'dashboard/items/new', to: 'dashboards#new', as: 'dashboard/items/new'
   get '/profile',   to: 'users#show'
   get '/profile/orders', to:'orders#index'
-  get '/profile/edit', to: 'users#edit'
+  get '/profile/edit', to: 'users#edit', as: 'profile_edit'
+
   get '/users', to: 'admin/users#index'
   get '/users', to: 'admin/users#edit'
 
@@ -33,9 +35,14 @@ Rails.application.routes.draw do
   get '/cart',     to: 'cart#index'
   get '/checkout', to: 'orders#create'
 
-  get '/dashboard',        to: 'dashboard#index'
-  get '/dashboard/orders', to: 'orders#index',    as: 'dashboard_orders'
-  # get '/dashboard/items', to: 'dashboards#items',    as: 'dashboard_items'
+
+  get '/dashboard',         to: 'dashboard#index'
+  get '/dashboard/orders',  to: 'orders#index',   as: 'dashboard_orders'
+  get '/dashboard/fulfill',  to: 'orders#update',  as: 'fulfillment'
+
+  post '/activate', to: 'users#toggle'
+
+
 
   resources :orders, only: [:index, :show]
 

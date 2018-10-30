@@ -10,13 +10,17 @@ class SessionsController <ApplicationController
 
   def create
     user = User.find_by(email: params[:email])
-    # binding.pry
     if user && user.authenticate(params[:password])
-      # binding.pry
-      session[:user_id] = user.id
-      # binding.pry
-      flash[:login] = "Welcome, #{user.name}!"
-      redirect_to profile_path
+
+      if user.active
+        session[:user_id] = user.id
+        flash[:login] = "Welcome, #{user.name}!"
+        redirect_to profile_path
+      else
+        flash[:error]= "Your account has been disabled. Please contact your administrator for details."
+        render :new
+      end
+
     else
       flash[:login] = "Incorrect email/password combination."
       render :new

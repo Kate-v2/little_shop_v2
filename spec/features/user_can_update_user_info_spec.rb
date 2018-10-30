@@ -30,13 +30,13 @@ describe 'when user visits their profile page' do
   end
 
   it 'they see a link to update their user info' do
-    visit user_path(@user)
+    visit profile_path
 
-    expect(page).to have_link('Update Info')
+    expect(page).to have_content('Update Info')
   end
 
   it 'can update user info' do
-    visit user_path(@user)
+    visit profile_path
 
     click_on('Update Info')
 

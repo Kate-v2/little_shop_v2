@@ -17,11 +17,5 @@ class User < ApplicationRecord
 
   has_secure_password
 
-  def change_status
-    if status == false
-      status == true
-    else
-      status == false
-    end 
-  end
+
 end

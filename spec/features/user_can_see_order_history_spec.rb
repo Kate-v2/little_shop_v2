@@ -21,15 +21,12 @@ describe 'Order History' do
 
   it 'displays an order' do
     purchase = Order.first
-    id      = purchase.id
-    created = purchase.created_at
-    updated = purchase.updated_at
-    status  = purchase.status
-    count   = purchase.item_count
-    # total   = purchase.total_cost
-
-    # total = number_with_delimiter(purchase.total_cost,delimiter: ",")
-    total = number_to_currency(purchase.total_cost)
+    id       = purchase.id
+    created  = purchase.created_at.to_date
+    updated  = purchase.updated_at.to_date
+    status   = purchase.status
+    count    = purchase.item_count
+    total    = number_to_currency(purchase.total_cost)
 
     order = page.find("#order-#{purchase.id}")
     expect(order).to have_content(id)
@@ -55,7 +52,6 @@ describe 'Order History' do
   end
 
   it 'can cancel pending orders' do
-
     last  = Order.last
     order = page.find("#order-#{last.id}")
     order.click_on("Cancel Order")
