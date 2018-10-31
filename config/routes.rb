@@ -29,17 +29,12 @@ Rails.application.routes.draw do
   get '/orders/:id/cancel',  to: 'orders#destroy', as: 'cancel_order'
   get '/orders/fulfill',     to: 'orders#update',  as: 'fulfillment'
 
-
   # --- Viewing Users ---
   get '/dashboard',           to: 'dashboards#index'
-  # dashboard#index should really be dashboard#show
   get '/dashboard/items',     to: 'dashboards#show',  as: 'dashboard_items'
-  # dashboard items should really point to items show
   get '/dashboard/items/new', to: 'dashboards#new',   as: 'dashboard/items/new'
   get '/dashboard/orders',    to: 'orders#index',     as: 'dashboard_orders'
-  # I WANT TO BE ABLE TO DO ---
   get '/dashboard/orders/:id',to: 'orders#show',      as: 'dashboard_order'
-  # --- THIS ^
 
   get '/profile',             to: 'users#show'
   get '/profile/edit',        to: 'users#edit',       as: 'profile_edit'
@@ -68,6 +63,8 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :create, :edit, :update, :show] do
     resources :items, only: [:new, :create]
   end
+
+  resources :dashboards
 
 
   namespace :admin do

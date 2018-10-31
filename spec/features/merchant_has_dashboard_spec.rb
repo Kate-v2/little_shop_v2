@@ -12,8 +12,10 @@ describe 'As a merchant' do
     login(@merch)
   end
 
+
   it 'Links to orders only when there are merchant orders' do
-    visit dashboard_path
+
+      visit dashboard_path
 
       expect(page).to_not have_link('Sales Orders')
       expect(page).to have_content("No orders yet.")

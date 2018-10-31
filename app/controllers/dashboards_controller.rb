@@ -22,28 +22,12 @@ class DashboardsController < ApplicationController
     @item     = Item.new
   end
 
-  def create
-    user = User.find(params[:user_id])
-    item = user.items.new(item_params)
-    if item.save
-      flash[:success] = "#{item.name.capitalize} added to store"
-      redirect_to "/dashboard/items"
-    else
-      flash[:error] = "#{item.name.capitalize}'s' information was invalid"
-      redirect_back(fallback_location: root_path)
-    end
-  end
-
-
   private
 
   def require_role
     render file: "public/404" unless current_admin? || current_merchant?
   end
 
-  def item_params
-    params.require(:item).permit(:name, :price, :description, :inventory, :user_id)
-  end
 
   def index_experience
     path = request.path
