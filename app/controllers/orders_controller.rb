@@ -110,12 +110,10 @@ class OrdersController < ApplicationController
   def show_experiences
     path = request.path
     @user_order_experience  = path == profile_order_path    && current_user
-    # @merch_order_experience = path == order_path            && current_merchant?
     @merch_order_experience = path == dashboard_order_path  && current_merchant?
     @admin_experience       = path == order_path            && current_admin?
-    # @admin_merch_experience = (path == merchant_order_path  && current_admin?)  if params[:user_id]
-    # @admin_order_experience = (path == merchant_orders_path && current_admin?)  if params[:user_id]
-    @admin_order_experience = (path == merchant_order_path  && current_admin?)  if params[:user_id]
+    admin_order_view = path == (merchant_order_path || path == order_path)      if params[:user_id]
+    @admin_order_experience = (admin_order_view             && current_admin?)  if params[:user_id]
     @admin_merch_experience = (path == merchant_orders_path && current_admin?)  if params[:user_id]
     found = (
       @user_order_experience  ||

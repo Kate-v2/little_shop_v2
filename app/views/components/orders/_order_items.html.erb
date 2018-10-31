@@ -40,7 +40,7 @@
 
     <% @order_items.each do |oitem| %> <% item = oitem.item %>
 
-      <% if @user_order_experience || @admin_order_experience %>
+      <% if @user_order_experience || @admin_order_experience || (@admin_experience && request.path != orders_path) %>
         <span class='order-item'>
           <%= render partial: 'components/orders/order_item', locals: { item: item, oitem: oitem } %>
         </span>

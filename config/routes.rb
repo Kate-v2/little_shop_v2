@@ -24,6 +24,8 @@ Rails.application.routes.draw do
 
   resources :orders, only: [:index, :show]
   # get '/profile/orders/:id/cancel', to: 'orders#destroy', as: 'cancel_order'
+  get '/orders',             to: 'orders#index',   as: 'orders_path'
+  get '/orders/:id',         to: 'orders#show',    as: 'order_path'
   get '/orders/:id/cancel',  to: 'orders#destroy', as: 'cancel_order'
   get '/orders/fulfill',     to: 'orders#update',  as: 'fulfillment'
 
