@@ -7,6 +7,7 @@
 
       <h4>Seller: <%=item.user.name%></h4>
       <h4><%=number_to_currency(item.price)%></h4>
+      <h4>Stock: <%=item.inventory%></h4>
 
       <%=render partial: 'components/add_item', :locals => {item: item}%>
 

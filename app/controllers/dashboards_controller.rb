@@ -3,7 +3,10 @@ class DashboardsController < ApplicationController
   before_action :require_role
 
   def index
-    if current_admin? && params[:id]
+    if current_admin? && request.path == '/dashboard'
+      @user = current_user
+      @merchant_orders = @user.find_merchant_order_ids
+    elsif current_admin? && params[:id]
       if User.find(params[:id]).role == "default"
         redirect_to user_path
       else
@@ -17,8 +20,14 @@ class DashboardsController < ApplicationController
   end
 
   def show
-      @items = current_user.items
+    if current_admin?
+      @user = User.find(params[:id])
+      @items = @user.items
+    else
       @user = current_user
+      @items = @user.items
+    end
+
   end
 
   def new

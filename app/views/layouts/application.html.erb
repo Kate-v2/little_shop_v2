@@ -11,8 +11,9 @@
   <body>
 
     <%= render partial: 'components/nav' %>
-    <%= render template: "application" %>
-    <%= yield %>
-
+    <section>
+      <%= render template: "application" %>
+      <%= yield %>
+    </section>
   </body>
 </html>

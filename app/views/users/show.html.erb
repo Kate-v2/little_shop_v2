@@ -8,12 +8,12 @@
   <li>Zip Code: <%= @user.zip %></li>
   <li>Email:    <%= @user.email %></li>
 </ul>
-<%= link_to "Update Info", profile_edit_path(@user.id) %>
-
 <%if current_user.role == "admin" %>
   <%if @user.role == "default" %>
+    <%= link_to "Update Info", profile_edit_path(@user.id) %>
     <%= link_to "Upgrade Account", upgrade_downgrade_path(id: @user.id, upgrade_downgrade: "merchant") %>
   <% elsif @user.role == "merchant" %>
+    <%= link_to "Update Info", merchant_edit_path(@user.id) %>
     <%= link_to "Downgrade Account", upgrade_downgrade_path(id: @user.id, upgrade_downgrade: "default") %>
   <%end%>
 <%end%>

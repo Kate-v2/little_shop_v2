@@ -38,7 +38,9 @@ class UsersController <ApplicationController
     if !current_admin?
     if @user.update(user_params)
       flash[:success] = "You have successfully updated your info"
-      if current_admin?
+      if current_admin? && @user.merchant?
+        redirect_to merchant_path(@user)
+      elsif current_admin?
         redirect_to user_path(@user)
       else
         redirect_to profile_path
