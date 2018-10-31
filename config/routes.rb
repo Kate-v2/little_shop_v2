@@ -29,7 +29,7 @@ Rails.application.routes.draw do
   get '/profile/edit', to: 'users#edit', as: 'profile_edit'
 
   get '/users', to: 'admin/users#index'
-  get '/users', to: 'admin/users#edit'
+  # get '/user/:id/edit', to: 'admin/users#edit', as: 'edit_user'
 
 
   get '/cart',     to: 'cart#index'

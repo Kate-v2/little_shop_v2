@@ -11,8 +11,7 @@ describe 'As a merchant' do
     # -- purchaser --
     login(@merch)
   end
-
-  it 'Fore anyone orders from me I dont see a link to my sales orders' do
+  it 'For anyone orders from me I dont see a link to my sales orders' do
     visit dashboard_path
 
     within('#merchant-orders') do
