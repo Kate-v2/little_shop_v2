@@ -74,7 +74,6 @@ def quick_item( options = {seller: nil, image: nil, inventory: 100} )
   hash[:inventory]   = options[:inventory]
   hash[:user_id]     = options[:seller]
   hash[:image]       = options[:image]
-  hash[:active]      = 1
   return hash
 end
 
