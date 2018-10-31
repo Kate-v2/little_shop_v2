@@ -19,8 +19,8 @@ class DashboardsController < ApplicationController
   end
 
   def show
-    @items = current_user.items
-    @user = current_user
+      @items = current_user.items
+      @user = current_user
   end
 
   def new
