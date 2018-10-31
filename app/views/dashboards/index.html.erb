@@ -25,7 +25,7 @@
     <%= link_to "Update Info", merchant_edit_path(@user.id) %>
   <% end %>
 
-  <%= (link_to "Downgrade Account", upgrade_downgrade_path(id: @user.id, upgrade_downgrade: "default")) if !@admin %>
+  <%= (link_to "Downgrade Account", upgrade_downgrade_path(id: @user.id, upgrade_downgrade: "default")) if !@admin_dashboard %>
 </div>
 <!-- ======= -->
 
