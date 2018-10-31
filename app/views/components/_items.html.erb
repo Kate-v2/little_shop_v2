@@ -4,7 +4,7 @@
     <span class='card item' id="item-<%= item.id %>">
 
       <%= link_to item_path(item) do %>
-        <div class='container item-link'>
+        <div class='item-link'>
           <h3><%=item.name%></h3>
           <% item.image ? img = item.image : img = "https://smhttp-ssl-50970.nexcesscdn.net/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/placeholder/default/no_image_available_3.jpg" %>
           <%= image_tag img %>
@@ -13,6 +13,7 @@
 
       <h4>Seller: <%=item.user.name%></h4>
       <h4><%=number_to_currency(item.price)%></h4>
+      <h4>Stock: <%=item.inventory%></h4>
 
       <%=render partial: 'components/add_item', :locals => {item: item}%>
 

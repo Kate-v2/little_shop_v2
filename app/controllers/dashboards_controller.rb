@@ -3,16 +3,29 @@ class DashboardsController < ApplicationController
   before_action :require_role
 
   def index
-
-    @user = User.find(session[:user_id])
-    @merchant_orders = @user.find_merchant_order_ids
-
-    @user = current_user
+    if current_admin? && request.path == '/dashboard'
+      @user = current_user
+      @merchant_orders = @user.find_merchant_order_ids
+    elsif current_admin?
+      @user = User.find(params[:id])
+      @merchant_orders = @user.find_merchant_order_ids
+    elsif request.path == dashboard_path
+      @user = current_user
+      @merchant_orders = @user.find_merchant_order_ids
+    else
+      render file: "public/404"
+    end
   end
 
   def show
-    @items = current_user.items
-    @user = current_user
+    if current_admin?
+      @user = User.find(params[:id])
+      @items = @user.items
+    else
+      @user = current_user
+      @items = @user.items
+    end
+
   end
 
   def new

@@ -1,12 +1,16 @@
 <section>
-<h2>Welcome <%= @user.name %>!</h2>
-<h3>Account Info</h3>
-<ul>
-  <li>Address:  <%= @user.address %></li>
-  <li>City:     <%= @user.city %></li>
-  <li>State:    <%= @user.state %></li>
-  <li>Zip Code: <%= @user.zip %></li>
-  <li>Email:    <%= @user.email %></li>
-</ul>
-<%= link_to "Update Info", profile_edit_path(@user.id) %>
+  <h2>Welcome <%= @user.name %>!</h2>
+  <h3>Account Info</h3>
+  <ul>
+    <li>Address:  <%= @user.address %></li>
+    <li>City:     <%= @user.city %></li>
+    <li>State:    <%= @user.state %></li>
+    <li>Zip Code: <%= @user.zip %></li>
+    <li>Email:    <%= @user.email %></li>
+  </ul>
+  <% if current_user.role == 'admin' %>
+    <%= link_to "Update Info", merchant_edit_path(@user.id) %>
+  <% else %>
+    <%= link_to "Update Info", profile_edit_path(@user.id) %>
+  <% end %>
 </section>

@@ -143,7 +143,7 @@ describe 'Merchant Sold Orders' do
             item  = order.order_items.first
             expect(card).to have_content(item.quantity * item.purchase_price)
           end
-          
+
         end
       end
 

@@ -30,15 +30,15 @@ describe 'As an admin' do
     it 'Each merchant name is a link to their respective show page' do
       visit merchants_path
       click_on(@merch_1.name)
-      expect(current_path).to eq(user_path(@merch_1))
+      expect(current_path).to eq(merchant_path(@merch_1))
 
       visit merchants_path
       click_on(@merch_2.name)
-      expect(current_path).to eq(user_path(@merch_2))
+      expect(current_path).to eq(merchant_path(@merch_2))
 
       visit merchants_path
       click_on(@merch_3.name)
-      expect(current_path).to eq(user_path(@merch_3))
+      expect(current_path).to eq(merchant_path(@merch_3))
     end
 
     it 'I see a button to disable each enabled merchant' do
