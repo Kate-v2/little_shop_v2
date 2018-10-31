@@ -42,7 +42,7 @@ Rails.application.routes.draw do
 
   post '/activate', to: 'users#toggle'
 
-
+  get '/upgrade_downgrade', to: 'users#update'
 
   resources :orders, only: [:index, :show]
 
@@ -52,7 +52,7 @@ Rails.application.routes.draw do
   get '/profile/orders/:id',        to: 'orders#show',    as: 'profile_order'
   get '/profile/orders/:id/cancel', to: 'orders#destroy', as: 'cancel_order'
 
-
+  get '/merchants/:id', to: 'dashboards#index', as: 'merchant_show'
   # namespace :profile do
   #   resources :orders, only:[:index, :show]
   # end

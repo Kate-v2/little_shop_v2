@@ -2,7 +2,11 @@
 <% @users.each do |user| %>
 
 <session>
-  <%=link_to user.name, user_path(user)%>
+  <% if user.role == "merchant" %>
+    <%=link_to user.name, merchant_show_path(user)%>
+  <% else %>
+    <%=link_to user.name, user_path(user)%>
+  <% end %>
   <% if user.active %>
     <%= "Active" %>
     <%= button_to "Disable", activate_path(user: user) %>
