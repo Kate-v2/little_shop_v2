@@ -16,6 +16,7 @@ require 'rails_helper'
       click_button 'Log In'
       expect(current_path).to eq(profile_path)
       expect(page).to have_content("Welcome, #{@user_1.name}")
+
     end
 
     it 'should be able to log out user' do

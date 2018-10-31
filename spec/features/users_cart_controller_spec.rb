@@ -39,12 +39,10 @@ describe 'cart' do
       expect(page).to have_content(@item_1.image)
       expect(page).to have_content(@item_1.user.name)
       expect(page).to have_content(@item_1.price)
-      # expect(@cart.contents[@item_1.id.to_s]).to eq(1)
       expect(page).to have_content(@item_2.name)
       expect(page).to have_content(@item_2.image)
       expect(page).to have_content(@item_2.user.name)
       expect(page).to have_content(@item_2.price)
-      # expect(@cart.contents[@item_2.id.to_s]).to eq(1)
 
       expect(page).to have_content("Item total: $300")
       expect(page).to have_content("Item total: $400")
@@ -62,6 +60,7 @@ describe 'cart' do
       expect(@cart.contents[@item_1.id.to_s]).to eq(2)
     end
   end
+
   describe 'when I visit the item show page' do
     it 'a flash message and increment when added item from item show page' do
       user_1 = create(:user)
@@ -72,6 +71,46 @@ describe 'cart' do
 
       expect(page).to have_content("#{item_1.name.capitalize} added to cart")
       expect(page).to have_content("CART: 1")
+    end
+
+    it 'a flash message and decrement when removed item from item show page' do
+      user_1 = create(:user)
+      item_1 = Item.create(name:"dog brush", price:300, description: "it's a brush for your dog", inventory:5, user_id: user_1.id )
+      visit item_path(item_1)
+
+      click_on "Add Item"
+      click_on "+"
+      click_on "+"
+      click_on "-"
+
+      expect(page).to have_content("#{item_1.name.capitalize} removed from cart")
+      expect(page).to have_content("CART: 2")
+
+      click_on "+"
+      click_on "+"
+      click_on "+"
+      click_on "+"
+
+      expect(page).to have_content("Only 5 in stock")
+
+    end
+
+    it 'can delete items from cart' do
+      user_1 = create(:user)
+      item_1 = Item.create(name:"dog brush", price:300, description: "it's a brush for your dog", inventory:5, user_id: user_1.id )
+      visit item_path(item_1)
+
+      click_on "Add Item"
+      click_on "+"
+      click_on "+"
+
+      visit(cart_path)
+      expect(page).to have_content("Remove Item From Cart")
+
+      click_on("Remove Item From Cart")
+
+      expect(current_path).to eq(cart_path)
+      expect(page).to_not have_content(item_1.name)
     end
   end
 

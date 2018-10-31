@@ -46,6 +46,7 @@ describe 'when admin visits registered user page' do
 
 
     expect(current_path).to eq("/users/#{@merch.id}")
+    expect(current_path).to eq(user_path(@merch))
     expect(page).to have_content("#{@merch.name.capitalize} is no longer a merchant")
   end
 
