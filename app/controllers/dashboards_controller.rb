@@ -32,8 +32,5 @@ class DashboardsController < ApplicationController
     render file: "public/404" unless current_admin? || current_merchant?
   end
 
-  def item_params
-    params.require(:item).permit(:name, :price, :description, :inventory, :user_id)
-  end
 
 end

@@ -30,6 +30,7 @@ require 'rails_helper'
       click_on 'Log Out'
       expect(current_path).to eq(root_path)
       expect(page).to have_content("Register")
+      expect(page).to have_content("You have logged out of your account")
     end
 
      it 'should fail if credentials are incorrect' do

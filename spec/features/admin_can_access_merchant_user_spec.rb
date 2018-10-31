@@ -50,4 +50,16 @@ describe 'when admin visits registered user page' do
     expect(page).to have_content("#{@merch.name.capitalize} is no longer a merchant")
   end
 
+  it 'they get redirected when typing in user/merchant uri' do
+
+    visit "/users/#{@merch.id}"
+
+    expect(current_path).to eq("/merchants/#{@merch.id}")
+
+    click_on("Downgrade Account")
+
+    visit "/merchants/#{@merch.id}"
+
+    expect(current_path).to eq("/users/#{@merch.id}")
+  end
 end
