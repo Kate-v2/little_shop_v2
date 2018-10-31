@@ -30,7 +30,7 @@ Rails.application.routes.draw do
   get '/profile/edit', to: 'users#edit', as: 'profile_edit'
 
   get '/users', to: 'admin/users#index'
-  get '/users', to: 'admin/users#edit'
+  # get '/user/:id/edit', to: 'admin/users#edit', as: 'edit_user'
 
 
   get '/cart',     to: 'cart#index'
@@ -39,11 +39,14 @@ Rails.application.routes.draw do
 
   get '/dashboard',         to: 'dashboard#index'
   get '/dashboard/orders',  to: 'orders#index',   as: 'dashboard_orders'
-  get '/dashboard/fulfill',  to: 'orders#update',  as: 'fulfillment'
+
+  # get '/profile/orders/:id/cancel', to: 'orders#destroy', as: 'cancel_order'
+  get '/orders/:id/cancel',  to: 'orders#destroy', as: 'cancel_order'
+  get '/orders/fulfill', to: 'orders#update',  as: 'fulfillment'
 
   post '/activate', to: 'users#toggle'
 
-
+  get '/upgrade_downgrade', to: 'users#update'
 
   resources :orders, only: [:index, :show]
 
@@ -51,9 +54,8 @@ Rails.application.routes.draw do
   get '/profile',                   to: 'users#show'
   get '/profile/orders',            to: 'orders#index'
   get '/profile/orders/:id',        to: 'orders#show',    as: 'profile_order'
-  get '/profile/orders/:id/cancel', to: 'orders#destroy', as: 'cancel_order'
 
-
+  get '/merchants/:id', to: 'dashboards#index', as: 'merchant_show'
   # namespace :profile do
   #   resources :orders, only:[:index, :show]
   # end

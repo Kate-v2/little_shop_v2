@@ -33,7 +33,10 @@ describe OrderItem, type: :model do
       @total_count_should = 6
     end
 
-    skip('I think we can DELETE this feature')
+    it 'should have default status of pending' do
+      pending = OrderItem.first.status
+      expect(pending).to eq('pending')
+    end
 
     describe 'Subtotals' do
 
@@ -49,6 +52,9 @@ describe OrderItem, type: :model do
         expect(bought3.subtotal).to eq(@item3.quantity * @item3.purchase_price )
       end
     end
+
+
+
   end
 
 

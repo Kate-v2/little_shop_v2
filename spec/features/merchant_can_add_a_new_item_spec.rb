@@ -15,10 +15,10 @@ describe 'From the dashboard' do
     click_on("All My Items")
     click_on("Add New Item")
 
-    fill_in 'Item Name', with: 'Kickball'
-    fill_in 'Price', with: 100
-    fill_in 'Description', with: 'fun'
-    fill_in 'Inventory', with: 200
+    fill_in "Item Name", with: 'Kickball'
+    fill_in "Price", with: 100
+    fill_in "Description", with: 'fun'
+    fill_in "Inventory", with: 200
 
     click_on "Create Item"
 
@@ -105,6 +105,7 @@ describe 'From the dashboard' do
     click_on ("Enable Taco")
 
     expect(page).to have_content("#{@item.name} is now for sale")
+
   end
 
 end

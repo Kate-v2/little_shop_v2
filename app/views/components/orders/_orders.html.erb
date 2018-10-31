@@ -4,46 +4,18 @@
 
     <span class='card order' id='order-<%= order.id %>' >
 
+      <%= render partial: '/components/orders/order_title',   locals: {order: order} %>
+      <%= render partial: '/components/orders/basic_details', locals: {order: order} %>
 
-      <% if @user_experience %>
-        <h3><%= link_to "Order: #{order.id}", profile_order_path(order) %>
-        </h3>
-      <% elsif @merch_experience %>
-        <h3><%= link_to "Order: #{order.id}", order_path(order) %>
-        </h3>
-      <% else %>
-        <h3>Order: <%= order.id %></h3>
-      <% end %>
-
-
-      <h4>Status: <%= order.status.capitalize %>
-      </h4>
-
-      <% if order.status == 'pending' %>
-        <%= link_to "Cancel Order",
-            cancel_order_path( id: order.id, previous: request.path )
-        %>
-      <% end %>
-
-      <h5 class='item-date'>Ordered: <%= order.created_at.to_date %>
-      </h5>
-      <h5 class='item-date'>Updated: <%= order.updated_at.to_date %>
-      </h5>
-
-      <% if @user_experience %>
-        <h4><%= order.item_count %> items
-        </h4>
-        <h4>Total: <%= number_to_currency(order.total_cost) %>
-        </h4>
+      <% if @user_experience || @admin_experience %>
+        <h4><%= order.item_count %> items</h4>
+        <h4>Total: <%= number_to_currency(order.total_cost) %></h4>
       <% end %>
 
       <%= render partial: 'components/orders/ship_to',     locals: { order: order } %>
       <%= render partial: 'components/orders/order_items', locals: { order: order } %>
 
-
-
-
-
     </span>
+
   <%end%>
 </div>
