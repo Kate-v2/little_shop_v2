@@ -4,7 +4,6 @@ require 'feature_helper'
 describe 'merchant vists their items page' do
   include FeatureHelper
   before(:each) do
-
     @merch = create(:user, role: 1)
     create_list(:item, 3, user_id: @merch.id)
   end

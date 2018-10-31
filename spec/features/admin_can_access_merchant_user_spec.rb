@@ -28,7 +28,39 @@ describe 'when admin visits registered user page' do
 
 
     expect(current_path).to eq("/merchants/#{@user.id}")
-    # expect(page).to have_content("#{@user.name.capitalize} has now been upgraded to a merchant.")
+    expect(page).to have_content("#{@user.name.capitalize} has been upgraded to a merchant")
+  end
+
+  it 'there are links to downgrade their account' do
+
+    visit user_path(@merch)
+
+    expect(page).to have_content("Downgrade Account")
+  end
+
+  it 'the downgrade link changes path to user profile path' do
+
+    visit user_path(@merch)
+
+    click_on("Downgrade Account")
+
+
+    expect(current_path).to eq("/users/#{@merch.id}")
+    expect(current_path).to eq(user_path(@merch))
+    expect(page).to have_content("#{@merch.name.capitalize} is no longer a merchant")
+  end
+
+  it 'they get redirected when typing in user/merchant uri' do
+
+    visit "/users/#{@merch.id}"
+
+    expect(current_path).to eq("/merchants/#{@merch.id}")
+
+    click_on("Downgrade Account")
+
+    visit "/merchants/#{@merch.id}"
+
+    expect(current_path).to eq("/users/#{@merch.id}")
   end
 
 

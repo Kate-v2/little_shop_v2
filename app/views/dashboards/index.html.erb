@@ -1,4 +1,5 @@
 
+<!-- <<<<<<< merchant_crud -->
 <h1> <%=@user.name%>'s Dashboard </h1>
 
 <% if current_user.admin? %>
@@ -18,3 +19,24 @@
   <% end %>
   <%= link_to "Downgrade Account", upgrade_downgrade_path(id: @user.id, upgrade_downgrade: "default") %>
 </div>
+<!-- ======= -->
+<h1> <%= @user.name %>'s Dashboard </h1>
+
+<h3><%= (link_to 'All My Items', 'dashboard/items') if !@admin_dashboard %>
+</h3>
+
+<h3>
+  <% if @merchant_orders && @merchant_orders.length > 0 %>
+    <%= (link_to 'Sales Orders', dashboard_orders_path)        if @merch_experience %>
+    <%= (link_to 'Sales Orders', merchant_orders_path(@user))  if @admin_experience %>
+  <% elsif @merch_experience || @admin_experience %>
+    <p>No orders yet.</p>
+  <% elsif @admin_dashboard %>
+      <!-- nothing -->
+  <% end %>
+</h3>
+
+<h3><%= link_to "Downgrade Account", upgrade_downgrade_path(id: @user.id, upgrade_downgrade: "default") %>
+</h3>
+<!-- >>>>>>> master
+ -->

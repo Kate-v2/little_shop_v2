@@ -1,19 +1,32 @@
+
 <h1><%=@user.name%>'s' Items </h1>
 <% if current_user.admin? %>
 <h2><%=link_to "Add New Item",  merchant_items_new_path%></h2>
 <% else %>
 <h2><%=link_to "Add New Item",  dashboard_items_new_path%></h2>
 <% end %>
+
 <div class='container' id='items-collection'>
   <% @items.each do |item| %>
-    <div class ="item" id="item<%=item.id%>"
+    <div class ="item" id="item<%=item.id%>">
+      <ul>
       <li><%=link_to item.name, item_path(item)%> </li>
       <li>Item ID: <%=item.id%> </li>
       <li><%=item.image%> </li>
       <li>Price : <%=item.price%> </li>
       <li>Inventory Count: <%=item.inventory%></li>
       <li><%=link_to "Edit #{item.name}", edit_item_path(item)%> </li>
+      <li>
+        <% if item.active %>
+          <%= "Active" %>
+          <%= button_to "Disable #{item.name}", item_path(item), {method: :put} %>
+        <%else%>
+          <%= "Disabled" %>
+          <%= button_to "Enable #{item.name}", item_path(item), {method: :put} %>
+        <%end%>
+      </li>
+      </ul>
     </div>
   <%end%>
   </div>
-</ul>
+

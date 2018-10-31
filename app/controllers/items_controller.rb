@@ -1,13 +1,14 @@
 class ItemsController < ApplicationController
+ before_action :require_role, except: [:index, :show]
 
-  def new
-    if current_user.admin?
-      @merchant = User.find(params[:id])
-    else
-      @merchant = current_user
-    end
-    @item = Item.new
-  end
+#   def new
+#     if current_user.admin?
+#       @merchant = User.find(params[:id])
+#     else
+#       @merchant = current_user
+#     end
+#     @item = Item.new
+#   end
 
   def create
     user = User.find(params[:user_id])
@@ -40,16 +41,30 @@ class ItemsController < ApplicationController
 
   def update
     @item = Item.find(params[:id])
-    if @item.update(item_params)
-      flash[:success] = "You have successfully updated your info"
-      redirect_to item_path(item)
-    else
-      flash[:notice] = "Please double check your info and try again"
+    if !params[:item]
+      @item.toggle(:active).save
+      if @item.active
+        flash[:success] = "#{@item.name} is now for sale"
+      else
+        flash[:success] = "#{@item.name} no longer for sale"
+      end
       redirect_back(fallback_location: root_path)
+    else
+      if @item.update(item_params)
+        flash[:success] = "You have successfully updated your info"
+        redirect_to item_path(@item)
+      else
+        flash[:notice] = "Please double check your info and try again"
+        redirect_back(fallback_location: root_path)
+      end
     end
   end
 
   private
+
+  def require_role
+    render file: "public/404" unless current_admin? || current_merchant?
+  end
 
   def item_params
     params.require(:item).permit(:name, :price, :description, :inventory, :user_id, :merch_id)
