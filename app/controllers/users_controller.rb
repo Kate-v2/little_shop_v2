@@ -21,10 +21,8 @@ class UsersController <ApplicationController
   end
 
   def edit
-    # binding.pry
     if current_admin?
-      # binding.pry
-      @user = User.find(params[:format])
+      @user = User.find(params[:id])
     else
       @user = User.find(current_user.id)
     end
@@ -37,8 +35,9 @@ class UsersController <ApplicationController
     else
       @user = User.find(current_user.id)
     end
-    if !current_admin?
-      if @user.update(user_params)
+    # if !current_admin? ||
+      if params[:user]
+        @user.update(user_params)
         flash[:success] = "You have successfully updated your info"
         if current_admin? && @user.merchant?
           redirect_to merchant_show_path(@user)
@@ -47,13 +46,13 @@ class UsersController <ApplicationController
         else
           redirect_to profile_path
         end
-      elsif request_page == login_path
+      elsif request.path == login_path
         flash[:notice] = "Please double check your info and try again"
         redirect_back(fallback_location: root_path)
       end
     end
 
-  end
+  # end
 
   def show
     if request.path == profile_path
