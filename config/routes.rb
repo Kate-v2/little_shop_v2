@@ -33,7 +33,7 @@ Rails.application.routes.draw do
   get '/dashboard/orders/:id',to: 'orders#show',      as: 'dashboard_order'
 
   get '/profile',             to: 'users#show'
-  get '/profile/edit',        to: 'users#edit',       as: 'profile_edit'
+  get '/profile/:id/edit',        to: 'users#edit',       as: 'profile_edit'
   get '/profile/orders',      to: 'orders#index'
   get '/profile/orders/:id',  to: 'orders#show',      as: 'profile_order'
 
