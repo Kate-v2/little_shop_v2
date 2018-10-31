@@ -31,24 +31,24 @@ describe 'user registration' do
 
     click_on "Register As New User"
 
-    # expect(page).to have_content("You are now registered and logged in.")
-    # expect(current_path).to eq(profile_path(@user))
+    expect(current_path).to eq(users_path(@user))
+    # expect(page).to have_content(flash[:register])
   end
   #
-  # it 'already has the user email' do
-  #
-  #   visit new_user_path
-  #
-  #   fill_in :name, with: 'Joe'
-  #   fill_in :address, with: "876 something drive"
-  #   fill_in :city, with: "Harrisburg"
-  #   fill_in :city, with: "Pennsylvania"
-  #   fill_in :email, with: @email
-  #   fill_in :password, with: '9876test'
-  #   fill_in :password_confirmation, with: '9876test'
-  #
-  #   click_on 'Register As New User'
-  #   expect(current_path).to eq(new_user_path)
-  #   expect(page).to have_button("Register As New User")
-  # end
+  it 'already has the user email' do
+
+    visit new_user_path
+
+    fill_in "Name", with: "Joe"
+    fill_in "Address", with: "876 something drive"
+    fill_in "City", with: "Harrisburg"
+    fill_in "State", with: "Pennsylvania"
+    fill_in "Email", with: @email
+    fill_in "Password", with: '9876test'
+    fill_in "Confirm password", with: '9876test'
+
+    click_on 'Register As New User'
+    expect(current_path).to eq(users_path)
+    expect(page).to have_button("Register As New User")
+  end
 end
