@@ -1,5 +1,4 @@
 <section>
-<h2>Welcome <%= @user.name %>!</h2>
 <h3>Account Info</h3>
 <ul>
   <li>Address:  <%= @user.address %></li>
@@ -12,7 +11,7 @@
 
 <%if current_user.role == "admin" %>
   <%if @user.role == "default" %>
-    <%= link_to "Upgrade Account", upgrade_downgrade_path(id: @user.id, upgrade_downgrade: "merchant") %>
+    <%= link_to "Upgrade Account",   upgrade_downgrade_path(id: @user.id, upgrade_downgrade: "merchant") %>
   <% elsif @user.role == "merchant" %>
     <%= link_to "Downgrade Account", upgrade_downgrade_path(id: @user.id, upgrade_downgrade: "default") %>
   <%end%>

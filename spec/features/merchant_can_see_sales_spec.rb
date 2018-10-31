@@ -51,7 +51,7 @@ describe 'Merchant Sold Orders' do
     order = Order.first
     id    = order.id
     click_on "Order: #{id}"
-    expect(page).to have_current_path(order_path(order))
+    expect(page).to have_current_path(dashboard_order_path(order))
   end
 
   describe 'Displayed Orders are specific to Merchant' do
@@ -64,19 +64,15 @@ describe 'Merchant Sold Orders' do
       expect(page).to_not have_content(@excluded_order.id)
     end
 
-    it 'only displays order items provided by current merchant' do
+    it 'only displays order details provided by current merchant' do
       order = Order.first
       items = OrderItem.where(order: order)
       expect(items.count).to eq(2)
-
-      this_merch_item  = Item.all[0]
-      other_merch_item = Item.all[1]
-      expect(other_merch_item.user_id).to eq(@merch2.id)
+      item  = Item.first
 
       order1 = page.find("#order-#{order.id}")
-      expect(order1).to     have_content(this_merch_item.name)
-      expect(order1).to     have_content(this_merch_item.name)
-      expect(order1).to_not have_content(other_merch_item.name)
+      expect(order1).to have_content("Item Count: 1")
+      expect(order1).to have_content("Checkout Cost: #{number_to_currency(item.price)}")
     end
 
     describe 'order details are specific to the merchant and not the whole order' do
@@ -143,7 +139,7 @@ describe 'Merchant Sold Orders' do
             item  = order.order_items.first
             expect(card).to have_content(item.quantity * item.purchase_price)
           end
-          
+
         end
       end
 

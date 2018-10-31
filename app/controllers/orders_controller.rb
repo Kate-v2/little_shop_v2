@@ -15,13 +15,17 @@ class OrdersController < ApplicationController
 
   def index
     session[:user_id] || not_found
-    user = User.find(session[:user_id].to_i)
     index_experiences
-    @orders = Order.where(user_id: user.id) if @user_experience
-    @orders = Order.all                     if @admin_experience
+
+    @user = User.find(session[:user_id].to_i) if @user_experience || @merch_experience
+    @user = User.find( params[:user_id].to_i) if @admin_merch_experience
+    @orders = Order.where(user_id: @user.id)  if @user
+    @orders = Order.all                       if @admin_experience
+
+    # binding.pry
 
     if @merch_experience
-      items        = Item.where(user_id: user.id).pluck(:id)
+      items        = Item.where(user_id: @user.id).pluck(:id)
       order_items  = OrderItem.where(item: items)
       order_ids    = order_items.pluck(:order_id)
       @orders      = Order.where(id: order_ids)
@@ -31,6 +35,9 @@ class OrdersController < ApplicationController
 
   def show
     show_experiences
+    # @user = User.find(session[:user_id].to_i) if @user_experience
+    @user = User.find(session[:user_id].to_i) if @user_order_experience  || @merch_order_experience
+    @user = User.find( params[:user_id].to_i) if @admin_merch_experience || @admin_order_experience
     @orders = [ Order.find(params[:id].to_i) ]
   end
 
@@ -102,17 +109,35 @@ class OrdersController < ApplicationController
 
   def show_experiences
     path = request.path
-    @user_order_experience  = path == profile_order_path && current_user
-    @merch_order_experience = path == order_path && (current_merchant? || current_admin?)
-    found = @user_order_experience || @merch_order_experience || not_found
+    @user_order_experience  = path == profile_order_path    && current_user
+    @merch_order_experience = path == dashboard_order_path  && current_merchant?
+    @admin_experience       = path == order_path            && current_admin?
+    admin_order_view = path == (merchant_order_path || path == order_path)      if params[:user_id]
+    @admin_order_experience = (admin_order_view             && current_admin?)  if params[:user_id]
+    @admin_merch_experience = (path == merchant_orders_path && current_admin?)  if params[:user_id]
+    found = (
+      @user_order_experience  ||
+      @merch_order_experience ||
+      @admin_experience       ||
+      @admin_merch_experience ||
+      @admin_order_experience
+    )
+    found || not_found
   end
 
   def index_experiences
     path = request.path
-    @user_experience  = path == profile_orders_path   && current_user
-    @merch_experience = path == dashboard_orders_path && (current_merchant? || current_admin?)
-    @admin_experience = path == orders_path           && current_admin?
-    not_found if (@user_experience || @merch_experience || @admin_experience) == false
+    @user_experience        = path == profile_orders_path    && current_user
+    @merch_experience       = path == dashboard_orders_path  && current_merchant?
+    @admin_experience       = path == orders_path            && current_admin?
+    @admin_merch_experience = (path == merchant_orders_path  && current_admin?) if params[:user_id]
+    found = (
+      @user_experience        ||
+      @merch_experience       ||
+      @admin_experience       ||
+      @admin_merch_experience
+    )
+    found || not_found
   end
 
   def flash_messages

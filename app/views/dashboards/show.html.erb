@@ -1,9 +1,11 @@
+
 <h1><%=@user.name%>'s' Items </h1>
 <h2><%=link_to "Add New Item",  dashboard_items_new_path%></h2>
-<ul>
+
 <div class='container' id='items-collection'>
   <% @items.each do |item| %>
     <div class ="item" id="item<%=item.id%>">
+      <ul>
       <li><%=link_to item.name, item_path(item)%> </li>
       <li>Item ID: <%=item.id%> </li>
       <li><%=item.image%> </li>
@@ -19,7 +21,8 @@
           <%= button_to "Enable #{item.name}", item_path(item), {method: :put} %>
         <%end%>
       </li>
+      </ul>
     </div>
   <%end%>
   </div>
-</ul>
+
