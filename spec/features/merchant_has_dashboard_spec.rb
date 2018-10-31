@@ -12,13 +12,11 @@ describe 'As a merchant' do
     login(@merch)
   end
 
-  it 'Fore anyone orders from me I dont see a link to my sales orders' do
+  it 'Links to orders only when there are merchant orders' do
     visit dashboard_path
 
-    within('#merchant-orders') do
-      expect(page).to_not have_link('Orders')
-      expect(page).to have_content("Sorry #{@merch.name}, no one has ordered any of your items.")
-    end
+      expect(page).to_not have_link('Sales Orders')
+      expect(page).to have_content("No orders yet.")
   end
 
 
@@ -30,7 +28,7 @@ describe 'As a merchant' do
     shop; checkout
     login(@merch)
     visit dashboard_path
-    
+
     expect(page).to have_link("Sales Orders")
   end
 
