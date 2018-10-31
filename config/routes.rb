@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   get '/dashboard', to: 'dashboards#index'
 
   get '/dashboard/items', to: 'dashboards#show', as: 'dashboard_items'
+  # post '/dashboard/items', to: 'dashboards#update', as: 'dashboard_update'
   get 'dashboard/items/new', to: 'dashboards#new', as: 'dashboard/items/new'
   get '/profile',   to: 'users#show'
   get '/profile/orders', to:'orders#index'
@@ -66,6 +67,8 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :create, :edit, :update, :show] do
     resources :items, only: [:new, :create]
   end
+
+  resources :dashboards
 
 
   namespace :admin do

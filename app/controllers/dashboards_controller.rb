@@ -31,6 +31,7 @@ class DashboardsController < ApplicationController
   end
 
 
+
   private
 
   def require_role

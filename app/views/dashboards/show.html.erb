@@ -11,12 +11,12 @@
       <li>Inventory Count: <%=item.inventory%></li>
       <li><%=link_to "Edit #{item.name}", edit_item_path(item)%> </li>
       <li>
-        <% if item.name %>
+        <% if item.active %>
           <%= "Active" %>
-          <%= button_to "Disable"  %>
+          <%= button_to "Disable", item_path(item), {method: :put} %>
         <%else%>
           <%= "Disabled" %>
-          <%= button_to "Enable" %>
+          <%= button_to "Enable", item_path(item), {method: :put} %>
         <%end%>
       </li>
     </div>
