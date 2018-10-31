@@ -6,6 +6,7 @@
 <% else %>
 <%= link_to 'All Items', dashboard_items_path(@user) %>
 <% end %>
+
 <div id="merchant-orders">
   <% if @merchant_orders.length > 0 %>
     <%= link_to 'Orders', dashboard_orders_path %>

@@ -1,0 +1,74 @@
+form {
+  max-width:500px;
+}
+
+form p {
+  margin:1px 0;
+  padding:15px;
+  border-radius: 5px;
+  box-sizing: border-box;
+  background-color:#eee;
+}
+
+form p:last-child {
+  background:none;
+}
+
+input[type="text"], input[type="number"], textarea {
+    display: inline-block;
+    box-sizing: border-box;
+    width: 69%;
+    font-size:16px;
+    line-height:1.1;
+}
+
+label {
+  display: inline-block;
+  width: 30%;
+  vertical-align: top;
+}
+
+input[type="submit"] {
+    margin-left: 31%;
+    background-color: #282f3a;
+    padding: 10px 15px;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    outline:0;
+    border:0;
+}
+
+input[type="submit"]:hover,
+input[type="submit"]:focus {
+  cursor: pointer;
+  background-color:#5D6D86;
+  outline:0;
+  border:0;
+}
+
+.merchants,
+.users {
+  padding-bottom:40px;
+}
+
+.merchants form,
+.users form {
+  margin-left:15px;
+}
+
+.merchants input[type="submit"],
+.users input[type="submit"] {
+  margin:5px 0 0 0;
+}
+
+.merchants p,
+.users p {
+  float:left;
+  margin:10px 20px 0 0;
+}
+
+.merchants h3,
+.users h3 {
+  margin-bottom:10px;
+}
