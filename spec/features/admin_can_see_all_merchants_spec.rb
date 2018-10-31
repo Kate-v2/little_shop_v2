@@ -115,6 +115,7 @@ describe 'As an admin' do
     end
 
     it 'I can update a merchants info' do
+
       click_on('Update Info')
 
       fill_in 'Name', with: 'Joe Schmoe'

@@ -12,7 +12,7 @@ describe 'From the dashboard' do
   it 'merchant can create a new item' do
     login(@merch)
     visit dashboard_path
-    click_on("All My Items")
+    click_on("All Items")
     click_on("Add New Item")
 
     fill_in "Item Name", with: 'Kickball'
@@ -31,7 +31,7 @@ describe 'From the dashboard' do
   it 'merchant is denied when creating a new item with ' do
     login(@merch)
     visit dashboard_path
-    click_on("All My Items")
+    click_on("All Items")
     click_on("Add New Item")
 
     fill_in 'Item Name', with: 'Kickball'
@@ -47,7 +47,7 @@ describe 'From the dashboard' do
   it 'merchant can update item' do
     login(@merch)
     visit dashboard_path
-    click_on("All My Items")
+    click_on("All Items")
     click_on("Add New Item")
 
     fill_in 'Item Name', with: 'Kickball'
@@ -72,7 +72,7 @@ describe 'From the dashboard' do
   it 'merchant cant update item with invalid info' do
     login(@merch)
     visit dashboard_path
-    click_on("All My Items")
+    click_on("All Items")
     click_on("Add New Item")
 
     fill_in 'Item Name', with: 'Kickball'
@@ -97,7 +97,7 @@ describe 'From the dashboard' do
   it 'merchant can disable item' do
     login(@merch)
     visit dashboard_path
-    click_on("All My Items")
+    click_on("All Items")
     click_on ("Disable Taco")
 
     expect(page).to have_content("#{@item.name} no longer for sale")

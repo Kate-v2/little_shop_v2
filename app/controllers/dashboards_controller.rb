@@ -23,6 +23,7 @@ class DashboardsController < ApplicationController
   end
 
   def new
+
     if current_admin?
       @merchant = User.find(params[:id])
     else
@@ -42,6 +43,7 @@ class DashboardsController < ApplicationController
     @merch_experience = (current_merchant? && path == dashboard_path)
     @admin_dashboard  = (current_admin?    && path == dashboard_path)
     @admin_experience = (current_admin?    && path == merchant_show_path) if params[:id]
+
     found = (
       @merch_experience ||
       @admin_dashboard  ||

@@ -43,9 +43,9 @@ Rails.application.routes.draw do
   get '/merchants/:id',                 to: 'dashboards#index', as: 'merchant_show'
   get '/merchants/:user_id/orders',     to: 'orders#index',     as: 'merchant_orders'
   get '/merchants/:user_id/orders/:id', to: 'orders#show',      as: 'merchant_order'
-  get '/merchants/:id/items',  to: 'dashboards#show',  as: 'merchant_items'
-  get '/merchants/:id/items/new',  to: 'dashboards#new',   as: 'merchant_items_new'
-  get '/merchants/edit',   to: 'users#edit',       as: 'merchant_edit'
+  get '/merchants/:id/items',           to: 'dashboards#show',  as: 'merchant_items'
+  get '/merchants/:id/items/new',       to: 'dashboards#new',   as: 'merchant_items_new'
+  get '/merchants/edit',                to: 'users#edit',       as: 'merchant_edit'
 
 
   # --- Admin Responsibilities ---
@@ -63,17 +63,17 @@ Rails.application.routes.draw do
     resources :items, only: [:new, :create]
   end
 
-  resources :dashboards
-
-
-  namespace :admin do
-    resources :items
-    resources :orders
-  end
-
-  namespace :merchant do
-    resources :items
-    resources :orders
-  end
+  # resources :dashboards
+  #
+  #
+  # namespace :admin do
+  #   resources :items
+  #   resources :orders
+  # end
+  #
+  # namespace :merchant do
+  #   resources :items
+  #   resources :orders
+  # end
 
 end
