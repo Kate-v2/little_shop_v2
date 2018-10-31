@@ -51,7 +51,7 @@ describe 'Merchant Sold Orders' do
     order = Order.first
     id    = order.id
     click_on "Order: #{id}"
-    expect(page).to have_current_path(order_path(order))
+    expect(page).to have_current_path(dashboard_order_path(order))
   end
 
   describe 'Displayed Orders are specific to Merchant' do
@@ -143,7 +143,7 @@ describe 'Merchant Sold Orders' do
             item  = order.order_items.first
             expect(card).to have_content(item.quantity * item.purchase_price)
           end
-          
+
         end
       end
 

@@ -29,14 +29,9 @@ describe 'As a merchant' do
     shop; checkout
     shop; checkout
     login(@merch)
-
     visit dashboard_path
-
-
-    within('#merchant-orders') do
-      expect(page).to have_link("Orders")
-    end
-
+    
+    expect(page).to have_link("Sales Orders")
   end
 
 end
