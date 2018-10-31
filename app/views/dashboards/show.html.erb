@@ -13,10 +13,10 @@
       <li>
         <% if item.active %>
           <%= "Active" %>
-          <%= button_to "Disable", item_path(item), {method: :put} %>
+          <%= button_to "Disable #{item.name}", item_path(item), {method: :put} %>
         <%else%>
           <%= "Disabled" %>
-          <%= button_to "Enable", item_path(item), {method: :put} %>
+          <%= button_to "Enable #{item.name}", item_path(item), {method: :put} %>
         <%end%>
       </li>
     </div>

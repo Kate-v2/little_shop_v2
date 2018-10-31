@@ -2,10 +2,10 @@ class ItemsController < ApplicationController
 
   before_action :require_role, except: [:index, :show]
 
-  def new
-    @merchant = User.find(session[:user_id])
-    @item = Item.new
-  end
+  # def new
+  #   @merchant = User.find(session[:user_id])
+  #   @item = Item.new
+  # end
 
   def create
     user = User.find(params[:user_id])
