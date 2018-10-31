@@ -5,19 +5,19 @@ describe 'As an admin' do
 
   include FeatureHelper
 
-  describe 'when I visit /mechants' do
+  before(:each) do
+    @admin = create(:user, role: 2)
+    # -- shop --
+    @merch_1 = create(:user, role: 1)
+    @merch_2 = create(:user, role: 1)
+    @merch_3 = create(:user, role: 1)
+    create_list(:item, 3, user_id: @merch_1.id)
+    create_list(:item, 4, user_id: @merch_2.id)
+    create_list(:item, 5, user_id: @merch_3.id)
+    login(@admin)
+  end
 
-    before(:each) do
-      @admin = create(:user, role: 2)
-      # -- shop --
-      @merch_1 = create(:user, role: 1)
-      @merch_2 = create(:user, role: 1)
-      @merch_3 = create(:user, role: 1)
-      create_list(:item, 3, user_id: @merch_1.id)
-      create_list(:item, 4, user_id: @merch_2.id)
-      create_list(:item, 5, user_id: @merch_3.id)
-      login(@admin)
-    end
+  describe 'when I visit /merchants' do
 
     it 'I see a list of all the merchants' do
       visit merchants_path
@@ -99,6 +99,35 @@ describe 'As an admin' do
 
       expect(current_path).to eq(profile_path)
       expect(page).to have_content(@merch_1.name)
+    end
+
+  end
+
+  describe 'When I visit a merchants dashboard' do
+
+    before(:each) do
+      visit merchant_show_path(@merch_1)
+    end
+
+    it 'uri is correct' do
+      expect(current_path).to eq "/merchants/#{@merch_1.id}"
+      expect(page).to have_link('Update Info')
+    end
+
+    it 'I can update a merchants info' do
+      click_on('Update Info')
+
+      fill_in 'Name', with: 'Joe Schmoe'
+      fill_in 'Address', with: '1800 street'
+      fill_in 'City', with: 'Denverville'
+      fill_in 'State', with: 'Colorassi'
+      fill_in 'Zip', with: '09876'
+      fill_in 'Email', with: 'Kickball@kickball.com'
+
+      click_on('Update User')
+
+      expect(current_path).to eq(merchant_show_path(@merch_1))
+      expect(page).to have_content("Joe Schmoe's")
     end
 
   end

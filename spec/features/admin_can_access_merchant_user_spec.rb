@@ -30,4 +30,6 @@ describe 'when admin visits registered user page' do
     expect(current_path).to eq("/merchants/#{@user.id}")
     # expect(page).to have_content("#{@user.name.capitalize} has now been upgraded to a merchant.")
   end
+
+  
 end
