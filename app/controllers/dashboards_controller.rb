@@ -3,7 +3,7 @@ class DashboardsController < ApplicationController
   before_action :require_role
 
   def index
-    if current_admin?
+    if current_admin? && params[:id]
       if User.find(params[:id]).role == "default"
         redirect_to user_path
       else
