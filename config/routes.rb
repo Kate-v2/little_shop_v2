@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   root "welcome#index"
 
+
   get  '/register',  to: 'users#new'
   post '/register',  to: 'users#create'
 
@@ -9,18 +10,13 @@ Rails.application.routes.draw do
   post '/login',  to: 'sessions#create'
   get  '/logout', to: 'sessions#destroy'
 
-  get '/cart',     to: 'cart#index'
-  get '/checkout', to: 'orders#create'
-
+  get '/cart',        to: 'cart#index'
   get '/add_item',    to: 'cart#create'
+  get '/checkout',    to: 'orders#create'
   get '/update_item', to: 'cart#update'
+
   get '/delete_item', to: 'cart#destroy'
   get '/delete_cart', to: 'cart#destroy'
-  # get '/destroy_item', to: 'cart#destroy'
-
-  #add destroy_item path to remove from database
-
-
 
   resources :orders, only: [:index, :show]
   # get '/profile/orders/:id/cancel', to: 'orders#destroy', as: 'cancel_order'
@@ -32,7 +28,7 @@ Rails.application.routes.draw do
   # --- Viewing Users ---
   get '/dashboard',           to: 'dashboards#index'
   get '/dashboard/items',     to: 'dashboards#show',  as: 'dashboard_items'
-  get '/dashboard/items/new', to: 'dashboards#new',   as: 'dashboard/items/new'
+  get '/dashboard/items/new', to: 'dashboards#new',   as: 'dashboard_items_new'
   get '/dashboard/orders',    to: 'orders#index',     as: 'dashboard_orders'
   get '/dashboard/orders/:id',to: 'orders#show',      as: 'dashboard_order'
 
@@ -47,6 +43,9 @@ Rails.application.routes.draw do
   get '/merchants/:id',                 to: 'dashboards#index', as: 'merchant_show'
   get '/merchants/:user_id/orders',     to: 'orders#index',     as: 'merchant_orders'
   get '/merchants/:user_id/orders/:id', to: 'orders#show',      as: 'merchant_order'
+  get '/merchants/:id/items',  to: 'dashboards#show',  as: 'merchant_items'
+  get '/merchants/:id/items/new',  to: 'dashboards#new',   as: 'merchant_items_new'
+  get '/merchants/edit',   to: 'users#edit',       as: 'merchant_edit'
 
 
   # --- Admin Responsibilities ---

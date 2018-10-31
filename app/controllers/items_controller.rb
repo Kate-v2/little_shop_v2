@@ -1,18 +1,25 @@
 class ItemsController < ApplicationController
+ before_action :require_role, except: [:index, :show]
 
-  before_action :require_role, except: [:index, :show]
-
-  # def new
-  #   @merchant = User.find(session[:user_id])
-  #   @item = Item.new
-  # end
+#   def new
+#     if current_user.admin?
+#       @merchant = User.find(params[:id])
+#     else
+#       @merchant = current_user
+#     end
+#     @item = Item.new
+#   end
 
   def create
     user = User.find(params[:user_id])
     item = user.items.new(item_params)
     if item.save
       flash[:success] = "#{item.name.capitalize} added to store"
-      redirect_to "/dashboard/items"
+      if current_user.admin?
+        redirect_to merchant_items_path(params[:user_id])
+      else
+        redirect_to dashboard_items_path
+      end
     else
       flash[:error] = "#{item.name.capitalize}'s' information was invalid"
       redirect_back(fallback_location: root_path)
@@ -60,7 +67,7 @@ class ItemsController < ApplicationController
   end
 
   def item_params
-    params.require(:item).permit(:name, :price, :description, :inventory, :user_id)
+    params.require(:item).permit(:name, :price, :description, :inventory, :user_id, :merch_id)
   end
 
 end

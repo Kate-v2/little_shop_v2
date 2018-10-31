@@ -1,19 +1,20 @@
 <h1> All users </h1>
+<div class="users">
 <% @users.each do |user| %>
-
-<session>
+<div class="user" id="user-<%= user.id %>">
   <% if user.role == "merchant" %>
-    <%=link_to user.name, merchant_show_path(user)%>
+    <h3><%=link_to user.name, merchant_show_path(user)%></h3>
   <% else %>
-    <%=link_to user.name, user_path(user)%>
+    <h3><%=link_to user.name, user_path(user)%></h3>
   <% end %>
   <% if user.active %>
-    <%= "Active" %>
+    <p>Account Status: Active</p>
     <%= button_to "Disable", activate_path(user: user) %>
   <%else%>
-    <%= "Disabled" %>
+    <p>Account Status: Disabled</p>
     <%= button_to "Enable", activate_path(user: user)%>
   <%end%>
-</session>
+</div>
 
 <%end%>
+</div>

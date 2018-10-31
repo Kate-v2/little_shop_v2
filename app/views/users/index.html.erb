@@ -1,17 +1,23 @@
 <h1>Merchants</h1>
+<div class="merchants">
 <% @merchants.each do |merchant| %>
 <div class="merchant" id="merchant-<%= merchant.id %>">
-  <h3><%= link_to merchant.name, user_path(merchant) %></h3>
-  <% if @user.admin? %>
-  <session>
-  <% if merchant.active %>
-    <%= "Active" %>
-    <%= button_to "Disable", activate_path(user: merchant) %>
-  <%else%>
-    <%= "Disabled" %>
-    <%= button_to "Enable", activate_path(user: merchant)%>
-  <%end%>
-  </session>
+
+  <% if @user.nil?%>
+    <h3><%= merchant.name %></h3>
+  <% elsif @user.admin? %>
+    <h3><%= link_to merchant.name, merchant_show_path(merchant) %></h3>
+    <% if merchant.active %>
+      <p>Account Status: Active</p>
+      <%= button_to "Disable", activate_path(user: merchant) %>
+    <%else%>
+      <p>Account Status: Disabled</p>
+      <%= button_to "Enable", activate_path(user: merchant)%>
+    <%end%>
+  <% else %>
+    <h3><%= merchant.name %></h3>
   <% end %>
+
 </div>
 <% end %>
+</div>

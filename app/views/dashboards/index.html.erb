@@ -1,4 +1,25 @@
 
+<!-- <<<<<<< merchant_crud -->
+<h1> <%=@user.name%>'s Dashboard </h1>
+
+<% if current_user.admin? %>
+<%= link_to 'All Items', merchant_items_path(@user) %>
+<% else %>
+<%= link_to 'All Items', dashboard_items_path(@user) %>
+<% end %>
+
+<div id="merchant-orders">
+  <% if @merchant_orders.length > 0 %>
+    <%= link_to 'Orders', dashboard_orders_path %>
+  <% else %>
+    <p>Sorry <%= @user.name %>, no one has ordered any of your items.</p>
+  <% end %>
+  <%if current_user.role == "admin" && @user.role == "merchant" %>
+    <%= link_to "Update Info", merchant_edit_path(@user.id) %>
+  <% end %>
+  <%= link_to "Downgrade Account", upgrade_downgrade_path(id: @user.id, upgrade_downgrade: "default") %>
+</div>
+<!-- ======= -->
 <h1> <%= @user.name %>'s Dashboard </h1>
 
 <h3><%= (link_to 'All My Items', 'dashboard/items') if !@admin_dashboard %>
@@ -17,3 +38,5 @@
 
 <h3><%= link_to "Downgrade Account", upgrade_downgrade_path(id: @user.id, upgrade_downgrade: "default") %>
 </h3>
+<!-- >>>>>>> master
+ -->

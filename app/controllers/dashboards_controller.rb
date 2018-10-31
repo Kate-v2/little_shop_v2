@@ -13,13 +13,22 @@ class DashboardsController < ApplicationController
   end
 
   def show
-    @user  = current_user
-    @items = @user.items
+    if current_admin?
+      @user = User.find(params[:id])
+      @items = @user.items
+    else
+      @user = current_user
+      @items = @user.items
+    end
   end
 
   def new
-    @merchant = User.find(session[:user_id])
-    @item     = Item.new
+    if current_admin?
+      @merchant = User.find(params[:id])
+    else
+      @merchant = current_user
+    end
+    @item = Item.new
   end
 
   private
@@ -27,7 +36,6 @@ class DashboardsController < ApplicationController
   def require_role
     render file: "public/404" unless current_admin? || current_merchant?
   end
-
 
   def index_experience
     path = request.path
