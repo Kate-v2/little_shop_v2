@@ -19,18 +19,19 @@ Rails.application.routes.draw do
 
   get '/merchants',            to: 'users#index'
   get '/merchants/:id/items',  to: 'dashboards#show',  as: 'merchant_items'
+  get '/merchants/:id/items/new',  to: 'dashboards#new',   as: 'merchant_items_new'
   get '/merchants/:id/orders', to: 'orders#index',     as: 'merchant_orders'
   get '/merchants/:user_id/orders/:id', to: 'orders#show', as: 'merchant_order'
-  get '/merchants/:id/edit',   to: 'users#edit',       as: 'merchant_edit'
+  get '/merchants/edit',   to: 'users#edit',       as: 'merchant_edit'
 
   get '/dashboard',            to: 'dashboards#index'
   get '/dashboard/items',      to: 'dashboards#show',  as: 'dashboard_items'
-  get '/dashboard/items/new',  to: 'dashboards#new',   as: 'dashboard/items/new'
+  get '/dashboard/items/new',  to: 'dashboards#new',   as: 'dashboard_items_new'
   # get '/dashboard/orders',     to: 'orders#index',     as: 'dashboard_orders'
   # get '/dashboard/fulfill',    to: 'orders#update',    as: 'fulfillment'
 
   get '/users',   to: 'admin/users#index'
-  get '/users',   to: 'admin/users#edit'
+  # get '/users',   to: 'admin/users#edit'
 
   get '/checkout', to: 'orders#create'
 

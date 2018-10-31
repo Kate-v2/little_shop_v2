@@ -13,9 +13,9 @@ describe 'merchant visits dashboard' do
   it 'and sees all items for that merchant' do
     login(@merch)
     visit dashboard_path
-    click_on("All My Items")
+    click_on("All Items")
 
-    expect(current_path).to eq("/dashboard/items")
+    expect(current_path).to eq(dashboard_items_path(@merch))
     expect(page).to have_content("Dashboard")
     expect(page).to have_content("#{@merch.items[0].name}")
     expect(page).to have_content("#{@merch.items[1].name}")
@@ -37,7 +37,7 @@ describe 'merchant visits dashboard' do
   it 'and can click link to item show page' do
     login(@merch)
     visit dashboard_path
-    click_on("All My Items")
+    click_on("All Items")
     click_on("#{@merch.items[1].name}")
 
     expect(current_path).to eq("/items/#{@merch.items[1].id}")
@@ -46,7 +46,7 @@ describe 'merchant visits dashboard' do
   it 'and can click link to add new item' do
     login(@merch)
     visit dashboard_path
-    click_on("All My Items")
+    click_on("All Items")
     click_on("Add New Item")
 
     expect(current_path).to eq("/dashboard/items/new")
@@ -55,7 +55,7 @@ describe 'merchant visits dashboard' do
   it 'and can click link to edit item' do
     login(@merch)
     visit dashboard_path
-    click_on("All My Items")
+    click_on("All Items")
     click_on("Edit #{@merch.items.first.name}")
 
     expect(current_path).to eq("/items/#{@merch.items.first.id}/edit")

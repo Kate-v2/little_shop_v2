@@ -1,6 +1,9 @@
 <h1><%=@user.name%>'s' Items </h1>
+<% if current_user.admin? %>
+<h2><%=link_to "Add New Item",  merchant_items_new_path%></h2>
+<% else %>
 <h2><%=link_to "Add New Item",  dashboard_items_new_path%></h2>
-<ul>
+<% end %>
 <div class='container' id='items-collection'>
   <% @items.each do |item| %>
     <div class ="item" id="item<%=item.id%>"

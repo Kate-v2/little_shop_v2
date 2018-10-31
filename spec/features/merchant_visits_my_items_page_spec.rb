@@ -12,16 +12,16 @@ describe 'merchant vists their items page' do
   it 'and can click link to add new item' do
     login(@merch)
     visit dashboard_path
-    click_on("All My Items")
+    click_on("All Items")
     click_on("Add New Item")
 
-    expect(current_path).to eq("/dashboard/items/new")
+    expect(current_path).to eq(dashboard_items_new_path)
   end
 
   it 'can create a new item' do
     login(@merch)
     visit dashboard_path
-    click_on("All My Items")
+    click_on("All Items")
     click_on("Add New Item")
 
     page.fill_in 'Item Name', with: 'Burrito'
@@ -30,7 +30,7 @@ describe 'merchant vists their items page' do
     page.fill_in 'Inventory', with: 20
     click_button("Create Item")
 
-    expect(current_path).to eq("/dashboard/items")
+    expect(current_path).to eq(dashboard_items_path)
   end
 
 

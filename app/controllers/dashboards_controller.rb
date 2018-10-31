@@ -31,7 +31,11 @@ class DashboardsController < ApplicationController
   end
 
   def new
-    @merchant = User.find(session[:user_id])
+    if current_admin?
+      @merchant = User.find(params[:id])
+    else
+      @merchant = current_user
+    end
     @item = Item.new
   end
 

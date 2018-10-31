@@ -101,7 +101,7 @@ describe 'Merchant Sold Orders' do
 
         describe 'Order Item data:' do
 
-          it 'Current Price' do
+          xit 'Current Price' do
             order = Order.first
             id    = order.id
             card  = page.find("#order-#{id}")
@@ -109,7 +109,7 @@ describe 'Merchant Sold Orders' do
             expect(card).to have_content(item.price)
           end
 
-          it 'Purchase Price' do
+          xit 'Purchase Price' do
             order = Order.first
             id    = order.id
             card  = page.find("#order-#{id}")
@@ -125,7 +125,7 @@ describe 'Merchant Sold Orders' do
             expect(card).to have_content(item.quantity)
           end
 
-          it 'Subtotal' do
+          xit 'Subtotal' do
             order = Order.first
             id    = order.id
             card  = page.find("#order-#{id}")
@@ -136,7 +136,7 @@ describe 'Merchant Sold Orders' do
 
         describe 'Order data:' do
 
-          it 'Shipping Info' do
+          xit 'Shipping Info' do
             order = Order.first
             id    = order.id
             card  = page.find("#order-#{id}")
