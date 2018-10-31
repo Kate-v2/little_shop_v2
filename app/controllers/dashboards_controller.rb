@@ -3,27 +3,23 @@ class DashboardsController < ApplicationController
   before_action :require_role
 
   def index
-    if current_admin? && params[:id]
-      if User.find(params[:id]).role == "default"
-        redirect_to user_path
-      else
-        @user = User.find(params[:id])
-        @merchant_orders = @user.find_merchant_order_ids
-      end
-    else
-      @user = current_user
-      @merchant_orders = @user.find_merchant_order_ids
+    index_experience
+    if @admin_experience
+      @user = User.find(params[:id])
+      redirect_to user_path if  @user.role == 'default'
     end
+    @user = current_user if (@merch_experience || @admin_dashboard)
+    @merchant_orders = @user.find_merchant_order_ids if (@merch_experience || @admin_experience)
   end
 
   def show
-      @items = current_user.items
-      @user = current_user
+    @user  = current_user
+    @items = @user.items
   end
 
   def new
     @merchant = User.find(session[:user_id])
-    @item = Item.new
+    @item     = Item.new
   end
 
   def create
@@ -47,6 +43,19 @@ class DashboardsController < ApplicationController
 
   def item_params
     params.require(:item).permit(:name, :price, :description, :inventory, :user_id)
+  end
+
+  def index_experience
+    path = request.path
+    @merch_experience = (current_merchant? && path == dashboard_path)
+    @admin_dashboard  = (current_admin?    && path == dashboard_path)
+    @admin_experience = (current_admin?    && path == merchant_show_path) if params[:id]
+    found = (
+      @merch_experience ||
+      @admin_dashboard  ||
+      @admin_experience
+    )
+    found || not_found
   end
 
 end

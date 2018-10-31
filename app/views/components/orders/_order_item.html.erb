@@ -1,0 +1,4 @@
+<%= render partial: 'components/items/item_title',  locals: { item: item,  } %>
+<h5>Sum: <%=       number_to_currency(oitem.subtotal)       %></h5>
+<h4>Qty: <%=       oitem.quantity                           %></h4>
+<h4>Purchased: <%= number_to_currency(oitem.purchase_price) %></h4>

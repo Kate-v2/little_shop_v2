@@ -3,25 +3,31 @@
 
   <% @total = 0 %>
   <% @count = 0 %>
+  <% @order_items = order.order_items.with_subtotals %>
+
+
 
   <% if @merch_experience || @merch_order_experience %>
 
-    <% order_items = order.order_items.with_subtotals %>
-    <% order_items.each do |oitem| %>
-      <span class='order-item'>
+    <% @order_items.each do |oitem| %> <% item = oitem.item %>
 
-        <% item = oitem.item %>
-        <% if item.user_id == current_user.id %>
-          <!-- Only Need this on show ? -->
-          <% @count += 1 %>
-          <% @total += oitem.subtotal %>
+      <% if item.user_id == current_user.id %>
 
-          <%= render partial: 'components/items/item_title',           locals: {oitem: oitem, item: item } %>
-          <%= render partial: 'components/orders/merchant_order_item', locals: {oitem: oitem, item: item, order: order } %>
-          <%= render partial: 'components/orders/fulfillment',         locals: {oitem: oitem, item: item } %>
+        <% @count += oitem.quantity %>
+        <% @total += oitem.subtotal %>
 
+        <% if @merch_order_experience %>
+          <span class='order-item'>
+
+            <%= render partial: 'components/orders/order_item',      locals: { item: item, oitem: oitem } %>
+            <h5>Current: <%= number_to_currency(item.price) %></h4>
+            <%= render partial: 'components/orders/fulfill_item',     locals: { item: item, oitem: oitem } %>
+
+          </span>
         <% end %>
-      </span>
+    <% end %>
+
+
     <% end %>
 
     <h3>Checkout Cost: <%= number_to_currency(@total) %></h3>
@@ -29,22 +35,21 @@
   <% end %>
 
 
-  <% if @user_order_experience %>
+
+  <% if @user_experience || @user_order_experience || @admin_experience || @admin_merch_experience || @admin_order_experience %>
+
+    <% @order_items.each do |oitem| %> <% item = oitem.item %>
+
+      <% if @user_order_experience || @admin_order_experience %>
+        <span class='order-item'>
+          <%= render partial: 'components/orders/order_item', locals: { item: item, oitem: oitem } %>
+        </span>
+      <% end %>
+
+    <% end %>
 
     <h3>Checkout Cost: <%= number_to_currency(order.total_cost) %></h3>
     <h3>Item Count: <%=    order.item_count                     %></h3>
-
-    <% order_items = order.order_items.with_subtotals %>
-    <% order_items.each do |oitem| %>
-    <span class='order-item'>
-      <% item = oitem.item %>
-      <% @count += oitem.quantity %>
-      <% @total += oitem.subtotal %>
-
-      <%= render partial: 'components/items/item_title',       locals: {oitem: oitem, item: item } %>
-      <%= render partial: 'components/orders/user_order_item', locals: {item: item, oitem: oitem, order: order } %>
-    </span>
-    <% end %>
   <% end %>
 
 

@@ -1,12 +1,19 @@
 
-<h1> <%=@user.name%>'s Dashboard </h1>
+<h1> <%= @user.name %>'s Dashboard </h1>
 
-<%= link_to 'All My Items', 'dashboard/items'%>
-<div id="merchant-orders">
-  <% if @merchant_orders.length > 0 %>
-    <%= link_to 'Orders', dashboard_orders_path %>
-  <% else %>
-    <p>Sorry <%= @user.name %>, no one has ordered any of your items.</p>
+<h3><%= (link_to 'All My Items', 'dashboard/items') if !@admin_dashboard %>
+</h3>
+
+<h3>
+  <% if @merchant_orders && @merchant_orders.length > 0 %>
+    <%= (link_to 'Orders', dashboard_orders_path)        if @merch_experience %>
+    <%= (link_to 'Orders', merchant_orders_path(@user))  if @admin_experience %>
+  <% elsif @merch_experience || @admin_experience %>
+    <p>No orders yet.</p>
+  <% elsif @admin_dashboard %>
+      <!-- nothing -->
   <% end %>
-  <%= link_to "Downgrade Account", upgrade_downgrade_path(id: @user.id, upgrade_downgrade: "default") %>
-</div>
+</h3>
+
+<h3><%= link_to "Downgrade Account", upgrade_downgrade_path(id: @user.id, upgrade_downgrade: "default") %>
+</h3>

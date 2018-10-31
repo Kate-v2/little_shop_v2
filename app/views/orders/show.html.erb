@@ -2,7 +2,6 @@
      <% link_to rel: 'stylesheet', src: "/assets/orders.css" %>
 <% end %>
 
-<h1><%= (link_to "Back to Orders", profile_orders_path )   if @user_order_experience  %></h1>
-<h1><%= (link_to "Back to Orders", dashboard_orders_path ) if @merch_order_experience %></h1>
+<%= render partial: '/components/orders/back_links' %>
 
 <%= render partial: '/components/orders/orders' %>

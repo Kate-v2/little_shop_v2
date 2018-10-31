@@ -7,12 +7,11 @@
       <%= render partial: '/components/orders/order_title',   locals: {order: order} %>
       <%= render partial: '/components/orders/basic_details', locals: {order: order} %>
 
-      <% if @user_experience || @admin_experience %>
-        <h4><%= order.item_count %> items</h4>
-        <h4>Total: <%= number_to_currency(order.total_cost) %></h4>
+      <!-- < % if @merch_order_experience || @admin_merch_experience %> -->
+      <% if @merch_order_experience || @admin_order_experience %>
+        <%= render partial: 'components/users/ship_to',      locals: { order: order } %>
       <% end %>
 
-      <%= render partial: 'components/orders/ship_to',     locals: { order: order } %>
       <%= render partial: 'components/orders/order_items', locals: { order: order } %>
 
     </span>
