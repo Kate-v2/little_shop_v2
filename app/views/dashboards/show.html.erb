@@ -3,13 +3,22 @@
 <ul>
 <div class='container' id='items-collection'>
   <% @items.each do |item| %>
-    <div class ="item" id="item<%=item.id%>"
+    <div class ="item" id="item<%=item.id%>">
       <li><%=link_to item.name, item_path(item)%> </li>
       <li>Item ID: <%=item.id%> </li>
       <li><%=item.image%> </li>
       <li>Price : <%=item.price%> </li>
       <li>Inventory Count: <%=item.inventory%></li>
       <li><%=link_to "Edit #{item.name}", edit_item_path(item)%> </li>
+      <li>
+        <% if item.name %>
+          <%= "Active" %>
+          <%= button_to "Disable"  %>
+        <%else%>
+          <%= "Disabled" %>
+          <%= button_to "Enable" %>
+        <%end%>
+      </li>
     </div>
   <%end%>
   </div>
