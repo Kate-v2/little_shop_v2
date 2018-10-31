@@ -11,10 +11,8 @@ class DashboardsController < ApplicationController
         @merchant_orders = @user.find_merchant_order_ids
       end
     else
-      @user = User.find(session[:user_id])
-      @merchant_orders = @user.find_merchant_order_ids
-
       @user = current_user
+      @merchant_orders = @user.find_merchant_order_ids
     end
   end
 
