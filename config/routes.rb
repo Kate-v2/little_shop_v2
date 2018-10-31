@@ -38,7 +38,10 @@ Rails.application.routes.draw do
 
   get '/dashboard',         to: 'dashboard#index'
   get '/dashboard/orders',  to: 'orders#index',   as: 'dashboard_orders'
-  get '/dashboard/fulfill',  to: 'orders#update',  as: 'fulfillment'
+
+  # get '/profile/orders/:id/cancel', to: 'orders#destroy', as: 'cancel_order'
+  get '/orders/:id/cancel',  to: 'orders#destroy', as: 'cancel_order'
+  get '/orders/fulfill', to: 'orders#update',  as: 'fulfillment'
 
   post '/activate', to: 'users#toggle'
 
@@ -50,7 +53,6 @@ Rails.application.routes.draw do
   get '/profile',                   to: 'users#show'
   get '/profile/orders',            to: 'orders#index'
   get '/profile/orders/:id',        to: 'orders#show',    as: 'profile_order'
-  get '/profile/orders/:id/cancel', to: 'orders#destroy', as: 'cancel_order'
 
   get '/merchants/:id', to: 'dashboards#index', as: 'merchant_show'
   # namespace :profile do

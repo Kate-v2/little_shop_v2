@@ -1,0 +1,6 @@
+<h4>Status: <%= order.status.capitalize %></h4>
+
+<%= render partial: 'components/orders/cancel_order', locals: {order: order} %>
+
+<h5 class='item-date'>Ordered: <%= order.created_at.to_date %></h5>
+<h5 class='item-date'>Updated: <%= order.updated_at.to_date %></h5>

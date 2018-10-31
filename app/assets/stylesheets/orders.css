@@ -1,0 +1,57 @@
+
+#orders-collection {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  vertical-align: middle;
+  justify-content: space-between;
+}
+
+#orders-collection .card {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+
+  margin: 2%;
+  background-color: lightgrey;
+  padding: 2%;
+}
+
+.order-items {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 90%;
+}
+
+.order-item {
+  /* border: 2px solid; */
+  padding: 10%;
+  margin-bottom: 10%;
+  background-color: grey;
+}
+
+.order-items img {
+  width: 30%;
+  height: auto;
+}
+
+.order-items h2 {
+  width: 100%;
+
+}
+
+.order-items h3 {
+  width: 100%;
+
+}
+
+.order-items h4 {
+  width: 100%;
+
+}
+
+.order-items h5 {
+  width: 100%;
+
+}

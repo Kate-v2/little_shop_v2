@@ -1,8 +1,10 @@
 
-<% if oitem.quantity <= item.inventory %>
-  <%= link_to 'Fulfill', fulfillment_path(oitem) %>
+<% if oitem.quantity <= item.inventory && oitem.status == 'pending'%>
+  <%= link_to 'Fulfill', fulfillment_path(order_item: oitem.id, previous: request.path) %>
   <!-- ??? Is a merchant able to cancel - it would affect the order  -->
   <!-- < %= link_to 'Cancel', cancel_order_path %> -->
-<% else %>
+<% elsif oitem.quantity > item.inventory && oitem.status == 'pending' %>
   <h3 id='cannot-fulfill'>Sorry, you don't have enough inventory to fulfill this order"</h3>
+<% elsif oitem.status == 'complete' %>
+  <h3><i>This order is fulfilled</i></h3>
 <% end %>

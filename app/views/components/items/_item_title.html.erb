@@ -1,5 +1,5 @@
 
-<% if @merch_experience || @merch_order_experience %>
+<% if request.path != item_path(item) %>
   <%= link_to item_path(item) do%>
     <span>
       <h3><%= item.name %></h3>
