@@ -28,4 +28,7 @@ Ruby Version: 2.4
 
 Run rspec to run the test suite
 
+<h2>More Information</h2>
+[User Stories](https://github.com/turingschool-projects/little_shop_v2)
+
 
