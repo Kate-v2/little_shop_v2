@@ -59,9 +59,9 @@ describe 'Merchant Sold Orders' do
     it 'does not display orders irrelevant to current merchant' do
       order1 = Order.all[0]
       order2 = Order.all[1]
-      expect(page).to     have_content(order1.id)
-      expect(page).to     have_content(order2.id)
-      expect(page).to_not have_content(@excluded_order.id)
+      expect(page).to     have_content("Order: #{order1.id}")
+      expect(page).to     have_content("Order: #{order2.id}")
+      expect(page).to_not have_content("Order: #{@excluded_order.id}")
     end
 
     it 'only displays order details provided by current merchant' do
@@ -95,62 +95,52 @@ describe 'Merchant Sold Orders' do
 
       describe 'order shows expected data' do
 
+        before(:each) do
+          @order = Order.first
+          visit dashboard_order_path(@order)
+          id = @order.id
+          @card  = page.find("#order-#{id}")
+          @item  = @order.items.first
+          @order_item = @order.order_items.first
+        end
+
         describe 'Order Item data:' do
 
-          xit 'Current Price' do
-            order = Order.first
-            id    = order.id
-            card  = page.find("#order-#{id}")
-            item  = order.items.first
-            expect(card).to have_content(item.price)
+          it 'Current Price' do
+            item_price = number_to_currency(@item.price)
+            expect(@card).to have_content("Current: #{item_price}")
           end
 
-          xit 'Purchase Price' do
-            order = Order.first
-            id    = order.id
-            card  = page.find("#order-#{id}")
-            item  = order.order_items.first
-            expect(card).to have_content(item.purchase_price)
+          it 'Purchase Price' do
+            item_purchase_price = number_to_currency(@order_item.purchase_price)
+            expect(@card).to have_content("Purchased: #{item_purchase_price}")
           end
 
           it 'Item Quantity' do
-            order = Order.first
-            id    = order.id
-            card  = page.find("#order-#{id}")
-            item  = order.order_items.first
-            expect(card).to have_content(item.quantity)
+            expect(@card).to have_content("Qty: #{@order_item.quantity}")
           end
 
-          xit 'Subtotal' do
-            order = Order.first
-            id    = order.id
-            card  = page.find("#order-#{id}")
-            item  = order.order_items.first
-            expect(card).to have_content(item.quantity * item.purchase_price)
+          it 'Subtotal' do
+            subtotal = number_to_currency(@order_item.quantity * @order_item.purchase_price)
+            expect(@card).to have_content("Sum: #{subtotal}")
           end
         end
 
         describe 'Order data:' do
 
-          xit 'Shipping Info' do
-            order = Order.first
-            id    = order.id
-            card  = page.find("#order-#{id}")
-            item  = order.order_items.first
-            expect(card).to have_content(item.quantity * item.purchase_price)
+          it 'Contains Users Shipping Info' do
+
+            shipping = page.find(".ship-to")
+            expect(shipping).to have_content(@user1.name)
+            expect(shipping).to have_content(@user1.address)
+            expect(shipping).to have_content(@user1.city)
+            expect(shipping).to have_content(@user1.state)
+            expect(shipping).to have_content(@user1.zip)
           end
-
         end
+
       end
-
-
     end
 
-
-
-
   end
-
-
-
 end

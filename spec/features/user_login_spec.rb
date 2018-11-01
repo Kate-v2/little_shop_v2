@@ -33,7 +33,7 @@ require 'rails_helper'
       expect(page).to have_content("You have logged out of your account")
     end
 
-     it 'should fail if credentials are incorrect' do
+    it 'should fail if credentials are incorrect' do
       visit login_path
 
       fill_in :email, with: @user_1.email
@@ -44,23 +44,19 @@ require 'rails_helper'
     end
 
     it 'should fail if credentials are empty' do
-     visit login_path
+      visit login_path
 
-     fill_in :email, with: @user_1.email
-     fill_in :password, with: ''
-     click_on 'Log In'
-     expect(current_path).to eq(login_path)
-     expect(page).to have_content("Incorrect email/password combination.")
+      fill_in :email, with: @user_1.email
+      fill_in :password, with: ''
+      click_on 'Log In'
+      expect(current_path).to eq(login_path)
+      expect(page).to have_content("Incorrect email/password combination.")
 
-     fill_in :email, with: ''
-     fill_in :password, with: @user_1.password
-     click_on 'Log In'
-     expect(page).to have_content("Incorrect email/password combination.")
-   end
-
-   it 'should keep field content if form fails' do
-     skip('HOW DO WE DO THIS -- COOKIE ?')
-   end
+      fill_in :email, with: ''
+      fill_in :password, with: @user_1.password
+      click_on 'Log In'
+      expect(page).to have_content("Incorrect email/password combination.")
+    end
 
   end
 end
