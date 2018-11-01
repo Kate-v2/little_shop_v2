@@ -23,8 +23,8 @@ Rails.application.routes.draw do
   get '/orders',             to: 'orders#index',   as: 'orders_path'
   get '/orders/:id',         to: 'orders#show',    as: 'order_path'
   get '/orders/:id/cancel',  to: 'orders#destroy', as: 'cancel_order'
-  # get '/orders/fulfill',     to: 'orders#update',  as: 'fulfillment'
-  get '/fulfill',     to: 'orders#update',  as: 'fulfillment'
+  get '/fulfill',            to: 'orders#update',  as: 'fulfillment'
+
 
   # --- Viewing Users ---
   get '/dashboard',           to: 'dashboards#index'
