@@ -17,17 +17,19 @@ class OrdersController < ApplicationController
     session[:user_id] || not_found
     index_experiences
 
-    @user = User.find(session[:user_id].to_i) if @user_experience || @merch_experience
-    @user = User.find( params[:user_id].to_i) if @admin_merch_experience
-    @orders = Order.where(user_id: @user.id)  if @user
-    @orders = Order.all                       if @admin_experience
 
-    # binding.pry
+    @user = User.find(session[:user_id].to_i)    if @user_experience || @merch_experience
+    @user = User.find( params[:user_id].to_i)    if @admin_merch_experience
+    orders = @user.find_merchant_order_ids.uniq  if !@admin_experience && (@user && @user.role == 'merchant') && (@admin_merch_experience || @merch_experience)
+    @orders = Order.where(user_id: @user.id)     if @user
+    @orders = Order.where(id: orders)            if @user && orders
+    @orders = Order.all                          if @admin_experience
 
     if @merch_experience
-      items        = Item.where(user_id: @user.id).pluck(:id)
-      order_items  = OrderItem.where(item: items)
-      order_ids    = order_items.pluck(:order_id)
+      order_ids = @user.find_merchant_order_ids.uniq
+      # items        = Item.where(user_id: @user.id).pluck(:id)
+      # order_items  = OrderItem.where(item: items)
+      # order_ids    = order_items.pluck(:order_id)
       @orders      = Order.where(id: order_ids)
     end
 
