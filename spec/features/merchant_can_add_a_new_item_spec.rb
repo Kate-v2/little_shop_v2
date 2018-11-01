@@ -5,6 +5,7 @@ describe 'From the dashboard' do
   include FeatureHelper
   before(:each) do
     @merch = create(:user, role: 1)
+    @admin = create(:user, role: 2)
     create_list(:item, 3, user_id: @merch.id)
     @item = @merch.items.create(name: 'Taco', price: 5,description: "yum", inventory: 100)
   end
@@ -106,6 +107,24 @@ describe 'From the dashboard' do
 
     expect(page).to have_content("#{@item.name} is now for sale")
 
+  end
+
+  it 'admin can create a new item' do
+    login(@admin)
+    visit merchant_show_path(@merch)
+    click_on("All Items")
+    click_on("Add New Item")
+
+    fill_in "Item Name", with: 'Bird'
+    fill_in "Price", with: 100
+    fill_in "Description", with: 'fun'
+    fill_in "Inventory", with: 200
+
+    click_on "Create Item"
+
+    expect(page).to have_content("Bird")
+    expect(page).to have_content("100")
+    expect(page).to have_content("200")
   end
 
 end
