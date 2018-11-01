@@ -27,9 +27,6 @@ class OrdersController < ApplicationController
 
     if @merch_experience
       order_ids = @user.find_merchant_order_ids.uniq
-      # items        = Item.where(user_id: @user.id).pluck(:id)
-      # order_items  = OrderItem.where(item: items)
-      # order_ids    = order_items.pluck(:order_id)
       @orders      = Order.where(id: order_ids)
     end
 
@@ -50,7 +47,7 @@ class OrdersController < ApplicationController
   end
 
   def update
-    if request.path == fulfillment_path  && current_merchant?  # current_user.id == item.user_id ??
+    if request.path == fulfillment_path  && current_merchant? 
       fulfill_order
       redirect_to params[:previous]
     end
@@ -81,9 +78,6 @@ class OrdersController < ApplicationController
     items = OrderItem.where(order: order )
     finalize = items.all? { |item| item.status == 'complete' }
     (order.status = fulfilled; order.save) if finalize
-    # if finalize
-    #   (order.status = fulfilled; order.save)
-    # end
   end
 
   def cancel_order
