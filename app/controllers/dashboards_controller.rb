@@ -23,7 +23,6 @@ class DashboardsController < ApplicationController
   end
 
   def new
-
     if current_admin?
       @merchant = User.find(params[:id])
     else
