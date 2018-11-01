@@ -3,16 +3,12 @@
   </h3>
 <!-- < % elsif @merch_experience || @admin_experience %> -->
 <% elsif @merch_experience %>
-  <!-- <h3>< %= link_to "Order: #{order.id}", order_path(order) %> -->
   <h3><%= link_to "Order: #{order.id}", dashboard_order_path(order) %>
   </h3>
-<!-- < % elsif @merch_order_experience %> -->
 <% elsif @merch_experience %>
-  <!-- <h3>< %= link_to "Order: #{order.id}", merchant_order_path(id: @user.id) %> -->
   <h3><%= link_to "Order: #{order.id}", merchant_order_path(user_id: @user.id, id: order.id) %>
   </h3>
 <% elsif @admin_merch_experience %>
-  <!-- <h3>< %= link_to "Order: #{order.id}", merchant_order_path(id: @user.id) %> -->
   <h3><%= link_to "Order: #{order.id}", merchant_order_path(user_id: @user.id, id: order.id) %>
   </h3>
 <% elsif @admin_experience && request.path != order_path(id: order.id) %>
