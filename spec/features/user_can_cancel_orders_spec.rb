@@ -67,11 +67,6 @@ describe 'Any User can CANCEL a relevant order' do
       skip
     end
 
-    it "Order Items are canceled with canceled order" do
-      skip
-    end
-
-
   end
 
   describe 'Merchant' do
@@ -89,7 +84,24 @@ describe 'Any User can CANCEL a relevant order' do
     end
 
     it "can cancel a joint merchant order" do
-      skip
+      login(@merch1)
+      visit dashboard_orders_path
+
+      order = Order.first
+      order1 = page.find("#order-#{order.id}")
+
+      # -- from show --
+      order1.click_on("Order: #{order.id}")
+      expect(page).to have_content("Status: Pending")
+      click_on("Cancel Order")
+      expect(page).to have_content("Status: Canceled")
+
+      items = order.order_items
+      other_order_item = items[1]
+      other_item = items[1].item
+
+      expect(other_item.user_id).to eq(@merch2.id)
+      expect(other_order_item.status).to eq('canceled')
     end
 
   end
@@ -117,8 +129,36 @@ describe 'Any User can CANCEL a relevant order' do
 
   describe 'Logistics' do
 
+    it 'OrderItems have canceled status' do
+      login(@user1)
+      visit profile_orders_path
+
+      order = Order.first
+      order1 = page.find("#order-#{order.id}")
+
+      order1.click_on("Cancel Order")
+      items = order.order_items
+      status = items.all? { |item| item.status == 'canceled'  }
+      expect(status).to eq(true)
+    end
+
     it 'Inventory is returned to all Merchant(s)' do
-      skip
+      login(@user1)
+      visit profile_orders_path
+
+      order = Order.first
+      order1 = page.find("#order-#{order.id}")
+
+      items = order.order_items
+      item  = items.first.item
+      inv   = item.inventory
+
+      order1.click_on("Cancel Order")
+      items = order.order_items
+      item  = items.first.item
+      new_inv = item.inventory
+
+      expect(new_inv - inv).to eq(1)
     end
 
 
