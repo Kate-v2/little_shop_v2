@@ -16,6 +16,7 @@ class UsersController <ApplicationController
       flash[:success] = "You are now registered and logged in"
       redirect_to profile_path
     else
+      flash[:error] = "This email is already in use."
       render :new
     end
   end
@@ -35,7 +36,7 @@ class UsersController <ApplicationController
     else
       @user = User.find(current_user.id)
     end
-
+    
     if params[:user]
       @user.update(user_params)
       flash[:success] = "You have successfully updated your info"
@@ -46,11 +47,9 @@ class UsersController <ApplicationController
       else
         redirect_to profile_path
       end
-    elsif request.path == login_path
-      flash[:notice] = "Please double check your info and try again"
-      redirect_back(fallback_location: root_path)
     end
   end
+
 
   def show
     if request.path == profile_path
