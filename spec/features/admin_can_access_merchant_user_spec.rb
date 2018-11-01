@@ -21,7 +21,7 @@ describe 'when admin visits registered user page' do
   end
 
   it 'the upgrade link changes path to merchant profile path' do
-    skip('MEGHAN FIXED THIS I BELEIVE!')
+
     visit user_path(@user)
 
     click_on("Upgrade Account")
@@ -52,15 +52,15 @@ describe 'when admin visits registered user page' do
 
   it 'they get redirected when typing in user/merchant uri' do
 
-    visit "/users/#{@merch.id}"
+    visit user_path(@merch)
 
-    expect(current_path).to eq("/merchants/#{@merch.id}")
+    expect(current_path).to eq(merchant_show_path(@merch))
 
     click_on("Downgrade Account")
 
-    visit "/merchants/#{@merch.id}"
+    visit merchant_show_path(@merch)
 
-    expect(current_path).to eq("/users/#{@merch.id}")
+    expect(current_path).to eq(user_path(@merch))
   end
 
 

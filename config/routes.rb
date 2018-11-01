@@ -33,7 +33,7 @@ Rails.application.routes.draw do
   get '/dashboard/orders/:id',to: 'orders#show',      as: 'dashboard_order'
 
   get '/profile',             to: 'users#show'
-  get '/profile/edit',        to: 'users#edit',       as: 'profile_edit'
+  get '/profile/:id/edit',        to: 'users#edit',       as: 'profile_edit'
   get '/profile/orders',      to: 'orders#index'
   get '/profile/orders/:id',  to: 'orders#show',      as: 'profile_order'
 
@@ -45,7 +45,7 @@ Rails.application.routes.draw do
   get '/merchants/:user_id/orders/:id', to: 'orders#show',      as: 'merchant_order'
   get '/merchants/:id/items',           to: 'dashboards#show',  as: 'merchant_items'
   get '/merchants/:id/items/new',       to: 'dashboards#new',   as: 'merchant_items_new'
-  get '/merchants/edit',                to: 'users#edit',       as: 'merchant_edit'
+  get '/merchants/:id/edit',            to: 'users#edit',       as: 'merchant_edit'
 
 
   # --- Admin Responsibilities ---
