@@ -27,8 +27,8 @@ describe 'Any User can CANCEL a relevant order' do
     # order has item 1 from merch 1
     # order has item 2 from merch 2
 
-    # item = Item.where(user_id: @merch3.id)
-    # @excluded_order = mock_order(item, 2, @user1 )
+    @admin = create(:user, role: 2)
+
   end
 
   describe 'User' do
@@ -109,21 +109,32 @@ describe 'Any User can CANCEL a relevant order' do
   describe 'Admin' do
 
     it 'can cancel merchant orders' do
-      skip
+      login(@admin)
+      visit orders_path
+
+      order = Order.first
+      order1 = page.find("#order-#{order.id}")
+
+      # -- from show --
+      order1.click_on("Order: #{order.id}")
+      expect(page).to have_content("Status: Pending")
+      click_on("Cancel Order")
+      expect(page).to have_content("Status: Canceled")
     end
 
     it 'can cancel user orders' do
-      skip
-    end
+      login(@admin)
+      visit merchant_orders_path(@merch1)
 
-    it "Order Items are canceled with canceled merchant order" do
-      skip
-    end
+      order = Order.first
+      order1 = page.find("#order-#{order.id}")
 
-    it "Order Items are canceled with canceled user order" do
-      skip
+      # -- from show --
+      order1.click_on("Order: #{order.id}")
+      expect(page).to have_content("Status: Pending")
+      click_on("Cancel Order")
+      expect(page).to have_content("Status: Canceled")
     end
-
 
   end
 
