@@ -9,8 +9,19 @@
 .item h3 {
   margin:0 0 10px;
 }
-.item h4 {
+.item p {
   margin:10px 0;
+}
+
+.merchant-items .item,
+.cart .item {
+  width: 23%;
+}
+
+.merchant-items .item img,
+.cart .item img {
+  width:50%;
+  margin:auto;
 }
 .add_sub_item span {
   padding: 9px 0;
@@ -33,4 +44,18 @@
 
 .add_sub_item a:only-child {
   border-radius: 5px;
+}
+
+#checkout {
+    display: inline-block;
+    background-color: #5390F4;
+    padding: 15px 20px;
+    border-radius: 5px;
+    color: white;
+    text-decoration: none;
+    margin:auto;
+}
+
+#checkout:hover {
+  background-color: #282f3a;
 }

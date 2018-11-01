@@ -10,24 +10,31 @@
 #orders-collection .card {
   display: flex;
   flex-direction: column;
-  width: 30%;
-
-  margin: 2%;
-  background-color: lightgrey;
+  width: 31%;
+  margin: 1%;
+  background-color: #eee;
   padding: 2%;
+  box-sizing: border-box;
+}
+
+#orders-collection .order:only-child {
+  width:100%;
+  margin:0;
 }
 
 .order-items {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  width: 90%;
+  width: 100%;
 }
 
 .order-item {
   /* border: 2px solid; */
-  padding: 10%;
-  margin-bottom: 10%;
+  width:23%;
+  box-sizing:border-box;
+  padding: 0 2%;
+  margin: 1%;
   background-color: grey;
 }
 

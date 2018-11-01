@@ -33,11 +33,6 @@
 
 #cart-button {
   position: relative;
-  display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
-  vertical-align: middle;
-  /* justify-content: space-around; */
 }
 
 #cart-button img {
@@ -69,19 +64,15 @@
   max-width: 20%;
   padding:0 15px;
   text-align: center;
-  vertical-align: middle;
+  display:flex;
+  justify-content: center;
 }
 
 
 
 
 .dropdown {
-  /* hover & dropdown guts */
-  display: flex;
-  flex-wrap: nowrap;
-  flex-direction: column;
-  vertical-align: middle;
-  justify-content: space-around;
+
 }
 
 .dropdown-list {
@@ -91,9 +82,6 @@
   width: 20%;
   top:68px;
   z-index: 1;
-
-  /* display: flex; */
-  /* flex-direction: column; */
 }
 
 #nav-bar .dropdown-list h3 {
