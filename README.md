@@ -8,6 +8,8 @@ Little shop is a replication of an [e-commerce site](https://www.urbandictionary
 
 The user experience should be dull, but every user will be thoroughly impressed with the logic that was implemented by four 10-week-old coders.
 
+Contributors: [Kate](https://github.com/Kate-v2), [Quinn](https://github.com/Q-Win),[Tim](https://github.com/TimothyFell),[Meghan](https://github.com/mstang15)
+
 <h1> Getting Started </h1>
 
 
