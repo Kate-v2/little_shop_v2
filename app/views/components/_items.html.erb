@@ -1,26 +1,24 @@
 
 <div class='container' id='items-collection'>
   <% @items.each do |item| %>
-    <span class='card item' id="item-<%= item.id %>">
+    <div class='card item' id="item-<%= item.id %>">
 
       <%= render partial: 'components/items/item_title', locals: {item: item} %>
 
-      <h4>Seller: <%=item.user.name%></h4>
-      <h4><%=number_to_currency(item.price)%></h4>
-      <h4>Stock: <%=item.inventory%></h4>
+      <p>Seller: <%= item.user.name %></p>
+      <p><%= number_to_currency(item.price) %></p>
+      <% if current_page?(item_path(item)) %>
+        <p>Description: <%= item.description %></p>
+        <p>Inventory: <%= item.inventory %></p>
+      <%end %>
 
-      <%=render partial: 'components/add_item', :locals => {item: item}%>
+      <%= render partial: 'components/add_item', :locals => {item: item} %>
 
       <%if current_page?(cart_path) %>
-        <h4><%=link_to "Remove Item From Cart", delete_item_path(delete_item: 0, item_id: item.id)%></h4>
-        <h4>Item total: <%= number_to_currency(@item_sum[item.id.to_s]) %></h4>
-      <%end%>
+        <p><%= link_to "Remove Item From Cart", delete_item_path(delete_item: 0, item_id: item.id) %></p>
+        <p>Item total: <%= number_to_currency(@item_sum[item.id.to_s]) %></p>
+      <%end %>
 
-      <% if current_page?(item_path(item))%>
-        <h4>Description: <%=item.description%></h4>
-        <h4>Inventory: <%=item.inventory%></h4>
-      <%end%>
-
-    </span>
-  <%end%>
+    </div>
+  <%end %>
 </div>

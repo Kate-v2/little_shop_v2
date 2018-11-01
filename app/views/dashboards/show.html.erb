@@ -1,32 +1,29 @@
 
-<h1><%=@user.name%>'s' Items </h1>
+<h1><%= @user.name %>'s' Items </h1>
 <% if current_user.admin? %>
-<h2><%=link_to "Add New Item",  merchant_items_new_path%></h2>
+<h2><%= link_to "Add New Item",  merchant_items_new_path%></h2>
 <% else %>
-<h2><%=link_to "Add New Item",  dashboard_items_new_path%></h2>
+<h2><%= link_to "Add New Item",  dashboard_items_new_path%></h2>
 <% end %>
 
-<div class='container' id='items-collection'>
+<div class='container merchant-items' id='items-collection'>
   <% @items.each do |item| %>
-    <div class ="item" id="item<%=item.id%>">
-      <ul>
-      <li><%=link_to item.name, item_path(item)%> </li>
-      <li>Item ID: <%=item.id%> </li>
-      <li><%=item.image%> </li>
-      <li>Price : <%=item.price%> </li>
-      <li>Inventory Count: <%=item.inventory%></li>
-      <li><%=link_to "Edit #{item.name}", edit_item_path(item)%> </li>
-      <li>
-        <% if item.active %>
-          <%= "Active" %>
-          <%= button_to "Disable #{item.name}", item_path(item), {method: :put} %>
-        <%else%>
-          <%= "Disabled" %>
-          <%= button_to "Enable #{item.name}", item_path(item), {method: :put} %>
-        <%end%>
-      </li>
-      </ul>
+    <div class='card item' id="item-<%= item.id %>">
+      <h3><%= link_to item.name, item_path(item)%> </h3>
+      <p>Item ID: <%= item.id%> </p>
+      <% item.image ? img = item.image : img = "https://smhttp-ssl-50970.nexcesscdn.net/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/placeholder/default/no_image_available_3.jpg" %>
+      <%= image_tag img %>
+      <p>Price: <%= number_to_currency(item.price) %></p>
+      <p>Inventory: <%= item.inventory %></p>
+      <p>Description: <%= item.description %></p>
+      <p><%= link_to "Edit #{item.name}", edit_item_path(item) %></p>
+      <% if item.active %>
+        <p>Active</p>
+        <%= button_to "Disable #{item.name}", item_path(item), {method: :put} %>
+      <%else %>
+        <p>Disabled</p>
+        <%= button_to "Enable #{item.name}", item_path(item), {method: :put} %>
+      <%end %>
     </div>
-  <%end%>
+  <%end %>
   </div>
-
