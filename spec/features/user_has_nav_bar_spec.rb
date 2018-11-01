@@ -134,7 +134,6 @@ describe 'Navigation Bar:' do
 
       it 'does have an orders view' do
         expect(page).to have_content('Orders')
-        # skip('needs Orders Controller')
         click_on 'All Orders'
         expect(page).to have_current_path(orders_path)
       end
