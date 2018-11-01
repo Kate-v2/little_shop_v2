@@ -1,5 +1,6 @@
 
 <% if oitem.quantity <= item.inventory && oitem.status == 'pending'%>
+
   <%= link_to 'Fulfill', fulfillment_path(order_item: oitem.id, previous: request.path) %>
 
 <% elsif oitem.quantity > item.inventory && oitem.status == 'pending' %>
@@ -7,5 +8,5 @@
 
 <% elsif oitem.status == 'complete' %>
   <h3><i>This order is fulfilled</i></h3>
-  
+
 <% end %>

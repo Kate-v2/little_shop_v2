@@ -47,7 +47,7 @@ class OrdersController < ApplicationController
   end
 
   def update
-    if request.path == fulfillment_path  && current_merchant? 
+    if request.path == fulfillment_path  && current_merchant?
       fulfill_order
       redirect_to params[:previous]
     end
